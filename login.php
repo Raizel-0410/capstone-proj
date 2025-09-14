@@ -12,7 +12,8 @@ $stmt->execute([':email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user || !password_verify($password, $user['password_hash'])) {
-    header('Location: loginpage.php?err=1');
+    $_SESSION['login_error'] = "Invalid email or password!";
+    header('Location: loginpage.php');
     exit;
 }
 
