@@ -121,3 +121,10 @@ body {
 .btn-secondary {
   background-color: #ff1100;
 }
+
+.right-panel a {
+  color: #006682;
+  text-align: end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
