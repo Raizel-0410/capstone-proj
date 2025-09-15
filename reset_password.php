@@ -15,5 +15,5 @@ if (!$reset) {
 <form action="reset_password_submit.php" method="POST">
   <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
   <label>New Password: <input type="password" name="password" required></label>
-  <button type="submit">Reset Password</button>
+  <button type="submit">Reset Password </button>
 </form>

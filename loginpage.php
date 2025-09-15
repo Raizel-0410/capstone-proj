@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require 'audit_log.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href=".\images\logo\5thFighterWing-logo.png">
+  <link rel="icon" type="image/png" href="./images/logo/5thFighterWing-logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./stylesheet/login.css">
 </head>
@@ -85,15 +86,10 @@ session_start();
     </div>
   </div>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var loginErrorModal = document.getElementById("loginErrorModal");
-    if (loginErrorModal) {
-      var modal = new bootstrap.Modal(loginErrorModal);
-      modal.show();
-    }
-  });
-  </script>
+  <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Audit Logging Script -->
+  <script src="loginpage.js"></script>
 </body>
 </html>

@@ -120,6 +120,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  background-color: transparent;
 }
 
 .user-text {
@@ -139,6 +140,7 @@
   color: red;
   text-decoration: none;
   font-weight: bold;
+  background-color: transparent;
 }
 
 .logout-link:hover {

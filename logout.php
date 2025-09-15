@@ -1,7 +1,15 @@
 <?php
 session_start();
 require 'db_connect.php';
+require 'audit_log.php'; // <-- include your logging function
 
+// Capture user before clearing session
+$userId = $_SESSION['user_id'] ?? 'guest';
+
+// Log the logout action in admin_audit_logs
+log_admin_action($pdo, $userId, "User logged out");
+
+// Delete session token if exists
 if (!empty($_SESSION['token'])) {
     $stmt = $pdo->prepare("DELETE FROM personnel_sessions WHERE token = :token");
     $stmt->execute([':token' => $_SESSION['token']]);

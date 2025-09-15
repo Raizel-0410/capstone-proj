@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([':reset_token' => $token]);
 
         header("Location: loginpage.php?reset=success");
+        log_admin_action($pdo, $email, "User Resets Password");
         exit;
     } else {
         die("Invalid or expired reset request.");

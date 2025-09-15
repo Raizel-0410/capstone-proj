@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db_connect.php';
+require 'audit_log.php';
 
 // Read POST from form submission
 $email = $_POST['email'] ?? '';
@@ -12,10 +13,15 @@ $stmt->execute([':email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user || !password_verify($password, $user['password_hash'])) {
+    log_admin_action($pdo, $email, "Failed login attempt"); // store attempted email
     $_SESSION['login_error'] = "Invalid email or password!";
     header('Location: loginpage.php');
     exit;
+} else {
+    log_admin_action($pdo, $email, "User logged in");
 }
+
+
 
 // 🔑 Remove any old sessions for this user
 $stmt = $pdo->prepare("DELETE FROM personnel_sessions WHERE user_id = :user_id");

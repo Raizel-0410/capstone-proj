@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db_connect.php'; 
+require 'audit_log.php'; 
 
 function generateRandomToken($length = 64) {
     return bin2hex(random_bytes($length / 2));
@@ -11,12 +12,13 @@ if (!isset($_SESSION['user_token'])) {
     $_SESSION['user_token'] = $token;
 
     $expiry = date("Y-m-d H:i:s", strtotime("+30 minutes"));
-
     $stmt = $pdo->prepare("INSERT INTO visitor_sessions (user_token, expires_at) VALUES (?, ?)");
     $stmt->execute([$token, $expiry]);
 } else {
     $token = $_SESSION['user_token'];
 }
+
+log_landing_action($pdo, $token, "Visited landing page");
 ?>
 
 <!DOCTYPE html>
@@ -195,12 +197,12 @@ if (!isset($_SESSION['user_token'])) {
 
     <!-- RIGHT SIDEBAR -->
     <aside class="news-sidebar">
-      <div id="search-container" class="sidebar-box">
-        <div class="search-box">
-          <input type="text" placeholder="Search..."> <i class="fa-solid fa-search"></i>
+      <div id="announcement-container" class="announcement-box">
+        <div class="announcement-box">
+          
         </div>
       </div>
-      <!-- You can add widgets here later -->
+    
     </aside>
 
   </div>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db_connect.php'; // use your existing connection
-
+require 'audit_log.php';
 // File upload function
 function uploadFile($fileInput, $uploadDir = "uploads/") {
     if (!isset($_FILES[$fileInput]) || $_FILES[$fileInput]['error'] !== UPLOAD_ERR_OK) {
@@ -68,6 +68,7 @@ $success = $stmt->execute([
 ]);
 
 if ($success) {
+    log_landing_action($pdo, $token, "Submitted visitation request form");
     echo "<script>alert('Visitation request submitted successfully!'); window.location.href='landingpage.php';</script>";
 } else {
     echo "<script>alert('Error saving request. Please try again.'); window.history.back();</script>";

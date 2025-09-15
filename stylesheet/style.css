@@ -292,10 +292,10 @@ padding: 10px;
 
 .news-layout {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 60% 40%;
   gap: 20px;
   align-items: start;
-  padding: 50px;
+  padding: 60px;
 }
 
 /* Left column already styled (carousel + headlines) */
@@ -317,6 +317,7 @@ padding: 10px;
 
 #news-carouselExampleAutoplaying .carousel-item.active {
   position: relative;
+  width: 100%;
 }
 
 /* Ensure images scale consistently */
@@ -328,6 +329,7 @@ padding: 10px;
 
 .news-list {
   padding: 0;
+  width: 100%;
 }
 
 .news-item {
@@ -365,7 +367,7 @@ padding: 10px;
   padding: 0;
 }
 
-.sidebar-box {
+.announcement-box {
   background: #fff;
   border-color: #bababa;
   border-style: solid;
@@ -375,41 +377,15 @@ padding: 10px;
   max-width: 100rem;
 }
 
-#search-container .sidebar-box {
-  border: none;
-}
-.search-box {
-  display: flex;
-  justify-content: end;
-  gap: 5px;
-  width: 100%;
-  align-items: center;
-}
-
-.search-box input {
-  border-width: 1px;
-  border-style: solid;
-  border-color:#072748;
-  border-radius: 5px;;
-  width: 450px;
-  padding: 5px;
-}
-
-.search-box input i{
-  color: #072748;
-}
-
 .sidebar-container {
-  height: 200px;
   width: 100%;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   justify-content: center;
 }
 
-.sidebar-container-announcements {
-  height: 467px;
-  width: 390px;
+.announcement-container {
+  height: 500px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   justify-content: center;
