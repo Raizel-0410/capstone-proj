@@ -60,7 +60,7 @@ if (!empty($session['user_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" type="image/png" href=".\images\logo\5thFighterWing-logo.png">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href=".\stylesheet\visitors.css">
     <title>Main Dashboard</title>
 </head>
 <body>
@@ -108,7 +108,7 @@ if (!empty($session['user_id'])) {
         <div class="header-left">
             <i class="fa-solid fa-home"></i> 
             <h6 class="path"> / Dashboards /</h6>
-            <h6 class="current-loc">Main Dashboard</h6>
+            <h6 class="current-loc">Visitors</h6>
         </div>
 
         <div class="header-right">
