@@ -2,7 +2,7 @@
 $host = "localhost";       
 $dbname = "isecure"; 
 $username = "it11";   
-$password = "faxjgendatabase";   
+$password = "faxjgeninc";   
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
