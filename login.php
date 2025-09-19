@@ -18,7 +18,7 @@ if (!$user || !password_verify($password, $user['password_hash'])) {
     header('Location: loginpage.php');
     exit;
 } else {
-    log_admin_action($pdo, $email, "User logged in");
+    log_admin_action($pdo, $user['id'], "User logged in");
 }
 
 

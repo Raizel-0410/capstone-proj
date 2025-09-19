@@ -1,6 +1,5 @@
 <?php
-session_start();
-require 'db_connect.php';
+require 'auth_check.php';
 
 // Default fallbacks so template never sees an undefined variable
 $fullName = 'Unknown User';
@@ -50,19 +49,20 @@ if (!empty($session['user_id'])) {
     exit;
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Personnel Accounts</title>
+
+    <!-- Bootstrap + Fonts + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="icon" type="image/png" href=".\images\logo\5thFighterWing-logo.png">
-    <link rel="stylesheet" href=".\stylesheet\personnelaccounts.css">
-    <title>Main Dashboard</title>
+
+    <!-- Your existing CSS -->
+    <link rel="stylesheet" href="./stylesheet/personnelaccounts.css">
 </head>
 <body>
 
@@ -87,9 +87,6 @@ if (!empty($session['user_id'])) {
         <li><i class="fa-solid fa-car-side"></i><a href="#"> Vehicles</a></li>
         <li><i class="fa-solid fa-user-gear"></i><a href="#"> Personnels</a></li>
         <li><i class="fa-solid fa-clock-rotate-left"></i><a href="#"> Pendings</a></li>
-    <h6>DASHBOARD WIDGETS</h6>
-        <li><i class="fa-solid fa-chart-column"></i><a href="#"> Daily Visits Analysis</a></li>
-        <li><i class="fa-solid fa-list-check"></i><a href="#"> Visitor Status</a></li>
     <h6>DATA MANAGEMENT</h6>
         <li><i class="fa-solid fa-image-portrait"></i><a href="#"> Personnel Accounts</a></li>
         <li><i class="fa-solid fa-box-archive"></i><a href="#"> Inventory</a></li>
@@ -121,49 +118,61 @@ if (!empty($session['user_id'])) {
             <div class="user-text">
             <span class="username"><?php echo $fullName; ?></span>
             <a id="logout-link" class="logout-link" href="logout.php">Logout</a>
-    </div>
+                  <!-- Confirm Modal -->
+        <div id="confirmModal" class="modal">
+            <div class="modal-content">
+                <p id="confirmMessage"></p>
+                <div class="modal-actions">
+                <button id="confirmYes" class="btn btn-danger">Yes</button>
+                 <button id="confirmNo" class="btn btn-secondary">No</button>
+                </div>
+            </div>
+        </div>
+            </div>
   </div>
+  
         </div>
     </div>
 
     <div class="personnel-container">
     <div class="personnel-topbar">
       
-         <!-- Only Admin should see this button (restrict via PHP session later) -->
-        <input class="search-bar" type="text" name="search" id="search"><i id="search-icon" class="fa-solid fa-search"></i>
+        <input class="search-bar" type="text" name="search" id="search" placeholder="Search by name or email">
+        <i id="search-icon" class="fa-solid fa-search"></i>
+
         <button class="role-btn" onclick="showDropdown()"><i class="fa-solid fa-user"></i>    Roles    <i class="fa-solid fa-caret-down"></i></button>
        <?php if ($role === 'Admin'): ?>
         <button id="addPersonnelBtn" class="add-btn">+ Add Personnel</button>
-        
        <?php endif; ?>
     </div>
    
-    
     <!-- Users Table -->
     <table id="userTable">
-      <thead>
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Rank</th>
-          <th>Status</th>
-          <th>Role</th>
-          <th>Joined</th>
-          <th>Last Active</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Rank</th>
+      <th>Status</th>
+      <th>Role</th>
+      <th>Joined</th>
+      <th>Last Active</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="usersTbody"></tbody>
+</table>
   </div>
 
-<!-- Add Personnel Modal -->
+<!-- Add / Edit Personnel Modal -->
 <div id="addUserModal" class="modal" aria-hidden="true">
   <div class="modal-content form-modal">
-    <span class="close-modal">&times;</span> <!-- This is the "X" close button -->
-    <h2>Create Personnel Account</h2>
+    <span class="close-modal" id="closeAddModal">&times;</span>
+    <h2 id="addModalTitle">Create Personnel Account</h2>
 
-    <form id="addUserForm" novalidate>
+    <form autocomplete="off" id="addUserForm" novalidate>
+      <input type="hidden" id="editing_id" name="id" value="">
+
       <label for="full_name">Full Name</label>
       <input id="full_name" name="full_name" type="text" placeholder="Enter full name" required>
 
@@ -171,10 +180,10 @@ if (!empty($session['user_id'])) {
       <input id="email" name="email" type="email" placeholder="Enter email" required>
 
       <label for="password">Password</label>
-      <input id="password" name="password" type="password" placeholder="Enter password" required>
+      <input id="password" name="password" type="password" placeholder="Enter password">
 
       <label for="password_confirm">Confirm Password</label>
-      <input id="password_confirm" name="password_confirm" type="password" placeholder="Re-enter password" required>
+      <input id="password_confirm" name="password_confirm" type="password" placeholder="Re-enter password">
 
       <label for="rank">Rank</label>
       <select id="rank" name="rank">
@@ -189,7 +198,7 @@ if (!empty($session['user_id'])) {
       </select>
 
       <label for="role">Role</label>
-      <select id="role" name="role">
+      <select id="roleSelect" name="role">
         <option value="User">User</option>
         <option value="Admin">Admin</option>
       </select>
@@ -204,15 +213,65 @@ if (!empty($session['user_id'])) {
       </select>
 
       <div class="modal-actions">
-        <button class="confirm" type="submit">✅ Create Account</button>
-        <button class="cancel" type="button" onclick="closeAddUserForm()">❌ Cancel</button>
+        <button class="confirm" type="submit" id="saveUserBtn">✅ Create Account</button>
+        <button class="cancel" type="button" id="cancelAddBtn">❌ Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div id="editUserModal" class="modal" aria-hidden="true">
+  <div class="modal-content form-modal">
+    <span class="close-modal" id="closeEditModal">&times;</span>
+    <h2>Edit Personnel Account</h2>
+
+    <form autocomplete="off" id="editUserForm" novalidate>
+      <input type="hidden" id="edit_user_id" name="id" value="">
+
+      <label for="edit_full_name">Full Name</label>
+      <input id="edit_full_name" name="full_name" type="text" placeholder="Enter full name" required>
+
+      <label for="edit_email">Email</label>
+      <input id="edit_email" name="email" type="email" placeholder="Enter email" required>
+
+      <label for="edit_rank">Rank</label>
+      <select id="edit_rank" name="rank">
+        <option value="Private">Private</option>
+        <option value="Corporal">Corporal</option>
+        <option value="Sergeant">Sergeant</option>
+        <option value="Lieutenant">Lieutenant</option>
+        <option value="Captain">Captain</option>
+        <option value="Major">Major</option>
+        <option value="Colonel">Colonel</option>
+        <option value="General">General</option>
+      </select>
+
+      <label for="edit_role">Role</label>
+      <select id="edit_role" name="role">
+        <option value="User">User</option>
+        <option value="Admin">Admin</option>
+      </select>
+
+      <label for="edit_status">Status</label>
+      <select id="edit_status" name="status">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Banned">Banned</option>
+        <option value="Pending">Pending</option>
+        <option value="Suspended">Suspended</option>
+      </select>
+
+      <div class="modal-actions">
+        <button class="confirm" type="submit" id="updateUserBtn">✅ Update Account</button>
+        <button class="cancel" type="button" id="cancelEditBtn">❌ Cancel</button>
       </div>
     </form>
   </div>
 </div>
 
 
-<!-- Confirm Modal -->
+<!-- Confirm + Notify Modals reuse your existing markup -->
 <div id="confirmModal" class="modal">
   <div class="modal-content">
     <p id="confirmMessage"></p>
@@ -223,8 +282,6 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
-
-<!-- Notification Modal -->
 <div id="notifyModal" class="custom-modal">
   <div class="custom-modal-content">
     <p id="notifyMessage">Action completed successfully!</p>
@@ -234,13 +291,13 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
-
+</div>
+</div>
 </div>
 
-</div>
-</div>
-<script src="personnelaccount.js"></script>
-<script src="session_check.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- Scripts -->
+<script src="./scripts/personnelaccount.js"></script>
+<script src="./scripts/session_check.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

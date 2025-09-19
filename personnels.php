@@ -1,6 +1,5 @@
 <?php
-session_start();
-require 'db_connect.php';
+require 'auth_check.php';
 
 // Default fallbacks so template never sees an undefined variable
 $fullName = 'Unknown User';
@@ -60,7 +59,7 @@ if (!empty($session['user_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" type="image/png" href=".\images\logo\5thFighterWing-logo.png">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href=".\stylesheet\personnelaccounts.css">
     <title>Main Dashboard</title>
 </head>
 <body>
@@ -86,9 +85,6 @@ if (!empty($session['user_id'])) {
         <li><i class="fa-solid fa-car-side"></i><a href="..\iSecure - final\vehicles.php"> Vehicles</a></li>
         <li><i class="fa-solid fa-user-gear"></i><a href="..\iSecure - final\personnels.php"> Personnels</a></li>
         <li><i class="fa-solid fa-clock-rotate-left"></i><a href="..\iSecure - final\pendings.php"> Pendings</a></li>
-    <h6>DASHBOARD WIDGETS</h6>
-        <li><i class="fa-solid fa-chart-column"></i><a href="#"> Daily Visits Analysis</a></li>
-        <li><i class="fa-solid fa-list-check"></i><a href="#"> Visitor Status</a></li>
     <h6>DATA MANAGEMENT</h6>
         <li><i class="fa-solid fa-image-portrait"></i><a href="..\iSecure - final\personnelaccounts.php"> Personnel Accounts</a></li>
         <li><i class="fa-solid fa-box-archive"></i><a href="..\iSecure - final\inventory.php"> Inventory</a></li>

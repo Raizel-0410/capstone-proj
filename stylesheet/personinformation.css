@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     font-family: 'League Spartan', sans-serif;
-    background-color: #F5F5F5;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -11,6 +10,7 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
+    background-color: #F5F5F5;
 }
 
 .left-panel {
@@ -242,10 +242,10 @@
 .person-information {
     display: flex; 
     flex-direction: row;
-    height: 70vh;
+    height: 43vh;
     width: 100%;
     background-color: transparent;
-    margin-top: 140px;
+    margin-top: 50px;
     padding: 0;
     gap: 25px;
 }
@@ -269,10 +269,10 @@
 }
 
 .information {
-    flex: 0 0 70%;
+    flex: 0 0 68%;
     background-color: white;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    width: 100%;
+    width: 350px;
     height: 404px;
     border-radius: 4px;
     padding: 10px;
@@ -281,6 +281,23 @@
 .information label{
     background-color: transparent;
     font-size: 24px;
+}
+
+.person-data {
+    height: 420px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.data-container {
+    padding: 10px;
+    height: 98%;
+    width: 99.5%;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-radius: 5px;
 }
 
 /* Tablets or smaller laptops */
