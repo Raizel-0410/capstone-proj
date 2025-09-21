@@ -2,28 +2,30 @@
     padding: 0;
     margin: 0;
     font-family: 'League Spartan', sans-serif;
-    background-color: #F5F5F5;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .body {
     display: flex;
-    margin-right: 0;
     height: 100vh;
+    overflow: hidden;
+    background-color: #F5F5F5;
 }
 
 .left-panel {
-    flex: 0 0 10%;
+    flex: 0 0 auto;
 }
 
 .right-panel {
-    flex: 0 0 87%;
+    flex: 1;
 }
 
 .sidebar-panel {
     padding: 10px;
     background-color: #006682;
     min-width: 252px;
+    max-width: 252px;
     height: 100%;
 }
 
@@ -87,9 +89,10 @@
 }
 
 .main-content {
+    flex: 1;
     padding: 20px;
     background-color: #F5F5F5;
-    height: 100%;
+    overflow-y: auto;
 }
 
 .main-header {
@@ -112,6 +115,37 @@
     gap: 15px;
     background-color: transparent;
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  gap: 8px;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  background-color: transparent;
+}
+
+.username {
+  font-weight: 900;
+  background-color: transparent;
+}
+
+.logout-link {
+  font-size: 13px;
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logout-link:hover {
+  text-decoration: underline;
+}
+
 
 .header-left i {
     background-color: transparent;
@@ -151,17 +185,87 @@
     font-size: 30px;
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: transparent;
-}
-
-
 .username {
     font-weight: 900;
     text-align: center;
     padding-top: 10px;
     background-color: transparent;
+}
+
+/* Modal base */
+.modal {
+  display: none; 
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-actions button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-actions .btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.modal-actions .btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+/* Tablets or smaller laptops */
+@media (max-width: 1366px) {
+    .sidebar-panel {
+        min-width: 220px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile or very small screens */
+@media (max-width: 768px) {
+    .body {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        width: 100%;
+    }
+
+    .sidebar-panel {
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+        height: auto;
+    }
+
+    .right-panel {
+        width: 100%;
+    }
 }

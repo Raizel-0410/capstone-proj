@@ -63,7 +63,7 @@
       <div class="main-header">
         <div class="header-left">
           <i class="fa-solid fa-home"></i>
-          <h6 class="path"> / Dashboards /</h6>
+          <h6 class="path"> / Dashboard /</h6>
           <h6 class="current-loc">Main Dashboard</h6>
         </div>
         <div class="header-right">
