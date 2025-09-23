@@ -91,6 +91,6 @@ require 'audit_log.php';
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Audit Logging Script -->
-  <script src="loginpage.js"></script>
+  <script src="./scripts/loginpage.js"></script>
 </body>
 </html>

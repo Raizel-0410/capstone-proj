@@ -7,19 +7,23 @@ function generateRandomToken($length = 64) {
     return bin2hex(random_bytes($length / 2));
 }
 
-if (!isset($_SESSION['user_token'])) {
+$token = $_SESSION['user_token'] ?? null;
+
+if (!$token) {
     $token = generateRandomToken(64);
     $_SESSION['user_token'] = $token;
 
-    $expiry = date("Y-m-d H:i:s", strtotime("+30 minutes"));
-    $stmt = $pdo->prepare("INSERT INTO visitor_sessions (user_token, expires_at) VALUES (?, ?)");
+    $expiry = date("Y-m-d H:i:s", strtotime("+45 minutes"));
+    $stmt = $pdo->prepare("INSERT INTO visitor_sessions (user_token, created_at, expires_at) VALUES (?, CURRENT_TIMESTAMP(), ?)");
     $stmt->execute([$token, $expiry]);
-} else {
-    $token = $_SESSION['user_token'];
 }
 
-log_landing_action($pdo, $token, "Visited landing page");
+// Only log if $token is valid
+if ($token) {
+    log_landing_action($pdo, $token, "Visited landing page");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

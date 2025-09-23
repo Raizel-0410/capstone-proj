@@ -1,7 +1,8 @@
 <?php
 session_start();
-require 'db_connect.php'; // use your existing connection
+require 'db_connect.php';
 require 'audit_log.php';
+
 // File upload function
 function uploadFile($fileInput, $uploadDir = "uploads/") {
     if (!isset($_FILES[$fileInput]) || $_FILES[$fileInput]['error'] !== UPLOAD_ERR_OK) {
@@ -41,11 +42,11 @@ $valid_id_path      = uploadFile("valid_id");
 $selfie_photo_path  = uploadFile("selfie_photo");
 $vehicle_photo_path = uploadFile("vehicle_photo");
 
-// Insert into DB
+// Insert into visitation_requests
 $stmt = $pdo->prepare("
     INSERT INTO visitation_requests 
-    (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path, vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path, reason, personnel_related, visit_date, visit_time) 
-    VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path, :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_model, :vehicle_photo_path, :reason, :personnel_related, :visit_date, :visit_time)
+    (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path, vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path, reason, personnel_related, visit_date, visit_time, status) 
+    VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path, :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_model, :vehicle_photo_path, :reason, :personnel_related, :visit_date, :visit_time, 'Pending')
 ");
 
 $success = $stmt->execute([
@@ -67,8 +68,31 @@ $success = $stmt->execute([
     ':visit_time'        => $visit_time
 ]);
 
+if (!empty($plate_number)) {
+    $stmt = $pdo->prepare("
+        INSERT INTO vehicles 
+        (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, status)
+        VALUES (:visitation_id, :vehicle_owner, :vehicle_brand, :vehicle_model, :vehicle_color, :plate_number, :vehicle_photo_path, 'Pending')
+    ");
+    $stmt->execute([
+        ':visitation_id'      => $visitationId,
+        ':vehicle_owner'      => $vehicle_owner ?: $visitor_name,
+        ':vehicle_brand'      => $vehicle_brand,
+        ':vehicle_model'      => $vehicle_model,
+        ':vehicle_color'      => $vehicle_color,
+        ':plate_number'       => $plate_number,
+        ':vehicle_photo_path' => $vehicle_photo_path
+    ]);
+}
+
+
 if ($success) {
+    $visitationId = $pdo->lastInsertId();
+
+    // Log action (make sure $token exists in your session or auth system)
+    $token = $_SESSION['user_token'] ?? null;
     log_landing_action($pdo, $token, "Submitted visitation request form");
+
     echo "<script>alert('Visitation request submitted successfully!'); window.location.href='landingpage.php';</script>";
 } else {
     echo "<script>alert('Error saving request. Please try again.'); window.history.back();</script>";

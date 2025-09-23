@@ -78,4 +78,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+    /* ---- Latest Vehicle Entry Widget ---- */
+  const latestVehicleList = document.querySelector("#latest-vehicle-widget .widget-list");
+  if (latestVehicleList) {
+    fetch("fetch_latest_vehicles.php")
+      .then(res => res.json())
+      .then(data => {
+        latestVehicleList.innerHTML = "";
+        if (data.length > 0) {
+          data.forEach(v => {
+            const li = document.createElement("li");
+            li.textContent = `${v.vehicle_brand} ${v.vehicle_model} - ${v.vehicle_owner}`;
+            latestVehicleList.appendChild(li);
+          });
+        } else {
+          latestVehicleList.innerHTML = "<li>No recent vehicles</li>";
+        }
+      })
+      .catch(err => {
+        console.error("Error loading latest vehicles:", err);
+        latestVehicleList.innerHTML = "<li>Error loading data</li>";
+      });
+  }
+
+
 });

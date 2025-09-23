@@ -1,6 +1,5 @@
 <?php
-session_start();
-require 'db_connect.php';
+require 'auth_check.php';
 
 // Default fallbacks so template never sees an undefined variable
 $fullName = 'Unknown User';
@@ -240,7 +239,7 @@ if (!empty($session['user_id'])) {
 </div>
 </div>
 <script src=""></script>
-<script src="session_check.js"></script>
+<script src="./scripts/session_check.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
-session_start();
-require 'db_connect.php';
+require 'auth_check.php';
+require 'audit_log.php';
 
 // Default fallbacks so template never sees an undefined variable
 $fullName = 'Unknown User';

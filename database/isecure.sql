@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2025 at 03:33 PM
+-- Generation Time: Sep 22, 2025 at 04:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,6 +53,24 @@ CREATE TABLE `deleted_users` (
   `joined_date` datetime DEFAULT NULL,
   `last_active` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inside_vehicles`
+--
+
+CREATE TABLE `inside_vehicles` (
+  `id` int(11) NOT NULL,
+  `request_id` int(11) DEFAULT NULL,
+  `owner` varchar(100) NOT NULL,
+  `brand` varchar(100) DEFAULT NULL,
+  `model` varchar(100) DEFAULT NULL,
+  `color` varchar(50) DEFAULT NULL,
+  `plate` varchar(50) DEFAULT NULL,
+  `entry_time` datetime DEFAULT current_timestamp(),
+  `exit_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -184,6 +202,26 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `vehicles`
+--
+
+CREATE TABLE `vehicles` (
+  `id` int(11) NOT NULL,
+  `visitation_id` int(11) DEFAULT NULL,
+  `vehicle_owner` varchar(100) NOT NULL,
+  `vehicle_brand` varchar(100) NOT NULL,
+  `vehicle_model` varchar(100) DEFAULT NULL,
+  `vehicle_color` varchar(50) DEFAULT NULL,
+  `plate_number` varchar(50) NOT NULL,
+  `vehicle_photo_path` varchar(255) DEFAULT NULL,
+  `entry_time` datetime DEFAULT current_timestamp(),
+  `exit_time` datetime DEFAULT NULL,
+  `status` enum('Inside','Exited') DEFAULT 'Inside'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `visitation_requests`
 --
 
@@ -205,7 +243,8 @@ CREATE TABLE `visitation_requests` (
   `personnel_related` varchar(100) DEFAULT NULL,
   `visit_date` date NOT NULL,
   `visit_time` time NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('Pending','Approved','Rejected') NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -235,6 +274,12 @@ ALTER TABLE `admin_audit_logs`
 -- Indexes for table `deleted_users`
 --
 ALTER TABLE `deleted_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inside_vehicles`
+--
+ALTER TABLE `inside_vehicles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -298,6 +343,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `visitation_id` (`visitation_id`);
+
+--
 -- Indexes for table `visitation_requests`
 --
 ALTER TABLE `visitation_requests`
@@ -317,6 +369,12 @@ ALTER TABLE `visitor_sessions`
 -- AUTO_INCREMENT for table `admin_audit_logs`
 --
 ALTER TABLE `admin_audit_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `inside_vehicles`
+--
+ALTER TABLE `inside_vehicles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -362,6 +420,12 @@ ALTER TABLE `password_resets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `visitation_requests`
 --
 ALTER TABLE `visitation_requests`
@@ -388,6 +452,12 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `personnel_sessions`
   ADD CONSTRAINT `personnel_sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  ADD CONSTRAINT `vehicles_ibfk_1` FOREIGN KEY (`visitation_id`) REFERENCES `visitation_requests` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
