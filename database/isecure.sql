@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2025 at 04:48 AM
+-- Generation Time: Sep 24, 2025 at 02:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -216,7 +216,7 @@ CREATE TABLE `vehicles` (
   `vehicle_photo_path` varchar(255) DEFAULT NULL,
   `entry_time` datetime DEFAULT current_timestamp(),
   `exit_time` datetime DEFAULT NULL,
-  `status` enum('Inside','Exited') DEFAULT 'Inside'
+  `status` enum('Expected','Inside','Exited') DEFAULT 'Expected'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -245,6 +245,23 @@ CREATE TABLE `visitation_requests` (
   `visit_time` time NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` enum('Pending','Approved','Rejected') NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitors`
+--
+
+CREATE TABLE `visitors` (
+  `id` int(11) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `contact_number` varchar(20) DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `date` date NOT NULL,
+  `time_in` time DEFAULT NULL,
+  `time_out` time DEFAULT NULL,
+  `status` enum('Inside','Outside') DEFAULT 'Inside'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -356,6 +373,12 @@ ALTER TABLE `visitation_requests`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `visitors`
+--
+ALTER TABLE `visitors`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `visitor_sessions`
 --
 ALTER TABLE `visitor_sessions`
@@ -429,6 +452,12 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for table `visitation_requests`
 --
 ALTER TABLE `visitation_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `visitors`
+--
+ALTER TABLE `visitors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

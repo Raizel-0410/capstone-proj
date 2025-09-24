@@ -76,7 +76,8 @@
 .camera-view-drop-down {
     margin-left: 20px;
 }
-.nav-links a{
+
+.nav-links a {
     text-decoration: none;
     background-color: transparent;
     color: white;
@@ -146,7 +147,6 @@
   text-decoration: underline;
 }
 
-
 .header-left i {
     background-color: transparent;
     align-self: center;
@@ -192,53 +192,85 @@
     background-color: transparent;
 }
 
-/* Modal base */
-.modal {
-  display: none; 
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
+/* =====================
+   Custom Modal Styling
+   ===================== */
+
+/* Override Bootstrap modal header */
+.modal-header {
+  background-color: #006682;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 15px 20px;
 }
 
-.modal.show {
-  display: flex;
+.modal-header .modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
+.modal-header .btn-close {
+  filter: brightness(0) invert(1); /* makes the X white */
+  opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+/* Match modal body to theme */
+.modal-body {
+  padding: 20px 25px;
+}
+
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
   border-radius: 10px;
-  width: 350px;
-  max-width: 90%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
 }
 
-.modal-actions {
-  margin-top: 20px;
+/* Modal footer styled like dashboard buttons */
+.modal-footer {
+  border-top: none;
+  padding: 15px 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
-.modal-actions button {
-  padding: 8px 20px;
+.modal-footer .btn {
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 8px 18px;
+}
+
+.modal-footer .btn-primary {
+  background-color: #006682;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
-.modal-actions .btn-danger {
-  background: #dc3545;
-  color: white;
+.modal-footer .btn-primary:hover {
+  background-color: #2789A4;
 }
 
-.modal-actions .btn-secondary {
-  background: #6c757d;
-  color: white;
+.modal-footer .btn-secondary {
+  background-color: #6c757d;
+  border: none;
 }
+
+.modal-footer .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* =====================
+   Responsive tweaks
+   ===================== */
 
 /* Tablets or smaller laptops */
 @media (max-width: 1366px) {
