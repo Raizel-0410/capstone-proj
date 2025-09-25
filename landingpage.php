@@ -229,7 +229,7 @@ if ($token) {
       <label>Home Address:
         <input type="text" name="home_address" placeholder="Enter home address" required>
       </label>
-      <label>Valid ID:
+      <label class="label-btn">Valid ID:
         <input type="file" name="valid_id" accept="image/*" required>
       </label>
     </div>
@@ -241,7 +241,7 @@ if ($token) {
       <label>Email Address:
         <input type="email" name="email" placeholder="example@email.com" required>
       </label>
-      <label>Selfie Photo:
+      <label class="label-btn">Selfie Photo:
         <input type="file" name="selfie_photo" accept="image/*" required>
       </label>
     </div>
@@ -269,7 +269,7 @@ if ($token) {
       <label>Vehicle Model:
         <input type="text" name="vehicle_model" placeholder="e.g. Vios, Civic">
       </label>
-      <label>Vehicle Photo:
+      <label class="label-btn">Vehicle Photo:
         <input type="file" name="vehicle_photo" accept="image/*">
       </label>
     </div>
