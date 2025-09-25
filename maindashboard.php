@@ -90,25 +90,53 @@
         </div>
       </div>
 
-      <!-- Stats cards -->
-      <div class="status-containers">
-        <div class="stats-cards">
-          <div class="card-value">08</div>
-          <div class="card-label">Current Visitors</div>
-        </div>
-        <div class="stats-cards">
-          <div class="card-value">12</div>
-          <div class="card-label">Current Vehicles</div>
-        </div>
-        <div class="stats-cards">
-          <div class="card-value">03</div>
-          <div class="card-label">Pendings</div>
-        </div>
-        <div class="stats-cards">
-          <div class="card-value">01</div>
-          <div class="card-label">Reports</div>
-        </div>
+     <!-- Visitor Details Modal -->
+<div class="modal fade" id="visitorDetailsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Visitor Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
+      <div class="modal-body">
+        <p><strong>Name:</strong> <span id="visitorName"></span></p>
+        <p><strong>Contact:</strong> <span id="visitorContact"></span></p>
+        <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
+        <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
+        <p><strong>Reason:</strong> <span id="visitorReason"></span></p>
+        <p><strong>Time In:</strong> <span id="visitorTimeIn"></span></p>
+        <p><strong>Time Out:</strong> <span id="visitorTimeOut"></span></p>
+        <p><strong>ID Photo:</strong><br><img id="visitorIDPhoto" src="" alt="ID Photo" style="width:100%;max-width:200px;"></p>
+        <p><strong>Selfie:</strong><br><img id="visitorSelfie" src="" alt="Selfie Photo" style="width:100%;max-width:200px;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <!-- Stats cards -->
+    <div class="status-containers">
+  <div class="stats-cards">
+    <div class="card-value" id="visitorsCount">0</div>
+    <div class="card-label">Current Visitors</div>
+  </div>
+  <div class="stats-cards">
+    <div class="card-value" id="vehiclesCount">0</div>
+    <div class="card-label">Current Vehicles</div>
+  </div>
+  <div class="stats-cards">
+    <div class="card-value" id="pendingCount">0</div>
+    <div class="card-label">Pendings</div>
+  </div>
+  <div class="stats-cards">
+    <div class="card-value" id="entryCount">0</div>
+    <div class="card-label">Door Entry</div>
+  </div>
+</div>
+
 
       <!-- Chart + Widgets -->
       <div class="dashboard-grid">
@@ -127,7 +155,7 @@
             </div>
           </div>
 
-          <!-- Visitor Status -->
+          <!-- Visitor Status Widget -->
           <div id="visitor-status-widget" class="visitor-status widget-card">
             <div class="widget-header">
               <h4>Visitor Status</h4>
@@ -147,26 +175,9 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="visitorStatusTbody">
                   <tr>
-                    <td>John Doe</td>
-                    <td><span style="color:green">08:00 AM</span></td>
-                    <td><span style="color:red">05:00 PM</span></td>
-                    <td>2025-09-01</td>
-                    <td>
-                      <button class="btn btn-success btn-sm">Edit</button>
-                      <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jane Smith</td>
-                    <td><span style="color:green">09:00 AM</span></td>
-                    <td><span style="color:red">04:00 PM</span></td>
-                    <td>2025-09-01</td>
-                    <td>
-                      <button class="btn btn-success btn-sm">Edit</button>
-                      <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
+                    <td colspan="5" class="text-center">Loading visitors...</td>
                   </tr>
                 </tbody>
               </table>
@@ -185,7 +196,7 @@
               </div>
             </div>
             <div class="widget-body">
-              <ul class="widget-list">
+              <ul class="widget-list" id="latestVehicleList">
                 <li>TOYOTA FORTUNER - John Doe</li>
                 <li>HONDA CIVIC - Jane Smith</li>
                 <li>NISSAN NV - Visitor A</li>
@@ -204,7 +215,7 @@
               </div>
             </div>
             <div class="widget-body">
-              <ul class="widget-list">
+              <ul class="widget-list" id="userActivityList">
                 <li><strong>John Doe</strong> - Logged in</li>
                 <li><strong>Jane Smith</strong> - Added visitor</li>
                 <li><strong>Admin</strong> - Updated landing page</li>

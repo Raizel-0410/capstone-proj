@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2025 at 02:32 AM
+-- Generation Time: Sep 25, 2025 at 02:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,6 +53,28 @@ CREATE TABLE `deleted_users` (
   `joined_date` datetime DEFAULT NULL,
   `last_active` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exited_visitors`
+--
+
+CREATE TABLE `exited_visitors` (
+  `id` int(11) NOT NULL,
+  `visitation_id` int(11) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `contact_number` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `home_address` varchar(255) DEFAULT NULL,
+  `reason` text DEFAULT NULL,
+  `visit_date` date DEFAULT NULL,
+  `time_in` time DEFAULT NULL,
+  `time_out` time DEFAULT NULL,
+  `valid_id_path` varchar(255) DEFAULT NULL,
+  `selfie_photo_path` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -257,6 +279,10 @@ CREATE TABLE `visitors` (
   `id` int(11) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `contact_number` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `id_photo_path` varchar(255) DEFAULT NULL,
+  `selfie_photo_path` varchar(255) DEFAULT NULL,
   `reason` varchar(255) DEFAULT NULL,
   `date` date NOT NULL,
   `time_in` time DEFAULT NULL,
@@ -292,6 +318,13 @@ ALTER TABLE `admin_audit_logs`
 --
 ALTER TABLE `deleted_users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exited_visitors`
+--
+ALTER TABLE `exited_visitors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `visitation_id` (`visitation_id`);
 
 --
 -- Indexes for table `inside_vehicles`
@@ -395,6 +428,12 @@ ALTER TABLE `admin_audit_logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `exited_visitors`
+--
+ALTER TABLE `exited_visitors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `inside_vehicles`
 --
 ALTER TABLE `inside_vehicles`
@@ -463,6 +502,12 @@ ALTER TABLE `visitors`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `exited_visitors`
+--
+ALTER TABLE `exited_visitors`
+  ADD CONSTRAINT `exited_visitors_ibfk_1` FOREIGN KEY (`visitation_id`) REFERENCES `visitation_requests` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `landing_audit_logs`

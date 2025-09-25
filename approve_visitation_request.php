@@ -30,7 +30,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':vehicle_model'     => $request['vehicle_model'],
                 ':vehicle_color'     => $request['vehicle_color'],
                 ':plate_number'      => $request['plate_number'],
-                ':vehicle_photo_path'=> $request['vehicle_photo'] ?? null
+                ':vehicle_photo_path'=> $request['vehicle_photo_path'] ?? null
+            ]);
+
+            // Insert into visitors table (now includes full details)
+            $stmt = $pdo->prepare("
+                INSERT INTO visitors 
+                    (full_name, contact_number, email, address, reason, id_photo_path, selfie_photo_path, date, time_in, status) 
+                VALUES 
+                    (:full_name, :contact_number, :email, :address, :reason, :id_photo, :selfie, CURDATE(), CURTIME(), 'Inside')
+            ");
+            $stmt->execute([
+                ':full_name'      => $request['visitor_name'],
+                ':contact_number' => $request['contact_number'] ?? null,
+                ':email'          => $request['email'] ?? null,
+                ':address'        => $request['home_address'] ?? null, // ✅ corrected
+                ':reason'         => $request['reason'],
+                ':id_photo'       => $request['valid_id_path'] ?? null, // ✅ corrected
+                ':selfie'         => $request['selfie_photo_path'] ?? null // ✅ corrected
             ]);
         }
 

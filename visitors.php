@@ -137,30 +137,7 @@ if (!empty($session['user_id'])) {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-              <?php
-              $stmt = $pdo->query("SELECT v.id, vr.visitor_name, vr.contact_number, vr.email, vr.home_address, vr.valid_id_path, vr.selfie_photo_path, v.date, v.time_in, v.time_out, v.status
-                                   FROM visitors v
-                                   LEFT JOIN visitation_requests vr ON v.id = vr.id
-                                   ORDER BY v.date DESC");
-              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  echo "<tr>
-                          <td>{$row['visitor_name']}</td>
-                          <td>{$row['contact_number']}</td>
-                          <td>{$row['date']}</td>
-                          <td>{$row['time_in']}</td>
-                          <td>{$row['time_out']}</td>
-                          <td>{$row['status']}</td>
-                          <td>
-                            <button class='btn btn-sm btn-warning edit-btn' data-id='{$row['id']}'>Edit</button>
-                            <button class='btn btn-sm btn-info view-btn' data-id='{$row['id']}'>View</button>";
-                  if ($row['status'] === 'Inside') {
-                      echo "<button class='btn btn-sm btn-danger exit-btn' data-id='{$row['id']}'>Mark Exit</button>";
-                  }
-                  echo "</td></tr>";
-              }
-              ?>
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
@@ -170,104 +147,33 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
-<!-- Visitor View Modal -->
-<div class="modal fade" id="visitorDetailsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title">Visitor Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <ul class="nav nav-tabs" id="visitorTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">Info</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="live-tab" data-bs-toggle="tab" data-bs-target="#live" type="button">Live Video</button>
-          </li>
-        </ul>
-        <div class="tab-content mt-3">
-          <div class="tab-pane fade show active" id="info">
-            <p><strong>Full Name:</strong> <span id="visitorName"></span></p>
-            <p><strong>Contact:</strong> <span id="visitorContact"></span></p>
-            <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
-            <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
-            <p><strong>Time In:</strong> <span id="visitorTimeIn"></span></p>
-            <p><strong>Time Out:</strong> <span id="visitorTimeOut"></span></p>
-            <div class="row mt-3">
-              <div class="col-md-6 text-center">
-                <h6>ID Photo</h6>
-                <img id="visitorIDPhoto" src="" alt="ID Photo" class="img-fluid rounded shadow">
-              </div>
-              <div class="col-md-6 text-center">
-                <h6>Selfie Photo</h6>
-                <img id="visitorSelfie" src="" alt="Selfie Photo" class="img-fluid rounded shadow">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="live">
-            <p class="text-center text-muted">Live video feed will appear here.</p>
-            <div id="liveVideoContainer" class="text-center"></div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Visitor Edit Modal -->
-<div class="modal fade" id="visitorEditModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-warning text-dark">
-        <h5 class="modal-title">Edit Visitor Exit Time</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form id="editVisitorForm">
-          <input type="hidden" id="editVisitorId" name="visitor_id">
-          <div class="mb-3">
-            <label for="editTimeOut" class="form-label">Time Out</label>
-            <input type="time" id="editTimeOut" name="time_out" class="form-control" required>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-warning">Save</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Edit Visitor Time Modal -->
+<!-- Edit Time Out Modal -->
 <div class="modal fade" id="editTimeModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-warning text-dark">
-        <h5 class="modal-title">Edit Visitor Exit Time</h5>
+        <h5 class="modal-title">Edit Time Out</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <form id="editTimeForm">
           <input type="hidden" id="editVisitorId">
           <div class="mb-3">
-            <label for="editTimeOut" class="form-label">New Exit Time</label>
-            <input type="time" id="editTimeOut" class="form-control" required>
+            <label for="editTimeOut" class="form-label">Time Out</label>
+            <input type="time" class="form-control" id="editTimeOut" required>
           </div>
-          <button type="submit" class="btn btn-warning w-100">Update Time</button>
         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="saveTimeBtn" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- Visitor Details Modal with Tabs -->
+<!-- Visitor Details Modal -->
 <div class="modal fade" id="visitorDetailsModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
@@ -308,11 +214,14 @@ if (!empty($session['user_id'])) {
 
           <!-- Live Video Tab -->
           <div class="tab-pane fade" id="liveVideo" role="tabpanel">
-            <div class="text-center">
+            <div class="text-center" id="liveDetails">
               <h6>Live Camera Feed</h6>
               <video id="visitorLiveVideo" autoplay playsinline muted class="rounded shadow" style="width: 100%; max-width: 600px;"></video>
               <p class="text-muted mt-2">Facial recognition will identify the visitor in real-time.</p>
+              <button id="markEntryBtn" class="btn btn-success mt-3" style="display:none;">Mark Entry</button>
+ 
             </div>
+            <p class="exitmsg" id="exitmsg" style="display: inline-block;">Live Video Unavailable, the visitor has exited.</p>
           </div>
         </div>
       </div>
@@ -322,8 +231,6 @@ if (!empty($session['user_id'])) {
     </div>
   </div>
 </div>
-
-
 
 <script src="./scripts/visitors.js"></script>
 <script src="./scripts/session_check.js"></script>

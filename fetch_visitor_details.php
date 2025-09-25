@@ -8,12 +8,32 @@ if (!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM visitation_requests WHERE id = :id");
-$stmt->execute([':id' => $id]);
-$visitor = $stmt->fetch(PDO::FETCH_ASSOC);
+try {
+    $stmt = $pdo->prepare("
+        SELECT 
+            id,
+            full_name,
+            contact_number,
+            email,
+            address,
+            reason,
+            id_photo_path,
+            selfie_photo_path,
+            date,
+            time_in,
+            time_out,
+            status
+        FROM visitors
+        WHERE id = :id
+    ");
+    $stmt->execute([':id' => $id]);
+    $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($visitor) {
-    echo json_encode(['success' => true, 'data' => $visitor]);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Visitor not found']);
+    if ($visitor) {
+        echo json_encode(['success' => true, 'data' => $visitor]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Visitor not found']);
+    }
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => 'Query error']);
 }

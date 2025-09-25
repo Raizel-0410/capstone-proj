@@ -45,8 +45,12 @@ $vehicle_photo_path = uploadFile("vehicle_photo");
 // Insert into visitation_requests
 $stmt = $pdo->prepare("
     INSERT INTO visitation_requests 
-    (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path, vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path, reason, personnel_related, visit_date, visit_time, status) 
-    VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path, :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_model, :vehicle_photo_path, :reason, :personnel_related, :visit_date, :visit_time, 'Pending')
+    (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path, 
+     vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path, 
+     reason, personnel_related, visit_date, visit_time, status) 
+    VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path, 
+            :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_model, :vehicle_photo_path, 
+            :reason, :personnel_related, :visit_date, :visit_time, 'Pending')
 ");
 
 $success = $stmt->execute([
@@ -68,28 +72,29 @@ $success = $stmt->execute([
     ':visit_time'        => $visit_time
 ]);
 
-if (!empty($plate_number)) {
-    $stmt = $pdo->prepare("
-        INSERT INTO vehicles 
-        (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, status)
-        VALUES (:visitation_id, :vehicle_owner, :vehicle_brand, :vehicle_model, :vehicle_color, :plate_number, :vehicle_photo_path, 'Pending')
-    ");
-    $stmt->execute([
-        ':visitation_id'      => $visitationId,
-        ':vehicle_owner'      => $vehicle_owner ?: $visitor_name,
-        ':vehicle_brand'      => $vehicle_brand,
-        ':vehicle_model'      => $vehicle_model,
-        ':vehicle_color'      => $vehicle_color,
-        ':plate_number'       => $plate_number,
-        ':vehicle_photo_path' => $vehicle_photo_path
-    ]);
-}
-
-
 if ($success) {
+    // Get the new visitation ID
     $visitationId = $pdo->lastInsertId();
 
-    // Log action (make sure $token exists in your session or auth system)
+    // If a vehicle was included, insert it properly now
+    if (!empty($plate_number)) {
+        $stmt = $pdo->prepare("
+            INSERT INTO vehicles 
+            (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, status)
+            VALUES (:visitation_id, :vehicle_owner, :vehicle_brand, :vehicle_model, :vehicle_color, :plate_number, :vehicle_photo_path, 'Pending')
+        ");
+        $stmt->execute([
+            ':visitation_id'      => $visitationId,
+            ':vehicle_owner'      => $vehicle_owner ?: $visitor_name,
+            ':vehicle_brand'      => $vehicle_brand,
+            ':vehicle_model'      => $vehicle_model,
+            ':vehicle_color'      => $vehicle_color,
+            ':plate_number'       => $plate_number,
+            ':vehicle_photo_path' => $vehicle_photo_path
+        ]);
+    }
+
+    // Log action
     $token = $_SESSION['user_token'] ?? null;
     log_landing_action($pdo, $token, "Submitted visitation request form");
 
