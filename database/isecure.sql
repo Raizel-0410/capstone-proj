@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2025 at 02:44 AM
+-- Generation Time: Sep 27, 2025 at 05:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -217,8 +217,7 @@ CREATE TABLE `users` (
   `password_hash` varchar(255) NOT NULL,
   `role` enum('Admin','User','Moderator','Guest') DEFAULT 'User',
   `joined_date` datetime DEFAULT current_timestamp(),
-  `last_active` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deleted_account` tinyint(1) DEFAULT 0
+  `last_active` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -287,7 +286,7 @@ CREATE TABLE `visitors` (
   `date` date NOT NULL,
   `time_in` time DEFAULT NULL,
   `time_out` time DEFAULT NULL,
-  `status` enum('Inside','Outside') DEFAULT 'Inside'
+  `status` enum('Inside','Exited') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
