@@ -240,32 +240,101 @@
   color: white;
 }
 
+/* === Fix table layout for Pendings page === */
+
+/* Make table container always full width */
+.table-container,
+.table-responsive {
+  width: 100% !important;
+  margin-top: 15px;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  overflow-x: auto !important; /* horizontal scroll if needed */
+  background: #fff !important;
+  padding: 0 !important;
+}
+
+/* Table */
+.table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  table-layout: auto !important; /* allow natural column sizing */
+  min-width: 600px !important;   /* prevent too much shrinking */
+}
+
+/* Header cells */
+.table thead th {
+  background-color: #5BB7D1 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  padding: 12px !important;
+  border: none !important;
+  white-space: nowrap !important;
+  min-width: 120px !important; /* ensures columns have breathing room */
+}
+
+/* Body cells */
+.table tbody td {
+  padding: 12px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  border: none !important;
+  background: transparent !important;
+  word-wrap: break-word !important;
+  min-width: 120px !important; /* matches header behavior */
+}
+
+/* Row separators */
+.table tbody tr {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* Fix for Actions column (buttons not shrinking) */
+.table tbody td:last-child {
+  width: 150px !important;
+  white-space: nowrap !important;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block !important;
+  padding: 4px 10px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: #fff !important;
+}
+.status-approved { background: #28a745 !important; }
+.status-pending  { background: #ffc107 !important; color: #000 !important; }
+.status-rejected { background: #dc3545 !important; }
+
+/* Tabs */
+.nav-tabs {
+  border-bottom: none !important;
+  margin-bottom: 10px !important;
+}
+.nav-tabs .nav-link {
+  border: none !important;
+  color: #333 !important;
+  font-weight: 500 !important;
+  padding: 6px 14px !important;
+}
+.nav-tabs .nav-link.active {
+  background: #5BB7D1 !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+}
+.nav-tabs .nav-link:hover {
+  background: #e6e6e6 !important;
+  border-radius: 4px !important;
+}
+
+
 /* Tablets or smaller laptops */
 @media (max-width: 1366px) {
     .sidebar-panel {
         min-width: 220px;
         font-size: 14px;
-    }
-}
-
-/* Mobile or very small screens */
-@media (max-width: 768px) {
-    .body {
-        flex-direction: column;
-    }
-
-    .left-panel {
-        width: 100%;
-    }
-
-    .sidebar-panel {
-        width: 100%;
-        min-width: unset;
-        max-width: unset;
-        height: auto;
-    }
-
-    .right-panel {
-        width: 100%;
     }
 }

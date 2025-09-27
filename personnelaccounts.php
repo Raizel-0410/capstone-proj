@@ -136,8 +136,8 @@ if (!empty($session['user_id'])) {
     </div>
 
     <div class="personnel-container">
+      <h3 class="title-perso"><i class="fa-solid fa-users"></i> Personnel Accounts</h3>
     <div class="personnel-topbar">
-      
         <input class="search-bar" type="text" name="search" id="search" placeholder="Search by name or email">
         <i id="search-icon" class="fa-solid fa-search"></i>
 

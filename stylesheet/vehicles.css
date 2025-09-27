@@ -240,6 +240,55 @@
   color: white;
 }
 
+/* === Vehicles Table Styling (same as Visitors) === */
+.vehicles-container {
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 30px;
+}
+
+.table-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+}
+
+#expectedVehiclesTable,
+#insideVehiclesTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+#expectedVehiclesTable th,
+#insideVehiclesTable th,
+#expectedVehiclesTable td,
+#insideVehiclesTable td {
+  padding: 12px;
+  text-align: center;
+  border: none;
+}
+
+#expectedVehiclesTable th,
+#insideVehiclesTable th {
+  background: #5BB7D1;
+  color: white;
+  font-weight: bold;
+}
+
+#expectedVehiclesTable tr,
+#insideVehiclesTable tr,
+#expectedVehiclesTable td,
+#insideVehiclesTable td {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
 /* Tablets or smaller laptops */
 @media (max-width: 1366px) {
     .sidebar-panel {

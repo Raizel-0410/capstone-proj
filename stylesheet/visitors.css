@@ -268,6 +268,87 @@
   background-color: #5a6268;
 }
 
+/* === Visitors Table Styling (match Personnel Accounts, no row lines) === */
+.visitors-container {
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 30px;
+}
+
+#visitorsTable {
+  width: 100%;
+  border-collapse: separate;   
+  border-spacing: 0 8px; 
+  border: #006682;      
+}
+
+#visitorsTable th, 
+#visitorsTable td {
+  padding: 12px;
+  text-align: center;
+  border: none;               
+}
+
+#visitorsTable th {
+  background: #5BB7D1;
+  color: white;
+  font-weight: bold;  
+}
+
+#visitorsTable tr,
+#visitorsTable td {
+  background: transparent;
+  box-shadow: none;
+}
+
+
+/* Action buttons inside table */
+#visitorsTable .btn {
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 5px 12px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+#visitorsTable .btn-primary {
+  background: #007bff;
+  color: white;
+}
+#visitorsTable .btn-primary:hover {
+  background: #0069d9;
+}
+
+#visitorsTable .btn-danger {
+  background: #dc3545;
+  color: white;
+}
+#visitorsTable .btn-danger:hover {
+  background: #c82333;
+}
+
+#visitorsTable .status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+#visitorsTable .status-active {
+  background: #28a745;
+}
+
+#visitorsTable .status-inactive {
+  background: #dc3545;
+}
+
+
 /* =====================
    Responsive tweaks
    ===================== */

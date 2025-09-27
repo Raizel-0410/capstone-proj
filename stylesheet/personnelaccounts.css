@@ -218,6 +218,19 @@
  flex: 1;
 }
 
+.title-perso {
+  justify-content: center;
+  align-items: center;
+}
+
+.title-perso i{
+  justify-self: center;
+  align-self: center;
+  font-size: 15px;
+}
+
+
+
 .search-bar {
     border-width: 0.5px;
     border-color: #1A728B;
@@ -226,6 +239,7 @@
     height: 30px;
     padding: 5px;
 }
+
 
 #search-icon {
     color: #1A728B;

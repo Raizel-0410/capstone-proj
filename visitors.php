@@ -120,9 +120,6 @@ if (!empty($session['user_id'])) {
 
       <!-- Visitors Table -->
       <div class="card mt-4">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">Visitors</h5>
-        </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered table-striped" id="visitorsTable">

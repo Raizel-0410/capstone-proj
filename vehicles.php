@@ -104,63 +104,58 @@ if (!empty($session['user_id'])) {
       </div>
 
 <!-- ==== Expected Vehicles Table ==== -->
-<div class="card mb-4">
-  <div class="card-header bg-primary text-white">
-    <h5 class="mb-0">Expected Vehicles</h5>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped" id="expectedVehiclesTable">
-        <thead class="table-light">
-          <tr>
-            <th>Owner</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Color</th>
-            <th>Plate No.</th>
-            <th>Status</th> <!-- ✅ Updated header -->
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="7" class="text-center">Loading...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="vehicles-container">
+  <h5 class="table-title">Expected Vehicles</h5>
+  <div class="table-responsive">
+    <table id="expectedVehiclesTable">
+      <thead>
+        <tr>
+          <th>Owner</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Color</th>
+          <th>Plate No.</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="7" class="text-center">Loading...</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
 
 
 
 <!-- ==== Inside Vehicles Table ==== -->
-<div class="card mb-4">
-  <div class="card-header bg-success text-white">
-    <h5 class="mb-0">Inside Vehicles</h5>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped" id="insideVehiclesTable">
-        <thead class="table-light">
-          <tr>
-            <th>Owner</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Color</th>
-            <th>Plate No.</th>
-            <th>Entry Time</th>
-            <th>Exit Time</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td colspan="8" class="text-center">Loading...</td></tr>
-        </tbody>
-      </table>
-    </div>
+<div class="vehicles-container">
+  <h5 class="table-title">Inside Vehicles</h5>
+  <div class="table-responsive">
+    <table id="insideVehiclesTable">
+      <thead>
+        <tr>
+          <th>Owner</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Color</th>
+          <th>Plate No.</th>
+          <th>Entry Time</th>
+          <th>Exit Time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="8" class="text-center">Loading...</td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
 
 
     </div>
