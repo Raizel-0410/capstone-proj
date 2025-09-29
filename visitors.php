@@ -103,17 +103,18 @@ if (!empty($session['user_id'])) {
             <div class="user-text">
               <span class="username"><?php echo $fullName; ?></span>
               <a id="logout-link" class="logout-link" href="logout.php">Logout</a>
-              <!-- Confirm Modal -->
-              <div id="confirmModal" class="modal">
-                <div class="modal-content">
-                  <p id="confirmMessage"></p>
-                  <div class="modal-actions">
-                    <button id="confirmYes" class="btn btn-danger">Yes</button>
-                    <button id="confirmNo" class="btn btn-secondary">No</button>
-                  </div>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+           <!-- Confirm Modal -->
+      <div id="confirmModal" class="modal">
+        <div class="modal-content">
+          <p id="confirmMessage"></p>
+          <div class="modal-actions">
+            <button id="confirmYes" class="btn btn-danger">Yes</button>
+            <button id="confirmNo" class="btn btn-secondary">No</button>
           </div>
         </div>
       </div>

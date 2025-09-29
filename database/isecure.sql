@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2025 at 05:06 AM
+-- Generation Time: Sep 29, 2025 at 11:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -110,6 +110,30 @@ CREATE TABLE `landing_about_us` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `landing_archives`
+--
+
+CREATE TABLE `landing_archives` (
+  `id` int(11) NOT NULL,
+  `about_title` varchar(255) DEFAULT NULL,
+  `about_content` text DEFAULT NULL,
+  `about_image` varchar(255) DEFAULT NULL,
+  `carousel_title` varchar(255) DEFAULT NULL,
+  `carousel_text` text DEFAULT NULL,
+  `carousel_image` varchar(255) DEFAULT NULL,
+  `news_carousel_image` varchar(255) DEFAULT NULL,
+  `headline_title` varchar(255) DEFAULT NULL,
+  `headline_description` text DEFAULT NULL,
+  `headline_image` varchar(255) DEFAULT NULL,
+  `vision_title` varchar(255) DEFAULT NULL,
+  `vision_link` varchar(255) DEFAULT NULL,
+  `vision_image` varchar(255) DEFAULT NULL,
+  `archived_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `landing_audit_logs`
 --
 
@@ -135,6 +159,22 @@ CREATE TABLE `landing_carousel` (
   `caption_text` varchar(255) DEFAULT NULL,
   `sort_order` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `landing_sidebar_sections`
+--
+
+CREATE TABLE `landing_sidebar_sections` (
+  `id` int(11) NOT NULL,
+  `section_type` enum('basa_announcements','west_philippine_sea','government_links') NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `image_path` varchar(500) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -338,6 +378,12 @@ ALTER TABLE `landing_about_us`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `landing_archives`
+--
+ALTER TABLE `landing_archives`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `landing_audit_logs`
 --
 ALTER TABLE `landing_audit_logs`
@@ -349,6 +395,13 @@ ALTER TABLE `landing_audit_logs`
 --
 ALTER TABLE `landing_carousel`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `landing_sidebar_sections`
+--
+ALTER TABLE `landing_sidebar_sections`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `section_type` (`section_type`);
 
 --
 -- Indexes for table `landing_vision_mission`
@@ -445,6 +498,12 @@ ALTER TABLE `landing_about_us`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `landing_archives`
+--
+ALTER TABLE `landing_archives`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `landing_audit_logs`
 --
 ALTER TABLE `landing_audit_logs`
@@ -454,6 +513,12 @@ ALTER TABLE `landing_audit_logs`
 -- AUTO_INCREMENT for table `landing_carousel`
 --
 ALTER TABLE `landing_carousel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `landing_sidebar_sections`
+--
+ALTER TABLE `landing_sidebar_sections`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

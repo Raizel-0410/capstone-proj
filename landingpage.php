@@ -85,7 +85,7 @@ if ($token) {
       foreach ($slides as $slide):
       ?>
         <div class="carousel-item <?= $isActive ? 'active' : '' ?>">
-          <img src="<?= htmlspecialchars($slide['image_path']) ?>" class="d-block w-100" alt="Carousel Slide">
+          <img src="<?= htmlspecialchars($slide['image_path']) ?>" class="d-block w-100" alt="Carousel Slide" style="object-fit: cover; height: 500px;">
           <?php if (!empty($slide['caption_title']) || !empty($slide['caption_text'])): ?>
             <div class="carousel-caption d-none d-md-block">
               <h5><?= htmlspecialchars($slide['caption_title']) ?></h5>
@@ -168,7 +168,7 @@ if ($token) {
           $active = "active";
           foreach ($carousel as $item): ?>
             <div class="carousel-item <?= $active ?>">
-              <img src="<?= htmlspecialchars($item['image_path']) ?>" class="d-block w-100" alt="News Carousel">
+              <img src="<?= htmlspecialchars($item['image_path']) ?>" class="d-block w-100" alt="News Carousel" style="object-fit: cover; height: 450px;">
             </div>
           <?php $active = ""; endforeach; ?>
         </div>
@@ -188,7 +188,7 @@ if ($token) {
         $headlines = $pdo->query("SELECT * FROM news_headlines ORDER BY created_at DESC LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
         foreach ($headlines as $news): ?>
           <div class="news-item">
-            <img src="<?= htmlspecialchars($news['image_path']) ?>" alt="<?= htmlspecialchars($news['title']) ?>">
+            <img src="<?= htmlspecialchars($news['image_path']) ?>" alt="<?= htmlspecialchars($news['title']) ?>" style="object-fit: cover; width: 200px; height: 150px;">
             <div class="news-text">
               <h2><?= htmlspecialchars($news['title']) ?></h2>
               <p><?= htmlspecialchars($news['description']) ?></p>
@@ -201,12 +201,21 @@ if ($token) {
 
     <!-- RIGHT SIDEBAR -->
     <aside class="news-sidebar">
-      <div id="announcement-container" class="announcement-box">
-        <div class="announcement-box">
-          
+      <?php
+      $stmt = $pdo->query("SELECT * FROM landing_sidebar_sections ORDER BY FIELD(section_type, 'basa_announcements', 'west_philippine_sea', 'government_links')");
+      $sidebarItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($sidebarItems as $item): 
+      ?>
+        <div class="sidebar-section card mb-3">
+          <?php if (!empty($item['image_path'])): ?>
+            <img src="<?= htmlspecialchars($item['image_path']) ?>" class="sidebar-img card-img-top" alt="<?= htmlspecialchars($item['title']) ?>" style="object-fit: cover; height: 200px;">
+          <?php endif; ?>
+          <div class="card-body">
+            <h5 class="card-title"><?= htmlspecialchars($item['title']) ?></h5>
+            <div class="sidebar-content"><?= $item['content'] ?></div>
+          </div>
         </div>
-      </div>
-    
+      <?php endforeach; ?>
     </aside>
 
   </div>

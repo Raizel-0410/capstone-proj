@@ -32,7 +32,10 @@ require 'audit_log.php';
           <input type="text" id="email" name="email" required>
           
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required> 
+          <div class="password-wrapper">
+            <input type="password" id="password" name="password" required>
+            <i class="fas fa-eye" id="togglePassword"></i>
+          </div>
           
           <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
           

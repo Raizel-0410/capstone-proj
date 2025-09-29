@@ -73,8 +73,30 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  margin-bottom: 10px;
   font-size: 1rem;
+}
+
+.password-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.password-wrapper input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.password-wrapper i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+.password-wrapper i:hover {
+  color: #333;
 }
 
 .forgot {

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function logAction(action) {
-  fetch("./helpers/audit_log.php", {
+  fetch("audit_log.php", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: "action=" + encodeURIComponent(action)
@@ -39,4 +39,16 @@ document.addEventListener("DOMContentLoaded", function () {
       logAction("Closed modal: " + (this.id || "Unnamed modal"));
     });
   });
+
+  // Password toggle functionality
+  const togglePassword = document.getElementById('togglePassword');
+  const password = document.getElementById('password');
+  if (togglePassword && password) {
+    togglePassword.addEventListener('click', function () {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+  }
 });
