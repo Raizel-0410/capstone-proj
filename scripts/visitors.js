@@ -1,5 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // Next button event listeners for tab navigation
+  const nextToVerifyBtn = document.getElementById("nextToVerify");
+  const nextToFacialBtn = document.getElementById("nextToFacial");
+  const nextToVehicleBtn = document.getElementById("nextToVehicle");
+  const nextToIdBtn = document.getElementById("nextToId");
+  const skipVehicleBtn = document.getElementById("skipVehicle");
+  const rejectBtn = document.getElementById("rejectBtn");
+
+  function showTab(tabId) {
+    const tabTrigger = document.querySelector(`#visitorTab button[data-bs-target="#${tabId}"]`);
+    if (tabTrigger) {
+      const tab = new bootstrap.Tab(tabTrigger);
+      tab.show();
+    }
+  }
+
+  if (nextToVerifyBtn) {
+    nextToVerifyBtn.addEventListener("click", () => {
+      showTab("verify");
+    });
+  }
+
+  if (nextToFacialBtn) {
+    nextToFacialBtn.addEventListener("click", () => {
+      showTab("facial");
+    });
+  }
+
+  if (nextToVehicleBtn) {
+    nextToVehicleBtn.addEventListener("click", () => {
+      showTab("vehicle");
+    });
+  }
+
+  if (nextToIdBtn) {
+    nextToIdBtn.addEventListener("click", () => {
+      showTab("id");
+    });
+  }
+  
+  if (skipVehicleBtn) {
+    skipVehicleBtn.addEventListener("click", () => {
+      showTab("id");
+    });
+  }
+  
+  if (rejectBtn) {
+    rejectBtn.addEventListener("click", () => {
+      // Close the modal on reject
+      const modalEl = document.getElementById("visitorDetailsModal");
+      const modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+      alert("Verification rejected.");
+    });
+  }
+
    /* ---- Logout modal ---- */
   const logoutLink = document.getElementById("logout-link");
   if (logoutLink) {
@@ -87,10 +145,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // View Button
     if (btn.classList.contains("view-btn")) {
       try {
+        if (!visitorId) {
+          alert("Visitor ID is missing.");
+          return;
+        }
         const res = await fetch(`fetch_visitor_details.php?id=${encodeURIComponent(visitorId)}`);
         const visitor = await res.json();
 
-        if (!visitor.success) return alert("Visitor data not found");
+        if (!visitor.success) {
+          alert(visitor.message || "Visitor data not found");
+          return;
+        }
 
         document.getElementById("visitorName").textContent = visitor.data.full_name;
         document.getElementById("visitorContact").textContent = visitor.data.contact_number;
@@ -102,20 +167,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
         currentVisitorId = visitor.data.id;
 
-        // Show Mark Entry button if not yet entered
-        if (!visitor.data.time_in || visitor.data.status === "Pending") {
-          markEntryBtn.style.display = "inline-block";
-          exitmsg.style.display = "none";
+        // Hide or show verify tabs based on visitor status
+        const verifyTabBtn = document.querySelector('#visitorTab button[data-bs-target="#verify"]');
+        const facialTabBtn = document.querySelector('#visitorTab button[data-bs-target="#facial"]');
+        const vehicleTabBtn = document.querySelector('#visitorTab button[data-bs-target="#vehicle"]');
+        const idTabBtn = document.querySelector('#visitorTab button[data-bs-target="#id"]');
+
+        if (visitor.data.status === "Inside" || visitor.data.status === "Exited") {
+          if (verifyTabBtn) verifyTabBtn.style.display = 'none';
+          if (facialTabBtn) facialTabBtn.style.display = 'none';
+          if (vehicleTabBtn) vehicleTabBtn.style.display = 'none';
+          if (idTabBtn) idTabBtn.style.display = 'none';
+
+          // Hide Next buttons in verify tabs
+          const nextToVerifyBtn = document.getElementById("nextToVerify");
+          const nextToFacialBtn = document.getElementById("nextToFacial");
+          const nextToVehicleBtn = document.getElementById("nextToVehicle");
+
+          if (nextToVerifyBtn) nextToVerifyBtn.style.display = 'none';
+          if (nextToFacialBtn) nextToFacialBtn.style.display = 'none';
+          if (nextToVehicleBtn) nextToVehicleBtn.style.display = 'none';
+
+          // Show details tab by default since all verify tabs are hidden
+          const detailsTabTriggerEl = document.querySelector('#details-tab');
+          if (detailsTabTriggerEl) {
+            const tab = bootstrap.Tab.getInstance(detailsTabTriggerEl) || new bootstrap.Tab(detailsTabTriggerEl);
+            tab.show();
+          }
         } else {
-          markEntryBtn.style.display = "inline-block";
-          exitmsg.style.display = "none";
-        }
+          if (verifyTabBtn) verifyTabBtn.style.display = 'block';
+          if (facialTabBtn) facialTabBtn.style.display = 'block';
+          if (vehicleTabBtn) vehicleTabBtn.style.display = 'block';
+          if (idTabBtn) idTabBtn.style.display = 'block';
 
-        // hide live tab when visitors are marked exited
+          // Show Next buttons in verify tabs
+          const nextToVerifyBtn = document.getElementById("nextToVerify");
+          const nextToFacialBtn = document.getElementById("nextToFacial");
+          const nextToVehicleBtn = document.getElementById("nextToVehicle");
 
-        if (visitor.data.status === "Exited") {
-          liveDetails.style.display = "none"
-          exitmsg.style.display = "inline-block";
+          if (nextToVerifyBtn) nextToVerifyBtn.style.display = 'inline-block';
+          if (nextToFacialBtn) nextToFacialBtn.style.display = 'inline-block';
+          if (nextToVehicleBtn) nextToVehicleBtn.style.display = 'inline-block';
+
+          // Show details tab by default
+          const detailsTabTriggerEl = document.querySelector('#details-tab');
+          if (detailsTabTriggerEl) {
+            const tab = bootstrap.Tab.getInstance(detailsTabTriggerEl) || new bootstrap.Tab(detailsTabTriggerEl);
+            tab.show();
+          }
         }
 
         new bootstrap.Modal(document.getElementById("visitorDetailsModal")).show();
@@ -164,16 +263,22 @@ else if (btn.classList.contains("exit-btn")) {
       body: formData
     });
 
-    const result = await res.json();
-    if (result.success) {
-      alert(result.message);
-      loadVisitors(); // Refresh table to show "Exited" status
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Response not ok:", text);
+      alert("Request failed: " + res.status + " - " + text.substring(0, 100));
     } else {
-      alert("Error: " + result.message);
+      const result = await res.json();
+      if (result.success) {
+        alert(result.message);
+        loadVisitors(); // Refresh table to show "Exited" status
+      } else {
+        alert("Error: " + result.message);
+      }
     }
   } catch (err) {
     console.error(err);
-    alert("Request failed.");
+    alert("Request failed: " + err.message);
   }
 }
 
@@ -184,13 +289,19 @@ else if (btn.classList.contains("exit-btn")) {
   document.getElementById("saveTimeBtn").addEventListener("click", async () => {
     const visitorId = document.getElementById("editVisitorId").value;
     const timeOut = document.getElementById("editTimeOut").value;
+    const validityStart = document.getElementById("editValidityStart").value;
+    const validityEnd = document.getElementById("editValidityEnd").value;
 
     if (!timeOut) return alert("Please enter a valid time out");
+    if (!validityStart) return alert("Please enter a valid validity start");
+    if (!validityEnd) return alert("Please enter a valid validity end");
 
     try {
       const formData = new URLSearchParams();
       formData.append("visitor_id", visitorId);
       formData.append("time_out", timeOut);
+      formData.append("validity_start", validityStart);
+      formData.append("validity_end", validityEnd);
 
       const res = await fetch("update_visitor_time_out.php", {
         method: "POST",
@@ -222,16 +333,21 @@ else if (btn.classList.contains("exit-btn")) {
 
   /* ---- Functions ---- */
   async function markEntry(visitorId) {
-    try {
-      const formData = new URLSearchParams();
-      formData.append("visitor_id", visitorId);
+  try {
+    const formData = new URLSearchParams();
+    formData.append("visitor_id", visitorId);
 
-      const res = await fetch("mark_entry_visitor.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formData
-      });
+    const res = await fetch("mark_entry_visitor.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formData
+    });
 
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Response not ok:", text);
+      alert("Request failed: " + res.status + " - " + text.substring(0, 100));
+    } else {
       const result = await res.json();
       if (result.success) {
         alert("Visitor entry marked!");
@@ -239,9 +355,10 @@ else if (btn.classList.contains("exit-btn")) {
       } else {
         alert("Error: " + result.message);
       }
-    } catch (err) {
-      console.error(err);
-      alert("Request failed.");
     }
+  } catch (err) {
+    console.error(err);
+    alert("Request failed: " + err.message);
+  }
   }
 });

@@ -1,0 +1,3 @@
+- [x] Edit visitors.php: Update nav-tabs to remove Live Video and add Verify, Facial Verification, Vehicle Verification, ID Verification tabs. Update tab-content with new panes, add Next buttons in appropriate tabs, move Mark Entry and add Reject to ID tab. Add Skip button in Vehicle Verification tab.
+- [x] Edit scripts/visitors.js: Add event listeners for Next buttons to switch tabs, update modal show logic to activate Details tab, handle Reject button, remove live video related code. Add event listener for Skip button.
+- [x] Test tab navigation and button functionality. (Skipped as per user request)

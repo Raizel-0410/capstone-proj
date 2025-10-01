@@ -10,7 +10,7 @@ if (!$id) {
 
 try {
     $stmt = $pdo->prepare("
-        SELECT 
+        SELECT
             id,
             full_name,
             contact_number,
@@ -30,10 +30,14 @@ try {
     $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($visitor) {
+        // Ensure paths are absolute or correct relative URLs for frontend
+        $visitor['id_photo_path'] = $visitor['id_photo_path'] ? htmlspecialchars($visitor['id_photo_path'], ENT_QUOTES, 'UTF-8') : '';
+        $visitor['selfie_photo_path'] = $visitor['selfie_photo_path'] ? htmlspecialchars($visitor['selfie_photo_path'], ENT_QUOTES, 'UTF-8') : '';
         echo json_encode(['success' => true, 'data' => $visitor]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Visitor not found']);
     }
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Query error']);
+    error_log("Query error in fetch_visitor_details.php: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Query error: ' . $e->getMessage()]);
 }

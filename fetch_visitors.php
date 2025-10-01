@@ -9,10 +9,10 @@ try {
             full_name,
             contact_number,
             email,
-            address AS home_address,     -- ✅ clearer mapping
+            address,
             reason,
-            id_photo_path AS valid_id,   -- ✅ alias for consistency
-            selfie_photo_path AS selfie, -- ✅ alias for consistency
+            id_photo_path,
+            selfie_photo_path,
             date,
             time_in,
             time_out,

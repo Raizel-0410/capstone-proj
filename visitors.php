@@ -67,9 +67,6 @@ if (!empty($session['user_id'])) {
         <ul>
           <h6>MENU</h6>
           <li><i class="fa-solid fa-gauge-high"></i><a href="maindashboard.php"> Main Dashboard</a></li>
-          <li><i class="fa-solid fa-video"></i><a href="cameraview.php"> Camera View</a></li>
-          <li class="camera-view-drop-down"><i class="fa-solid fa-circle-dot"></i><a href="livefeed.php"> Live Feed</a></li>
-          <li class="camera-view-drop-down"><i class="fa-solid fa-id-card-clip"></i><a href="personinformation.php"> Person Information</a></li>
           <li><i class="fa-solid fa-user"></i><a href="visitors.php"> Visitors</a></li>
           <li><i class="fa-solid fa-car-side"></i><a href="vehicles.php"> Vehicles</a></li>
           <li><i class="fa-solid fa-user-gear"></i><a href="personnels.php"> Personnels</a></li>
@@ -160,6 +157,14 @@ if (!empty($session['user_id'])) {
             <label for="editTimeOut" class="form-label">Time Out</label>
             <input type="time" class="form-control" id="editTimeOut" required>
           </div>
+          <div class="mb-3">
+            <label for="editValidityStart" class="form-label">Validity Start</label>
+            <input type="datetime-local" class="form-control" id="editValidityStart" required>
+          </div>
+          <div class="mb-3">
+            <label for="editValidityEnd" class="form-label">Validity End</label>
+            <input type="datetime-local" class="form-control" id="editValidityEnd" required>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -186,7 +191,16 @@ if (!empty($session['user_id'])) {
             <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Details</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="live-tab" data-bs-toggle="tab" data-bs-target="#liveVideo" type="button" role="tab">Live Video</button>
+            <button class="nav-link" id="verify-tab" data-bs-toggle="tab" data-bs-target="#verify" type="button" role="tab">Verify</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab">Facial Verification</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab">Vehicle Verification</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="id-tab" data-bs-toggle="tab" data-bs-target="#id" type="button" role="tab">ID Verification</button>
           </li>
         </ul>
 
@@ -208,18 +222,41 @@ if (!empty($session['user_id'])) {
                 <img id="visitorSelfie" src="" alt="Selfie Photo" class="img-fluid rounded shadow">
               </div>
             </div>
+            <button id="nextToVerify" class="btn btn-primary mt-3">Next</button>
           </div>
 
-          <!-- Live Video Tab -->
-          <div class="tab-pane fade" id="liveVideo" role="tabpanel">
-            <div class="text-center" id="liveDetails">
-              <h6>Live Camera Feed</h6>
-              <video id="visitorLiveVideo" autoplay playsinline muted class="rounded shadow" style="width: 100%; max-width: 600px;"></video>
-              <p class="text-muted mt-2">Facial recognition will identify the visitor in real-time.</p>
-              <button id="markEntryBtn" class="btn btn-success mt-3" style="display:none;">Mark Entry</button>
- 
-            </div>
-            <p class="exitmsg" id="exitmsg" style="display: inline-block;">Live Video Unavailable, the visitor has exited.</p>
+          <!-- Verify Tab -->
+          <div class="tab-pane fade" id="verify" role="tabpanel">
+            <h6>Verification Checklist</h6>
+            <ul>
+              <li>Facial Verification</li>
+              <li>Vehicle Verification</li>
+              <li>ID Verification</li>
+            </ul>
+            <button id="nextToFacial" class="btn btn-primary mt-3">Next</button>
+          </div>
+
+          <!-- Facial Verification Tab -->
+          <div class="tab-pane fade" id="facial" role="tabpanel">
+            <h6>Facial Verification</h6>
+            <div id="facialContainer">Container for facial recognition feature</div>
+            <button id="nextToVehicle" class="btn btn-primary mt-3">Next</button>
+          </div>
+
+          <!-- Vehicle Verification Tab -->
+          <div class="tab-pane fade" id="vehicle" role="tabpanel">
+            <h6>Vehicle Verification</h6>
+            <div id="vehicleContainer">Container for vehicle verification feature</div>
+            <button id="nextToId" class="btn btn-primary mt-3">Next</button>
+            <button id="skipVehicle" class="btn btn-secondary mt-3 ms-2">Skip</button>
+          </div>
+
+          <!-- ID Verification Tab -->
+          <div class="tab-pane fade" id="id" role="tabpanel">
+            <h6>ID Verification</h6>
+            <div id="idContainer">Container for ID verification feature</div>
+            <button id="markEntryBtn" class="btn btn-success mt-3">Mark Entry</button>
+            <button id="rejectBtn" class="btn btn-danger mt-3">Reject</button>
           </div>
         </div>
       </div>

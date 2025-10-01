@@ -15,32 +15,15 @@ if (!$visitorId) {
 }
 
 try {
-    // Fetch visitor from visitors table
-    $stmt = $pdo->prepare("SELECT * FROM visitors WHERE id = :id LIMIT 1");
-    $stmt->execute([':id' => $visitorId]);
-    $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$visitor) {
-        echo json_encode(['success' => false, 'message' => 'Visitor not found']);
-        exit;
-    }
-
     // Update time_out and status
     $stmt = $pdo->prepare("UPDATE visitors SET time_out = NOW(), status = 'Exited' WHERE id = :id");
     $stmt->execute([':id' => $visitorId]);
 
     // If visitor has a vehicle, update vehicles table
-    if (!empty($visitor['plate_number'])) {
-        $stmt = $pdo->prepare("
-            UPDATE vehicles 
-            SET exit_time = NOW(), status = 'Exited' 
-            WHERE plate_number = :plate AND status = 'Inside'
-        ");
-        $stmt->execute([':plate' => $visitor['plate_number']]);
-    }
+    $stmt = $pdo->prepare("UPDATE vehicles SET exit_time = NOW(), status = 'Exited' WHERE visitation_id = :vid AND exit_time IS NULL");
+    $stmt->execute([':vid' => $visitorId]);
 
     echo json_encode(['success' => true, 'message' => 'Visitor exit marked successfully']);
-
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }

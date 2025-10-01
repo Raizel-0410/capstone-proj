@@ -21,6 +21,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./stylesheet/admin.css">
+  <link rel="stylesheet" href="./stylesheet/admin-maindashboard.css">
 </head>
 <body>
 <div class="body">
@@ -33,9 +34,6 @@
         <ul>
           <h6>MENU</h6>
           <li><i class="fa-solid fa-gauge-high"></i><a href="maindashboard.php"> Main Dashboard</a></li>
-          <li><i class="fa-solid fa-video"></i><a href="cameraview.php"> Camera View</a></li>
-          <li class="camera-view-drop-down"><i class="fa-solid fa-circle-dot"></i><a href="livefeed.php"> Live Feed</a></li>
-          <li class="camera-view-drop-down"><i class="fa-solid fa-id-card-clip"></i><a href="personinformation.php"> Person Information</a></li>
           <li><i class="fa-solid fa-user"></i><a href="visitors.php"> Visitors</a></li>
           <li><i class="fa-solid fa-car-side"></i><a href="vehicles.php"> Vehicles</a></li>
           <li><i class="fa-solid fa-user-gear"></i><a href="personnels.php"> Personnels</a></li>
@@ -119,23 +117,47 @@
 
       <!-- Stats cards -->
     <div class="status-containers">
-  <div class="stats-cards">
-    <div class="card-value" id="visitorsCount">0</div>
-    <div class="card-label">Current Visitors</div>
-  </div>
-  <div class="stats-cards">
-    <div class="card-value" id="vehiclesCount">0</div>
-    <div class="card-label">Current Vehicles</div>
-  </div>
-  <div class="stats-cards">
-    <div class="card-value" id="pendingCount">0</div>
-    <div class="card-label">Pendings</div>
-  </div>
-  <div class="stats-cards">
-    <div class="card-value" id="entryCount">0</div>
-    <div class="card-label">Door Entry</div>
-  </div>
-</div>
+      <div class="stats-cards">
+        <div class="stats-card-icon">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="stats-card-content">
+          <div class="card-value" id="visitorsCount">0</div>
+          <div class="card-label">Current Visitors</div>
+          <div class="updated-time">updated 21hrs ago</div>
+        </div>
+      </div>
+      <div class="stats-cards">
+        <div class="stats-card-icon">
+          <i class="fa-solid fa-car"></i>
+        </div>
+        <div class="stats-card-content">
+          <div class="card-value" id="vehiclesCount">0</div>
+          <div class="card-label">Current Vehicles</div>
+          <div class="updated-time">updated 21hrs ago</div>
+        </div>
+      </div>
+      <div class="stats-cards">
+        <div class="stats-card-icon">
+          <i class="fa-solid fa-list-check"></i>
+        </div>
+        <div class="stats-card-content">
+          <div class="card-value" id="pendingCount">0</div>
+          <div class="card-label">Pendings</div>
+          <div class="updated-time">updated 21hrs ago</div>
+        </div>
+      </div>
+      <div class="stats-cards">
+        <div class="stats-card-icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div class="stats-card-content">
+          <div class="card-value" id="entryCount">0</div>
+          <div class="card-label">Access Control</div>
+          <div class="updated-time">updated 21hrs ago</div>
+        </div>
+      </div>
+    </div>
 
 
       <!-- Chart + Widgets -->

@@ -22,13 +22,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        // Update time_out and status in visitors table
-        $stmt = $pdo->prepare("
-            UPDATE visitors
-            SET time_out = NOW()
-            WHERE id = :id
-        ");
-        $stmt->execute([':id' => $visitorId]);
+        // Update time_out, status, and optionally validity in visitors table
+        $validityStart = $_POST['validity_start'] ?? null;
+        $validityEnd = $_POST['validity_end'] ?? null;
+
+        if ($validityStart && $validityEnd) {
+            // Extract time from validity_end for time_out
+            $timeOutFromValidity = date('H:i:s', strtotime($validityEnd));
+            $stmt = $pdo->prepare("
+                UPDATE visitors
+                SET time_out = :timeout,
+                    validity_start = :validstart,
+                    validity_end = :validend
+                WHERE id = :id
+            ");
+            $stmt->execute([
+                ':timeout' => $timeOutFromValidity,
+                ':validstart' => $validityStart,
+                ':validend' => $validityEnd,
+                ':id' => $visitorId
+            ]);
+        } else if ($validityStart) {
+            // If only validity_start is provided, update it without changing time_out
+            $stmt = $pdo->prepare("
+                UPDATE visitors
+                SET validity_start = :validstart
+                WHERE id = :id
+            ");
+            $stmt->execute([
+                ':validstart' => $validityStart,
+                ':id' => $visitorId
+            ]);
+        } else {
+            $stmt = $pdo->prepare("
+                UPDATE visitors
+                SET time_out = NOW()
+                WHERE id = :id
+            ");
+            $stmt->execute([':id' => $visitorId]);
+        }
 
         // Sync to vehicles table if visitor has a vehicle
         if (!empty($visitor['plate_number'])) {
