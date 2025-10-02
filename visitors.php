@@ -73,7 +73,6 @@ if (!empty($session['user_id'])) {
           <li><i class="fa-solid fa-clock-rotate-left"></i><a href="pendings.php"> Pendings</a></li>
           <h6>DATA MANAGEMENT</h6>
           <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
-          <li><i class="fa-solid fa-box-archive"></i><a href="inventory.php"> Inventory</a></li>
           <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
           <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
           <h6>CUSTOMIZATION</h6>
