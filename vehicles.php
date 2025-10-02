@@ -158,23 +158,12 @@ if (!empty($session['user_id'])) {
 </div>
 
 
-<<<<<<< Updated upstream
 
     </div>
   </div>
 </div>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 <script src="./scripts/vehicles.js"></script>
 <script src="./scripts/session_check.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

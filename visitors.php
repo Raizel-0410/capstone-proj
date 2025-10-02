@@ -117,41 +117,6 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      <!-- Visitors Table -->
-      <div class="card mt-4">
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="visitorsTable">
-              <thead class="table-light">
-                <tr>
-                  <th>Full Name</th>
-                  <th>Contact</th>
-                  <th>Date</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
            <!-- Confirm Modal -->
       <div id="confirmModal" class="modal">
         <div class="modal-content">
@@ -234,19 +199,6 @@ if (!empty($session['user_id'])) {
     </table>
   </div>
 </div>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     </div>
   </div>

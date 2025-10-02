@@ -23,10 +23,7 @@ try {
     $stmt = $pdo->prepare("UPDATE vehicles SET entry_time = NOW(), status = 'Inside' WHERE visitation_id = :vid AND entry_time IS NULL");
     $stmt->execute([':vid' => $visitorId]);
 
-        echo json_encode(['success' => true, 'message' => 'Visitor marked as Inside']);
-    } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-    }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request']);
+    echo json_encode(['success' => true, 'message' => 'Visitor marked as Inside']);
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
