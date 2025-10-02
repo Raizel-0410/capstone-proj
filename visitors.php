@@ -227,9 +227,94 @@ if (!empty($session['user_id'])) {
         <h5 class="modal-title">Visitor Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body" id="visitorDetailsBody">
-        <!-- Content loaded dynamically -->
-      </div>
+      <ul class="nav nav-tabs" id="visitorTab" role="tablist" style="margin-bottom: 20px;">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">Details</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="verify-tab" data-bs-toggle="tab" data-bs-target="#verify" type="button" role="tab" aria-controls="verify" aria-selected="false">Verify</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab" aria-controls="facial" aria-selected="false">Facial</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="false">Vehicle</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="id-tab" data-bs-toggle="tab" data-bs-target="#id" type="button" role="tab" aria-controls="id" aria-selected="false">ID</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="visitorTabContent" style="margin-top: 10px;">
+      <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+          <div class="visitor-info" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; align-items: start;">
+            <p><strong>Full Name:</strong> <span id="visitorName"></span></p>
+            <p><strong>Contact Number:</strong> <span id="visitorContact"></span></p>
+            <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
+            <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
+            <p><strong>Reason for Visit:</strong> <span id="visitorReason"></span></p>
+            <p><strong>Personnel Related:</strong> <span id="visitorPersonnel"></span></p>
+            <div class="photos" style="display: flex; gap: 20px; margin-top: 20px;">
+              <div>
+                <strong>ID Photo:</strong><br>
+                <img id="visitorIDPhoto" src="" alt="ID Photo" style="max-width:200px; max-height:200px;">
+              </div>
+              <div>
+                <strong>Selfie:</strong><br>
+                <img id="visitorSelfie" src="" alt="Selfie" style="max-width:200px; max-height:200px;">
+              </div>
+            </div>
+            <div id="vehicleInfo" style="display:none; margin-top: 20px;">
+              <h5>Vehicle Information</h5>
+              <p><strong>Owner:</strong> <span id="vehicleOwner"></span></p>
+              <p><strong>Brand:</strong> <span id="vehicleBrand"></span></p>
+              <p><strong>Model:</strong> <span id="vehicleModel"></span></p>
+              <p><strong>Color:</strong> <span id="vehicleColor"></span></p>
+              <p><strong>Plate Number:</strong> <span id="plateNumber"></span></p>
+              <div style="margin-top: 10px;">
+                <strong>Vehicle Photo:</strong><br>
+                <img id="vehiclePhoto" src="" alt="Vehicle Photo" style="max-width:200px; max-height:200px;">
+              </div>
+            </div>
+            <div id="driverInfo" style="display:none; margin-top: 20px;">
+              <h5>Driver Information</h5>
+              <p><strong>Name:</strong> <span id="driverName"></span></p>
+              <div style="margin-top: 10px;">
+                <strong>ID Photo:</strong><br>
+                <img id="driverIdPhoto" src="" alt="Driver ID" style="max-width:200px; max-height:200px;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="verify" role="tabpanel" aria-labelledby="verify-tab">
+          <div>
+            <button id="nextToFacial" class="btn btn-primary float-end">Next</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="facial" role="tabpanel" aria-labelledby="facial-tab">
+          <div>
+            <div id="facialRecognitionContainer" style="min-height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
+              <!-- Facial recognition feature under development -->
+            </div>
+            <button id="nextToVehicle" class="btn btn-primary float-end">Next</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
+          <div>
+            <div id="vehicleRecognitionContainer" style="min-height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
+              <!-- Vehicle license plate recognition feature under development -->
+            </div>
+            <button id="skipVehicle" class="btn btn-secondary float-start">Skip</button>
+            <button id="nextToId" class="btn btn-primary float-end">Next</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="id" role="tabpanel" aria-labelledby="id-tab">
+          <div>
+            <div id="idRecognitionContainer" style="min-height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
+              <!-- ID recognition feature under development -->
+            </div>
+            <button id="markEntryBtn" class="btn btn-success float-end">Mark Entry</button>
+          </div>
+        </div>
     </div>
   </div>
 </div>

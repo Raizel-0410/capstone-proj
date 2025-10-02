@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>${escapeHtml(v.first_name || "")}</td>
           <td>${escapeHtml(v.last_name || "")}</td>
           <td>${escapeHtml(v.contact_number || "")}</td>
+          ${v.date !== undefined ? `<td>${escapeHtml(v.date || "")}</td>` : ""}
           ${v.key_card_number !== undefined ? `<td>${escapeHtml(v.key_card_number || "")}</td>` : ""}
           ${v.time_in !== undefined ? `<td>${escapeHtml(v.time_in || "")}</td>` : ""}
           ${v.time_out !== undefined ? `<td>${escapeHtml(v.time_out || "")}</td>` : ""}
