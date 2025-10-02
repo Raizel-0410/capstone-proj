@@ -35,22 +35,22 @@ try {
             veh.plate_number,
             veh.vehicle_photo_path
         FROM visitors v
-        LEFT JOIN visitation_requests vr ON vr.visitor_name = CONCAT(v.first_name, ' ', v.last_name) AND vr.visit_date = v.date
-        LEFT JOIN vehicles veh ON veh.visitation_id = vr.id
+        LEFT JOIN visitation_requests vr 
+            ON vr.visitor_name = CONCAT(v.first_name, ' ', v.last_name) 
+           AND vr.visit_date = v.date
+        LEFT JOIN vehicles veh 
+            ON veh.visitation_id = vr.id
         WHERE v.id = :id
     ");
+    
     $stmt->execute([':id' => $id]);
     $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($visitor) {
-        // Ensure paths are absolute or correct relative URLs for frontend
-        $visitor['id_photo_path'] = $visitor['id_photo_path'] ? htmlspecialchars($visitor['id_photo_path'], ENT_QUOTES, 'UTF-8') : '';
-        $visitor['selfie_photo_path'] = $visitor['selfie_photo_path'] ? htmlspecialchars($visitor['selfie_photo_path'], ENT_QUOTES, 'UTF-8') : '';
         echo json_encode(['success' => true, 'data' => $visitor]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Visitor not found']);
     }
 } catch (Exception $e) {
-    error_log("Query error in fetch_visitor_details.php: " . $e->getMessage());
-    echo json_encode(['success' => false, 'message' => 'Query error: ' . $e->getMessage()]);
+    echo json_encode(['success' => false, 'message' => 'Query error']);
 }

@@ -72,7 +72,7 @@ function escapeHtml(s) {
       insideTbody.innerHTML = "";
       if (!Array.isArray(data) || data.length === 0) {
         insideTbody.innerHTML =
-          `<tr><td colspan="8" class="text-center">No vehicles inside</td></tr>`;
+          `<tr><td colspan="9" class="text-center">No vehicles inside</td></tr>`;
         return;
       }
 
