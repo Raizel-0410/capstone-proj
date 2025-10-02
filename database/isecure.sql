@@ -7,7 +7,11 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 -- Generation Time: Sep 25, 2025 at 02:44 AM
+=======
+-- Generation Time: Oct 02, 2025 at 12:57 PM
+>>>>>>> Stashed changes
 =======
 -- Generation Time: Oct 02, 2025 at 12:57 PM
 >>>>>>> Stashed changes
@@ -329,7 +333,12 @@ CREATE TABLE `visitors` (
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   `status` enum('Inside','Outside') DEFAULT 'Inside'
+=======
+  `status` enum('Inside','Exited') DEFAULT NULL,
+  `key_card_number` varchar(255) DEFAULT NULL
+>>>>>>> Stashed changes
 =======
   `status` enum('Inside','Exited') DEFAULT NULL,
   `key_card_number` varchar(255) DEFAULT NULL
