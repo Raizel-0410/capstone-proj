@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $status = ($action === 'reject') ? 'Rejected' : 'Approved';
             $stmt = $pdo->prepare("UPDATE visitation_requests SET status = :status WHERE id = :id");
             $stmt->execute([':status' => $status, ':id' => $id]);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
         // Fetch the visitation request details
@@ -24,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([':id' => $id]);
         $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if ($request) {
             // Insert into vehicles table as EXPECTED (not yet inside)
@@ -60,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':selfie'         => $request['selfie_photo_path'] ?? null // ✅ corrected
             ]);
 =======
+=======
+>>>>>>> Stashed changes
 if ($request) {
                 // Insert into vehicles table as EXPECTED (not yet inside)
                 $stmt = $pdo->prepare("

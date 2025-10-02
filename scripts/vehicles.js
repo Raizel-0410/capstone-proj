@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 
   // ---- Load Expected Vehicles ----

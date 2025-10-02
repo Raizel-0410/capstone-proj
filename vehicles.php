@@ -186,11 +186,14 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
+<<<<<<< Updated upstream
 
     </div>
   </div>
 </div>
 
+=======
+>>>>>>> Stashed changes
 <script src="./scripts/vehicles.js"></script>
 <script src="./scripts/session_check.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

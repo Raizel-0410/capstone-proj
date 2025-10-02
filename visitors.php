@@ -120,6 +120,7 @@ if (!empty($session['user_id'])) {
       </div>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <!-- Visitors Table -->
       <div class="card mt-4">
         <div class="card-header bg-primary text-white">
@@ -145,6 +146,8 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 =======
+=======
+>>>>>>> Stashed changes
            <!-- Confirm Modal -->
       <div id="confirmModal" class="modal">
         <div class="modal-content">
@@ -227,6 +230,9 @@ if (!empty($session['user_id'])) {
     </table>
   </div>
 </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     </div>

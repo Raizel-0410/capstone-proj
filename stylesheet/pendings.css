@@ -457,6 +457,9 @@
     color: #004d40;
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 /* Tablets or smaller laptops */
 @media (max-width: 1366px) {
@@ -466,6 +469,7 @@
     }
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 /* Mobile or very small screens */
 @media (max-width: 768px) {
@@ -488,6 +492,9 @@
         width: 100%;
     }
 }
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes

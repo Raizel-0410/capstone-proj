@@ -11,6 +11,7 @@ if (!$id) {
 try {
     $stmt = $pdo->prepare("
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         SELECT 
             id,
             full_name,
@@ -27,6 +28,8 @@ try {
         FROM visitors
         WHERE id = :id
 =======
+=======
+>>>>>>> Stashed changes
         SELECT
             v.id,
             CONCAT(v.first_name, ' ', v.last_name) AS full_name,
@@ -55,6 +58,9 @@ try {
         LEFT JOIN visitation_requests vr ON vr.visitor_name = CONCAT(v.first_name, ' ', v.last_name) AND vr.visit_date = v.date
         LEFT JOIN vehicles veh ON veh.visitation_id = vr.id
         WHERE v.id = :id
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     ");
     $stmt->execute([':id' => $id]);
