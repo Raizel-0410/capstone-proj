@@ -10,30 +10,6 @@ if (!$id) {
 
 try {
     $stmt = $pdo->prepare("
-        SELECT 
-            id,
-            full_name,
-            contact_number,
-            email,
-            address,
-            reason,
-            id_photo_path,
-            selfie_photo_path,
-            date,
-            time_in,
-            time_out,
-            status
-        FROM visitors
-        WHERE id = :id
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         SELECT
             v.id,
             CONCAT(v.first_name, ' ', v.last_name) AS full_name,
@@ -59,30 +35,23 @@ try {
             veh.plate_number,
             veh.vehicle_photo_path
         FROM visitors v
-        LEFT JOIN visitation_requests vr ON vr.visitor_name = CONCAT(v.first_name, ' ', v.last_name) AND vr.visit_date = v.date
-        LEFT JOIN vehicles veh ON veh.visitation_id = vr.id
+        LEFT JOIN visitation_requests vr 
+            ON vr.visitor_name = CONCAT(v.first_name, ' ', v.last_name) 
+            AND vr.visit_date = v.date
+        LEFT JOIN vehicles veh 
+            ON veh.visitation_id = vr.id
         WHERE v.id = :id
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     ");
     $stmt->execute([':id' => $id]);
     $visitor = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($visitor) {
-        // Ensure paths are absolute or correct relative URLs for frontend
+        // sanitize paths
         $visitor['id_photo_path'] = $visitor['id_photo_path'] ? htmlspecialchars($visitor['id_photo_path'], ENT_QUOTES, 'UTF-8') : '';
         $visitor['selfie_photo_path'] = $visitor['selfie_photo_path'] ? htmlspecialchars($visitor['selfie_photo_path'], ENT_QUOTES, 'UTF-8') : '';
+        $visitor['vehicle_photo_path'] = $visitor['vehicle_photo_path'] ? htmlspecialchars($visitor['vehicle_photo_path'], ENT_QUOTES, 'UTF-8') : '';
+        $visitor['driver_id'] = $visitor['driver_id'] ? htmlspecialchars($visitor['driver_id'], ENT_QUOTES, 'UTF-8') : '';
+
         echo json_encode(['success' => true, 'data' => $visitor]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Visitor not found']);

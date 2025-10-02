@@ -73,6 +73,7 @@ if (!empty($session['user_id'])) {
           <li><i class="fa-solid fa-clock-rotate-left"></i><a href="pendings.php"> Pendings</a></li>
           <h6>DATA MANAGEMENT</h6>
           <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
+          <li><i class="fa-solid fa-box-archive"></i><a href="inventory.php"> Inventory</a></li>
           <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
           <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
           <h6>CUSTOMIZATION</h6>
@@ -106,7 +107,7 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 
-           <!-- Confirm Modal -->
+      <!-- Confirm Modal -->
       <div id="confirmModal" class="modal">
         <div class="modal-content">
           <p id="confirmMessage"></p>
@@ -117,245 +118,121 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 
-           <!-- Confirm Modal -->
-      <div id="confirmModal" class="modal">
-        <div class="modal-content">
-          <p id="confirmMessage"></p>
-          <div class="modal-actions">
-            <button id="confirmYes" class="btn btn-danger">Yes</button>
-            <button id="confirmNo" class="btn btn-secondary">No</button>
-          </div>
+      <!-- Expected Visitors -->
+      <div class="vehicles-container">
+        <h5 class="table-title">Expected Visitors</h5>
+        <div class="table-responsive">
+          <table id="expectedVisitorsTable">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" class="text-center">Loading...</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-<!-- ==== Expected Visitors Table ==== -->
-<div class="vehicles-container">
-  <h5 class="table-title">Expected Visitors</h5>
-  <div class="table-responsive">
-    <table id="expectedVisitorsTable">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Contact</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td colspan="6" class="text-center">Loading...</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+      <!-- Inside Visitors -->
+      <div class="vehicles-container">
+        <h5 class="table-title">Inside Visitors</h5>
+        <div class="table-responsive">
+          <table id="insideVisitorsTable">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact</th>
+                <th>Key Card Number</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="8" class="text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-<!-- ==== Inside Visitors Table ==== -->
-<div class="vehicles-container">
-  <h5 class="table-title">Inside Visitors</h5>
-  <div class="table-responsive">
-    <table id="insideVisitorsTable">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Contact</th>
-          <th>Key Card Number</th>
-          <th>Time In</th>
-          <th>Time Out</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td colspan="8" class="text-center">Loading...</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ==== Exited Visitors Table ==== -->
-<div class="vehicles-container">
-  <h5 class="table-title">Exited Visitors</h5>
-  <div class="table-responsive">
-    <table id="exitedVisitorsTable">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Contact</th>
-          <th>Key Card Number</th>
-          <th>Time In</th>
-          <th>Time Out</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td colspan="8" class="text-center">Loading...</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+      <!-- Exited Visitors -->
+      <div class="vehicles-container">
+        <h5 class="table-title">Exited Visitors</h5>
+        <div class="table-responsive">
+          <table id="exitedVisitorsTable">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact</th>
+                <th>Key Card Number</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="8" class="text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
     </div>
   </div>
 </div>
 
-<!-- Edit Time Out Modal -->
+<!-- Modals -->
 <div class="modal fade" id="editTimeModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-warning text-dark">
-        <h5 class="modal-title">Edit Time Out</h5>
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Visitor Time</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <form id="editTimeForm">
-          <input type="hidden" id="editVisitorId">
+          <input type="hidden" id="editVisitorId" name="visitor_id">
+          <div class="mb-3">
+            <label for="editTimeIn" class="form-label">Time In</label>
+            <input type="datetime-local" id="editTimeIn" name="time_in" class="form-control">
+          </div>
           <div class="mb-3">
             <label for="editTimeOut" class="form-label">Time Out</label>
-            <input type="time" class="form-control" id="editTimeOut" required>
+            <input type="datetime-local" id="editTimeOut" name="time_out" class="form-control">
           </div>
-          <div class="mb-3">
-            <label for="editValidityStart" class="form-label">Validity Start</label>
-            <input type="datetime-local" class="form-control" id="editValidityStart" required>
-          </div>
-          <div class="mb-3">
-            <label for="editValidityEnd" class="form-label">Validity End</label>
-            <input type="datetime-local" class="form-control" id="editValidityEnd" required>
-          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="saveTimeBtn" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- Visitor Details Modal -->
 <div class="modal fade" id="visitorDetailsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
+      <div class="modal-header">
         <h5 class="modal-title">Visitor Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body">
-        <!-- Tabs -->
-        <ul class="nav nav-tabs" id="visitorTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Details</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="verify-tab" data-bs-toggle="tab" data-bs-target="#verify" type="button" role="tab">Verify</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab">Facial Verification</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab">Vehicle Verification</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="id-tab" data-bs-toggle="tab" data-bs-target="#id" type="button" role="tab">ID Verification</button>
-          </li>
-        </ul>
-
-        <div class="tab-content mt-3">
-          <!-- Visitor Details -->
-          <div class="tab-pane fade show active" id="details" role="tabpanel">
-            <div class="details-container">
-              <div class="details-text">
-                <p><strong>Full Name:</strong> <span id="visitorName"></span></p>
-                <p><strong>Contact:</strong> <span id="visitorContact"></span></p>
-                <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
-                <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
-                <p><strong>Reason:</strong> <span id="visitorReason"></span></p>
-                <p><strong>Personnel to Visit:</strong> <span id="visitorPersonnel"></span></p>
-                <p><strong>Personnel Office:</strong> <span id="visitorPersonnelOffice"></span></p>
-                <p><strong>Office to Visit:</strong> <span id="visitorOfficeToVisit"></span></p>
-                <div id="vehicleInfo" style="display: none;">
-                  <h6>Vehicle Information:</h6>
-                  <p><strong>Vehicle Owner:</strong> <span id="vehicleOwner"></span></p>
-                  <p><strong>Vehicle Brand:</strong> <span id="vehicleBrand"></span></p>
-                  <p><strong>Vehicle Model:</strong> <span id="vehicleModel"></span></p>
-                  <p><strong>Vehicle Color:</strong> <span id="vehicleColor"></span></p>
-                  <p><strong>Plate Number:</strong> <span id="plateNumber"></span></p>
-                </div>
-                <div id="driverInfo" style="display: none;">
-                  <h6>Driver Information:</h6>
-                  <p><strong>Driver Name:</strong> <span id="driverName"></span></p>
-                </div>
-              </div>
-              <div class="details-images">
-                <div class="image-container">
-                  <h6>ID Photo</h6>
-                  <img id="visitorIDPhoto" src="" alt="ID Photo" class="img-fluid rounded shadow">
-                </div>
-                <div class="image-container">
-                  <h6>Selfie Photo</h6>
-                  <img id="visitorSelfie" src="" alt="Selfie Photo" class="img-fluid rounded shadow">
-                </div>
-                <div class="image-container" id="vehiclePhotoContainer" style="display:none;">
-                  <h6>Vehicle Photo</h6>
-                  <img id="vehiclePhoto" src="" alt="Vehicle Photo" class="img-fluid rounded shadow" style="max-width: 200px;">
-                </div>
-                <div class="image-container" id="driverIdPhotoContainer" style="display:none;">
-                  <h6>Driver ID Photo</h6>
-                  <img id="driverIdPhoto" src="" alt="Driver ID Photo" class="img-fluid rounded shadow" style="max-width: 200px;">
-                </div>
-              </div>
-            </div>
-            <button id="nextToVerify" class="btn btn-primary mt-3">Next</button>
-          </div>
-
-          <!-- Verify Tab -->
-          <div class="tab-pane fade" id="verify" role="tabpanel">
-            <h6>Verification Checklist</h6>
-            <ul>
-              <li>Facial Verification</li>
-              <li>Vehicle Verification</li>
-              <li>ID Verification</li>
-            </ul>
-            <button id="nextToFacial" class="btn btn-primary mt-3">Next</button>
-          </div>
-
-          <!-- Facial Verification Tab -->
-          <div class="tab-pane fade" id="facial" role="tabpanel">
-            <h6>Facial Verification</h6>
-            <div id="facialContainer">Container for facial recognition feature</div>
-            <button id="nextToVehicle" class="btn btn-primary mt-3">Next</button>
-          </div>
-
-          <!-- Vehicle Verification Tab -->
-          <div class="tab-pane fade" id="vehicle" role="tabpanel">
-            <h6>Vehicle Verification</h6>
-            <div id="vehicleContainer">Container for vehicle verification feature</div>
-            <button id="nextToId" class="btn btn-primary mt-3">Next</button>
-            <button id="skipVehicle" class="btn btn-secondary mt-3 ms-2">Skip</button>
-          </div>
-
-          <!-- ID Verification Tab -->
-          <div class="tab-pane fade" id="id" role="tabpanel">
-            <h6>ID Verification</h6>
-            <div id="idContainer">Container for ID verification feature</div>
-            <button id="markEntryBtn" class="btn btn-success mt-3">Mark Entry</button>
-            <button id="rejectBtn" class="btn btn-danger mt-3">Reject</button>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-body" id="visitorDetailsBody">
+        <!-- Content loaded dynamically -->
       </div>
     </div>
   </div>
 </div>
 
+<!-- Scripts -->
 <script src="./scripts/visitors_new.js"></script>
 <script src="./scripts/session_check.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

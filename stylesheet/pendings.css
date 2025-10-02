@@ -33,16 +33,10 @@
     font-weight: 600;
     font-size: 40px;
     color: white;
-    background-color: transparent;
     margin-bottom: 26px;
 }
 
-.nav-links {
-    background-color: transparent;
-}
-
 .nav-links ul {
-   background-color: transparent;
    list-style: none;
    padding: 10px;
    flex-wrap: wrap;
@@ -50,35 +44,26 @@
 
 .nav-links h6 {
     font-size: 17px;
-    font-weight: 300px;
+    font-weight: 300;
     color: #FFFFFFBF;
-    background-color: transparent;
     margin-bottom: 11px;
 }
 
 .nav-links i {
     height: 18px;
     width: 18px;
-    margin-right: 10px;
-    margin-left: 5px;
+    margin: 0 10px 0 5px;
     color: white;
-    background-color: transparent;
 }
 
 .nav-links li {
-    text-decoration: none;
-    background-color: transparent;
     margin-bottom: 10px;
     padding: 4px;
     flex-wrap: wrap;
 }
 
-.camera-view-drop-down {
-    margin-left: 20px;
-}
-.nav-links a{
+.nav-links a {
     text-decoration: none;
-    background-color: transparent;
     color: white;
     font-weight: bold;
 }
@@ -99,9 +84,7 @@
     width: 100%;
     height: 63px;
     background-color: white;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #C9C3C3;
+    border: 1px solid #C9C3C3;
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
@@ -113,13 +96,11 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    background-color: transparent;
 }
 
 .user-info {
   display: flex;
   align-items: center;
-  background-color: transparent;
   gap: 8px;
 }
 
@@ -127,12 +108,10 @@
   display: flex;
   flex-direction: column;
   line-height: 1.2;
-  background-color: transparent;
 }
 
 .username {
   font-weight: 900;
-  background-color: transparent;
 }
 
 .logout-link {
@@ -146,17 +125,13 @@
   text-decoration: underline;
 }
 
-
 .header-left i {
-    background-color: transparent;
-    align-self: center;
     color: #4B5563;
 }
 
 .path {
     text-align: center;
     padding-top: 10px;
-    background-color: transparent;
     color: #4B5563;
     font-weight: lighter;
 }
@@ -164,13 +139,7 @@
 .current-loc {
     text-align: center;
     padding-top: 10px;
-    background-color: transparent;
     font-weight: 900;
-}
-
-.header-rght i {
-    height: 30px;
-    width: 30px;
 }
 
 .fa-user-circle {
@@ -179,17 +148,8 @@
     color: #B8ECFF;
     background-color: #1A728B;
     border-radius: 50%;
-    align-content: center;
-    justify-content: center;
     text-align: center;
     font-size: 30px;
-}
-
-.username {
-    font-weight: 900;
-    text-align: center;
-    padding-top: 10px;
-    background-color: transparent;
 }
 
 /* Modal base */
@@ -198,7 +158,6 @@
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.6);
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
@@ -219,7 +178,6 @@
   margin: auto;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -248,31 +206,25 @@
   color: white;
 }
 
-<<<<<<< Updated upstream
-=======
 /* === Fix table layout for Pendings page === */
-
-/* Make table container always full width */
 .table-container,
 .table-responsive {
   width: 100% !important;
   margin-top: 15px;
   border: 1px solid #ddd !important;
   border-radius: 6px !important;
-  overflow-x: auto !important; /* horizontal scroll if needed */
+  overflow-x: auto !important;
   background: #fff !important;
   padding: 0 !important;
 }
 
-/* Table */
 .table {
   width: 100% !important;
   border-collapse: collapse !important;
-  table-layout: auto !important; /* allow natural column sizing */
-  min-width: 600px !important;   /* prevent too much shrinking */
+  table-layout: auto !important;
+  min-width: 600px !important;
 }
 
-/* Header cells */
 .table thead th {
   background-color: #5BB7D1 !important;
   color: #fff !important;
@@ -281,39 +233,34 @@
   padding: 8px 6px !important;
   border: none !important;
   white-space: nowrap !important;
-  min-width: 90px !important; /* reduced from 120px for better fit */
+  min-width: 90px !important;
   max-width: 150px !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
 
-/* Body cells */
 .table tbody td {
   padding: 8px 6px !important;
   text-align: center !important;
   vertical-align: middle !important;
   border: none !important;
   background: transparent !important;
-  word-wrap: break-word !important;
-  min-width: 90px !important; /* matches header behavior */
+  min-width: 90px !important;
   max-width: 150px !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
 
-/* Row separators */
 .table tbody tr {
   border-bottom: 1px solid #f0f0f0 !important;
 }
 
-/* Fix for Actions column (buttons not shrinking) */
 .table tbody td:last-child {
   width: 150px !important;
   white-space: nowrap !important;
 }
 
-/* Status badges */
 .status-badge {
   display: inline-block !important;
   padding: 4px 10px !important;
@@ -349,7 +296,6 @@
   border-radius: 4px !important;
 }
 
-
 /* Modal styles for view details */
 .modal img {
     max-width: 100%;
@@ -371,16 +317,16 @@
 /* Visitor details modal improvements */
 .modal-body {
     font-family: 'League Spartan', sans-serif;
-    color: #004d40; /* Dark teal to match dashboard theme */
+    color: #004d40;
     line-height: 1.6;
     max-width: 750px;
-    max-height: 70vh; /* reduced height to improve visual balance */
+    max-height: 70vh;
     margin: 0 auto;
-    background-color: #e0f2f1; /* Light teal background */
+    background-color: #e0f2f1;
     padding: 20px 30px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
-    overflow-y: auto; /* enable vertical scrolling if content overflows */
+    overflow-y: auto;
     overflow-x: hidden;
     word-wrap: break-word;
     font-size: 14px;
@@ -392,7 +338,7 @@
 
 .modal-body strong {
     font-weight: 700;
-    color: #00796b; /* Medium teal */
+    color: #00796b;
     justify-self: end;
 }
 
@@ -438,7 +384,7 @@
 .modal-body .row.mt-3 .col-md-6 {
     flex: 1;
     text-align: center;
-    background-color: #b2dfdb; /* lighter teal background for photo containers */
+    background-color: #b2dfdb;
     padding: 10px;
     border-radius: 10px;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
@@ -457,19 +403,6 @@
     color: #004d40;
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 /* Tablets or smaller laptops */
 @media (max-width: 1366px) {
     .sidebar-panel {
@@ -478,11 +411,6 @@
     }
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 /* Mobile or very small screens */
 @media (max-width: 768px) {
     .body {
@@ -504,18 +432,3 @@
         width: 100%;
     }
 }
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes

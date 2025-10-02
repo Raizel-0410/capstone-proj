@@ -51,7 +51,7 @@
 
 .nav-links h6 {
     font-size: 17px;
-    font-weight: 300px;
+    font-weight: 300;
     color: #FFFFFFBF;
     background-color: transparent;
     margin-bottom: 11px;
@@ -215,110 +215,6 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-  align-items: center;
-  gap: 15px;
-  flex-wrap: nowrap;
-  padding-right: 20px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  z-index: 1100; /* Ensure dropdown is above other elements */
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: rgba(0, 255, 0, 0.1);
-  min-width: 140px;
-  min-height: 100px;
-  max-height: 200px;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1200; /* Higher than dropdown container */
-  border-radius: 6px;
-  padding: 8px 12px;
-  border: 1px solid green;
-  top: 100%;
-  left: 0;
-}
-
-.dropdown.show .dropdown-content {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: fixed !important;
-  top: auto !important;
-  left: auto !important;
-  bottom: auto !important;
-  right: auto !important;
-  z-index: 9999 !important;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  min-width: 140px;
-  border-radius: 6px;
-  padding: 8px 12px;
-}
-
-.role-btn {
-  background: transparent;
-  border-radius: 20px;
-  text-align: center;
-  width: 140px;
-  height: 32px;
-  align-content: center;
-  padding: 5px 12px;
-  color: #1A728B;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #1A728B;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  white-space: nowrap;
-  z-index: 1100;
-}
-
-.add-btn {
-  background: #5BB7D1;
-  color: white;
-  padding-top: 2px;
-  height: 32px;
-  width: 160px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-  justify-content: center;
-  white-space: nowrap;
-  z-index: 1000;
-}
-
-.add-btn:hover {
-  background: #264c56;
-}
-
-.title-perso {
-  justify-content: center;
->>>>>>> Stashed changes
   align-items: center;
   gap: 15px;
   flex-wrap: nowrap;
@@ -412,15 +308,10 @@
 .title-perso {
   justify-content: center;
   align-items: center;
+  gap: 15px;
+  flex-wrap: nowrap;
+  padding-right: 20px;
 }
-
-.title-perso i{
-  justify-self: center;
-  align-self: center;
-  font-size: 15px;
-}
-
-
 
 .search-bar {
     border-width: 0.5px;
@@ -430,7 +321,6 @@
     height: 30px;
     padding: 5px;
 }
-
 
 #search-icon {
     color: #1A728B;
@@ -442,49 +332,11 @@
     margin-left: 0;
 }
 
-.role-btn {
-    background: transparent;
-    border-radius: 20px;
-    text-align: center;
-    width: 140px;
-    height: 32px;
-    align-content: center;
-    padding: 5px 12px;
-    color: #1A728B;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #1A728B;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-}
-
 .role-btn i  {
     color: #1A728B;
 }
 
 /* Dropdown styles */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  min-width: 120px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  border-radius: 6px;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-}
-
 .dropdown-content a {
   color: #007b8a;
   padding: 6px 8px;

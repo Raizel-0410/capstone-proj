@@ -2,50 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const expectedTbody = document.querySelector("#expectedVehiclesTable tbody");
   const insideTbody = document.querySelector("#insideVehiclesTable tbody");
 
- function escapeHtml(s) {
-  if (!s) return "";
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
-=======
-=======
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
-
-
-   /* ---- Logout modal ---- */
-  const logoutLink = document.getElementById("logout-link");
-  if (logoutLink) {
-    logoutLink.addEventListener("click", (ev) => {
-      ev.preventDefault();
-      const modal = document.getElementById("confirmModal");
-      const msgEl = document.getElementById("confirmMessage");
-      const yes = document.getElementById("confirmYes");
-      const no = document.getElementById("confirmNo");
-
-      msgEl.textContent = "Are you sure you want to log out?";
-      modal.classList.add("show");
-
-      yes.onclick = () => { window.location.href = logoutLink.href; };
-      no.onclick = () => { modal.classList.remove("show"); };
-    });
+  function escapeHtml(s) {
+    if (!s) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
-  
+
   // ---- Load Expected Vehicles ----
   async function loadExpectedVehicles() {
     try {
@@ -60,18 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-     data.forEach(v => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-    <td>${escapeHtml(v.vehicle_owner)}</td>
-    <td>${escapeHtml(v.vehicle_brand)}</td>
-    <td>${escapeHtml(v.vehicle_model)}</td>
-    <td>${escapeHtml(v.vehicle_color)}</td>
-    <td>${escapeHtml(v.plate_number)}</td>
-    <td>${escapeHtml(v.status)}</td>
-  `;
-  expectedTbody.appendChild(tr);
-});
+      data.forEach(v => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${escapeHtml(v.vehicle_owner)}</td>
+          <td>${escapeHtml(v.vehicle_brand)}</td>
+          <td>${escapeHtml(v.vehicle_model)}</td>
+          <td>${escapeHtml(v.vehicle_color)}</td>
+          <td>${escapeHtml(v.plate_number)}</td>
+          <td>${escapeHtml(v.status)}</td>
+        `;
+        expectedTbody.appendChild(tr);
+      });
 
     } catch (err) {
       console.error("Error loading expected vehicles:", err);
@@ -89,31 +54,31 @@ document.addEventListener("DOMContentLoaded", () => {
       insideTbody.innerHTML = "";
       if (!Array.isArray(data) || data.length === 0) {
         insideTbody.innerHTML =
-          `<tr><td colspan="8" class="text-center">No vehicles inside</td></tr>`;
+          `<tr><td colspan="9" class="text-center">No vehicles inside</td></tr>`;
         return;
       }
 
       data.forEach(v => {
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>${escapeHtml(v.vehicle_owner)}</td>
-    <td>${escapeHtml(v.vehicle_brand)}</td>
-    <td>${escapeHtml(v.vehicle_model)}</td>
-    <td>${escapeHtml(v.vehicle_color)}</td>
-    <td>${escapeHtml(v.plate_number)}</td>
-    <td>${escapeHtml(v.entry_time || "")}</td>
-    <td>${v.exit_time ? escapeHtml(v.exit_time) : "Still Inside"}</td>
-    <td>${escapeHtml(v.status || "Inside")}</td>
-    <td>
-      ${!v.exit_time
-        ? `<button class="btn btn-sm btn-danger exit-btn" data-id="${v.id}">
-             Mark Exit
-           </button>`
-        : ""}
-    </td>
-  `;
-  insideTbody.appendChild(tr);
-});
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${escapeHtml(v.vehicle_owner)}</td>
+          <td>${escapeHtml(v.vehicle_brand)}</td>
+          <td>${escapeHtml(v.vehicle_model)}</td>
+          <td>${escapeHtml(v.vehicle_color)}</td>
+          <td>${escapeHtml(v.plate_number)}</td>
+          <td>${escapeHtml(v.entry_time || "")}</td>
+          <td>${v.exit_time ? escapeHtml(v.exit_time) : "Still Inside"}</td>
+          <td>${escapeHtml(v.status || "Inside")}</td>
+          <td>
+            ${!v.exit_time
+              ? `<button class="btn btn-sm btn-danger exit-btn" data-id="${v.id}">
+                   Mark Exit
+                 </button>`
+              : ""}
+          </td>
+        `;
+        insideTbody.appendChild(tr);
+      });
 
     } catch (err) {
       console.error("Error loading inside vehicles:", err);
