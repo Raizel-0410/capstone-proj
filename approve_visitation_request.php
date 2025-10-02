@@ -21,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -36,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([':id' => $id]);
         $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -76,6 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':selfie'         => $request['selfie_photo_path'] ?? null // ✅ corrected
             ]);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
