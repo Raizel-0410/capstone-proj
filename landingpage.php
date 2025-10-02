@@ -232,8 +232,11 @@ if ($token) {
   <h3>Visitor Information: </h3>
   <div class="visitor-information-section">
     <div class="visitor-info-column">
-      <label>Visitor Name:
-        <input type="text" name="visitor_name" placeholder="Enter full name" required>
+      <label>First Name:
+        <input type="text" name="first_name" placeholder="Enter first name" required>
+      </label>
+      <label>Last Name:
+        <input type="text" name="last_name" placeholder="Enter last name" required>
       </label>
       <label>Home Address:
         <input type="text" name="home_address" placeholder="Enter home address" required>
@@ -256,8 +259,8 @@ if ($token) {
     </div>
   </div>
 
-  <!-- Vehicle Info -->
-  <h3>Vehicle Information: </h3>
+  <!-- Vehicle Info (Optional) -->
+  <h3>Vehicle Information (Optional):</h3>
   <div class="vehicle-information-section">
     <div class="vehicle-info-column">
       <label>Vehicle Owner:
@@ -275,8 +278,8 @@ if ($token) {
       <label>Vehicle Color:
         <input type="text" name="vehicle_color" placeholder="e.g. Red, Black">
       </label>
-      <label>Vehicle Model:
-        <input type="text" name="vehicle_model" placeholder="e.g. Vios, Civic">
+      <label>Vehicle Type:
+        <input type="text" name="vehicle_type" placeholder="e.g. Sedan, SUV">
       </label>
       <label class="label-btn">Vehicle Photo:
         <input type="file" name="vehicle_photo" accept="image/*">
@@ -284,15 +287,32 @@ if ($token) {
     </div>
   </div>
 
+  <!-- Driver Info (if different driver) -->
+  <h3>Driver Information (if different from visitor):</h3>
+  <div class="driver-information-section">
+    <label>Driver Name:
+      <input type="text" name="driver_name" placeholder="Driver's full name">
+    </label>
+    <label class="label-btn">Driver ID Photo:
+      <input type="file" name="driver_id" accept="image/*">
+    </label>
+  </div>
+
   <!-- Schedule -->
   <h3>Schedule Request: </h3>
   <div class="schedule-request-section">
     <div class="schedule-req-div">
-      <label>Reason for Visitation:
+      <label>Reason:
         <input type="text" name="reason" placeholder="Enter reason" required>
       </label>
-      <label>Personnel Related to:
+      <label>Personnel to Visit:
         <input type="text" name="personnel_related" placeholder="Who will be visited">
+      </label>
+      <label>Personnel Office:
+        <input type="text" name="personnel_office" placeholder="Office where personnel is stationed">
+      </label>
+      <label>Office to Visit:
+        <input type="text" name="office_to_visit" placeholder="Office to visit">
       </label>
     </div>
 
@@ -385,6 +405,22 @@ if ($token) {
     </div>
   </div>
      <script src="./scripts/landingpage.js"></script>
+     <script>
+       document.querySelector('form.visitation-request-section').addEventListener('submit', function(e) {
+         const visitTime = document.querySelector('input[name="visit_time"]').value;
+         if (visitTime) {
+           const [hours, minutes] = visitTime.split(':').map(Number);
+           const totalMinutes = hours * 60 + minutes;
+           const startMinutes = 7 * 60; // 7:00 AM
+           const endMinutes = 19 * 60; // 7:00 PM
+           if (totalMinutes < startMinutes || totalMinutes > endMinutes) {
+             alert('The schedule of the visit cannot be scheduled since it’s outside working hours (7 AM to 7 PM).');
+             e.preventDefault();
+             return false;
+           }
+         }
+       });
+     </script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
      </body>
 </html>

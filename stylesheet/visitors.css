@@ -3,7 +3,67 @@
     margin: 0;
     font-family: 'League Spartan', sans-serif;
     box-sizing: border-box;
-    overflow: hidden;
+    /* Removed overflow: hidden to prevent content clipping */
+}
+
+/* Fix .body overflow to allow scrolling */
+.body {
+    display: flex;
+    height: 100vh;
+    /* Changed overflow from hidden to auto to allow scrolling */
+    overflow: auto;
+    background-color: #F5F5F5;
+}
+
+/* Add styles for expectedVisitorsTable, insideVisitorsTable, and exitedVisitorsTable similar to visitorsTable */
+#expectedVisitorsTable,
+#insideVisitorsTable,
+#exitedVisitorsTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    border: #006682;
+    margin-top: 20px;
+}
+
+#expectedVisitorsTable th,
+#expectedVisitorsTable td,
+#insideVisitorsTable th,
+#insideVisitorsTable td,
+#exitedVisitorsTable th,
+#exitedVisitorsTable td {
+    padding: 12px;
+    text-align: center;
+    border: none;
+}
+
+#expectedVisitorsTable th,
+#insideVisitorsTable th,
+#exitedVisitorsTable th {
+    background: #5BB7D1;
+    color: white;
+    font-weight: bold;
+}
+
+#expectedVisitorsTable tr,
+#expectedVisitorsTable td,
+#insideVisitorsTable tr,
+#insideVisitorsTable td,
+#exitedVisitorsTable tr,
+#exitedVisitorsTable td {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Add spacing between table headers and content */
+h5 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+/* Add spacing between tables */
+#expectedVisitorsTable {
+    margin-bottom: 40px;
 }
 
 .body {
@@ -381,4 +441,75 @@
     .right-panel {
         width: 100%;
     }
+}
+
+/* Visitor details modal improvements */
+.modal-body {
+    font-family: 'League Spartan', sans-serif;
+    color: #004d40; /* Dark teal to match dashboard theme */
+    line-height: 1.6;
+    max-width: 900px;
+    max-height: 600px; /* limit height to avoid excessive scrolling */
+    margin: 0 auto;
+    background-color: #e0f2f1; /* Light teal background */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
+    overflow-y: auto; /* enable vertical scrolling if content overflows */
+}
+
+.modal-body strong {
+    font-weight: 700;
+    color: #00796b; /* Medium teal */
+}
+
+.modal-body p {
+    margin-bottom: 14px;
+    font-size: 16px;
+}
+
+.modal-body #vehicleInfo,
+.modal-body #driverInfo {
+    margin-top: 25px;
+    border-top: 2px solid #00796b;
+    padding-top: 20px;
+}
+
+.modal-body #vehicleInfo strong,
+.modal-body #driverInfo strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #004d40;
+}
+
+.modal-body img {
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 77, 64, 0.3);
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.modal-body .row.mt-3 {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.modal-body .row.mt-3 .col-md-6 {
+    flex: 1;
+    text-align: center;
+    background-color: transparent; /* removed background color as requested */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
+}
+
+.modal-body .row.mt-3 .col-md-6 img {
+    max-height: 90px; /* further reduced size for photos */
+    object-fit: contain;
+    border: 2px solid #004d40;
+    border-radius: 10px;
 }

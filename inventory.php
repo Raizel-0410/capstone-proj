@@ -83,8 +83,10 @@ if (!empty($session['user_id'])) {
         <li><i class="fa-solid fa-user-gear"></i><a href="..\iSecure - final\personnels.php"> Personnels</a></li>
         <li><i class="fa-solid fa-clock-rotate-left"></i><a href="..\iSecure - final\pendings.php"> Pendings</a></li>
     <h6>DATA MANAGEMENT</h6>
-        <li><i class="fa-solid fa-image-portrait"></i><a href="..\iSecure - final\personnelaccounts.php"> Personnel Accounts</a></li>
-        <li><i class="fa-solid fa-box-archive"></i><a href="..\iSecure - final\inventory.php"> Inventory</a></li>
+        <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
+        <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
+        <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
+        <li><i class="fa-solid fa-box-archive"></i><a href="inventory.php"> Inventory</a></li>
     <h6>CUSTOMIZATION</h6>
         <li><i class="fa-solid fa-newspaper"></i><a href="..\iSecure - final\customizelanding.php"> Landing Page</a></li>
     </ul>

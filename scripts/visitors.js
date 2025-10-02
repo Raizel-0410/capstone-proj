@@ -99,19 +99,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!Array.isArray(data) || data.length === 0) {
         visitorsTbody.innerHTML =
-          `<tr><td colspan="7" class="text-center">No visitors found</td></tr>`;
+          `<tr><td colspan="10" class="text-center">No visitors found</td></tr>`;
         return;
       }
 
       data.forEach(v => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${escapeHtml(v.full_name)}</td>
+          <td>${escapeHtml(v.first_name || "")}</td>
+          <td>${escapeHtml(v.last_name || "")}</td>
           <td>${escapeHtml(v.contact_number || "")}</td>
+          <td>${escapeHtml(v.day_name || "")}</td>
           <td>${escapeHtml(v.date)}</td>
           <td>${escapeHtml(v.time_in || "")}</td>
           <td>${v.time_out ? escapeHtml(v.time_out) : ""}</td>
           <td>${escapeHtml(v.status)}</td>
+          <td>${escapeHtml(v.key_card_number || "")}</td>
           <td>
             <button class="btn btn-info btn-sm view-btn" data-id="${v.id}">View</button>
             ${(!v.time_in || v.status === "Pending")
@@ -127,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.error("Error loading visitors:", err);
       visitorsTbody.innerHTML =
-        `<tr><td colspan="7" class="text-center text-danger">Failed to load visitors</td></tr>`;
+        `<tr><td colspan="10" class="text-center text-danger">Failed to load visitors</td></tr>`;
     }
   }
 
@@ -157,13 +160,38 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        document.getElementById("visitorName").textContent = visitor.data.full_name;
-        document.getElementById("visitorContact").textContent = visitor.data.contact_number;
-        document.getElementById("visitorEmail").textContent = visitor.data.email;
-        document.getElementById("visitorAddress").textContent = visitor.data.address;
-        document.getElementById("visitorReason").textContent = visitor.data.reason;
+        document.getElementById("visitorName").textContent = escapeHtml(visitor.data.full_name);
+        document.getElementById("visitorContact").textContent = escapeHtml(visitor.data.contact_number);
+        document.getElementById("visitorEmail").textContent = escapeHtml(visitor.data.email);
+        document.getElementById("visitorAddress").textContent = escapeHtml(visitor.data.address);
+        document.getElementById("visitorReason").textContent = escapeHtml(visitor.data.reason);
+        document.getElementById("visitorPersonnel").textContent = escapeHtml(visitor.data.personnel_related || '');
         document.getElementById("visitorIDPhoto").src = visitor.data.id_photo_path;
         document.getElementById("visitorSelfie").src = visitor.data.selfie_photo_path;
+
+        // Vehicle Info
+        const vehicleInfo = document.getElementById("vehicleInfo");
+        if (visitor.data.vehicle_owner) {
+          vehicleInfo.style.display = 'block';
+          document.getElementById("vehicleOwner").textContent = escapeHtml(visitor.data.vehicle_owner);
+          document.getElementById("vehicleBrand").textContent = escapeHtml(visitor.data.vehicle_brand);
+          document.getElementById("vehicleModel").textContent = escapeHtml(visitor.data.vehicle_model);
+          document.getElementById("vehicleColor").textContent = escapeHtml(visitor.data.vehicle_color);
+          document.getElementById("plateNumber").textContent = escapeHtml(visitor.data.plate_number);
+          document.getElementById("vehiclePhoto").src = visitor.data.vehicle_photo_path || '';
+        } else {
+          vehicleInfo.style.display = 'none';
+        }
+
+        // Driver Info
+        const driverInfo = document.getElementById("driverInfo");
+        if (visitor.data.driver_name) {
+          driverInfo.style.display = 'block';
+          document.getElementById("driverName").textContent = escapeHtml(visitor.data.driver_name);
+          document.getElementById("driverIdPhoto").src = visitor.data.driver_id || '';
+        } else {
+          driverInfo.style.display = 'none';
+        }
 
         currentVisitorId = visitor.data.id;
 
@@ -218,6 +246,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         new bootstrap.Modal(document.getElementById("visitorDetailsModal")).show();
+
+
       } catch (err) {
         console.error(err);
         alert("Failed to fetch visitor details.");

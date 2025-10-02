@@ -23,7 +23,9 @@ function uploadFile($fileInput, $uploadDir = "uploads/") {
 }
 
 // Collect form inputs
-$visitor_name       = $_POST['visitor_name'] ?? null;
+$first_name         = $_POST['first_name'] ?? null;
+$last_name          = $_POST['last_name'] ?? null;
+$visitor_name       = trim($first_name . ' ' . $last_name);
 $home_address       = $_POST['home_address'] ?? null;
 $contact_number     = $_POST['contact_number'] ?? null;
 $email              = $_POST['email'] ?? null;
@@ -31,9 +33,13 @@ $vehicle_owner      = $_POST['vehicle_owner'] ?? null;
 $vehicle_brand      = $_POST['vehicle_brand'] ?? null;
 $plate_number       = $_POST['plate_number'] ?? null;
 $vehicle_color      = $_POST['vehicle_color'] ?? null;
-$vehicle_model      = $_POST['vehicle_model'] ?? null;
+$vehicle_type       = $_POST['vehicle_type'] ?? null;
 $reason             = $_POST['reason'] ?? null;
 $personnel_related  = $_POST['personnel_related'] ?? null;
+$personnel_office   = $_POST['personnel_office'] ?? null;
+$office_to_visit    = $_POST['office_to_visit'] ?? null;
+$driver_name        = $_POST['driver_name'] ?? null;
+$driver_id          = $_POST['driver_id'] ?? null;
 $visit_date         = $_POST['visit_date'] ?? null;
 $visit_time         = $_POST['visit_time'] ?? null;
 
@@ -44,12 +50,12 @@ $vehicle_photo_path = uploadFile("vehicle_photo");
 
 // Insert into visitation_requests
 $stmt = $pdo->prepare("
-    INSERT INTO visitation_requests 
-    (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path, 
-     vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path, 
-     reason, personnel_related, visit_date, visit_time, status) 
-    VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path, 
-            :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_model, :vehicle_photo_path, 
+    INSERT INTO visitation_requests
+    (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path,
+     vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path,
+     reason, personnel_related, visit_date, visit_time, status)
+    VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path,
+            :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_type, :vehicle_photo_path,
             :reason, :personnel_related, :visit_date, :visit_time, 'Pending')
 ");
 
@@ -64,7 +70,7 @@ $success = $stmt->execute([
     ':vehicle_brand'     => $vehicle_brand,
     ':plate_number'      => $plate_number,
     ':vehicle_color'     => $vehicle_color,
-    ':vehicle_model'     => $vehicle_model,
+    ':vehicle_type'      => $vehicle_type,
     ':vehicle_photo_path'=> $vehicle_photo_path,
     ':reason'            => $reason,
     ':personnel_related' => $personnel_related,

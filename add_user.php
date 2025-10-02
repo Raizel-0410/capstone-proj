@@ -19,7 +19,7 @@ if (!$data || empty($data['full_name']) || empty($data['email']) || empty($data[
 try {
     $stmt = $pdo->prepare("
         INSERT INTO users (id, full_name, email, rank, status, password_hash, role, joined_date, last_active)
-        VALUES (UUID(), :full_name, :email, :rank, :status, :role, :password_hash, NOW(), NOW())
+        VALUES (UUID(), :full_name, :email, :rank, :status, :password_hash, :role, NOW(), NOW())
     ");
     $stmt->execute([
         ":full_name"     => encryptData($data['full_name']),
@@ -28,7 +28,6 @@ try {
         ":status"        => encryptData($data['status']),
         ":password_hash" => password_hash($data['password'], PASSWORD_DEFAULT),
         ":role"          => encryptData($data['role']),
-        
     ]);
 
     echo json_encode(["success" => true, "message" => "User added successfully"]);

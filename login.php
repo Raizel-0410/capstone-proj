@@ -52,6 +52,6 @@ $_SESSION['role']    = $user['role'];
 if ($user['role'] === 'Admin') {
     header('Location: maindashboard.php');
 } else {
-    header('Location: maindashboard.php'); 
+    header('Location: personnel_dashboard.php'); 
 }
 exit;
