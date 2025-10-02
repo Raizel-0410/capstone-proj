@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("UPDATE visitation_requests SET status = :status WHERE id = :id");
             $stmt->execute([':status' => $status, ':id' => $id]);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -27,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([':id' => $id]);
         $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if ($request) {
@@ -64,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':selfie'         => $request['selfie_photo_path'] ?? null // ✅ corrected
             ]);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 if ($request) {

@@ -11,7 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .replace(/"/g, "&quot;");
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+
+>>>>>>> Stashed changes
 
 >>>>>>> Stashed changes
 

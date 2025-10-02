@@ -12,6 +12,7 @@ try {
     $stmt = $pdo->prepare("
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         SELECT 
             id,
             full_name,
@@ -28,6 +29,8 @@ try {
         FROM visitors
         WHERE id = :id
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         SELECT
@@ -59,6 +62,9 @@ try {
         LEFT JOIN vehicles veh ON veh.visitation_id = vr.id
         WHERE v.id = :id
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

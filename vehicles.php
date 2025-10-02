@@ -192,6 +192,9 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 <script src="./scripts/vehicles.js"></script>
