@@ -82,6 +82,10 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <li><i class="fa-solid fa-car-side"></i><a href="vehicles.php"> Vehicles</a></li>
         <li><i class="fa-solid fa-user-gear"></i><a href="personnels.php"> Personnels</a></li>
         <li><i class="fa-solid fa-clock-rotate-left"></i><a href="pendings.php"> Pendings</a></li>
+        <h6>DATA MANAGEMENT</h6>
+        <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
+        <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
+        <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
         <h6>CUSTOMIZATION</h6>
         <li><i class="fa-solid fa-newspaper"></i><a href="customizelanding.php"> Landing Page</a></li>
       </ul>
@@ -123,18 +127,25 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Pending -->
     <div class="tab-pane fade show active" id="pendingTab">
       <table class="table table-bordered">
-        <thead class="table-light"><tr><th>Visitor</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+        <thead class="table-light"><tr><th>Visitor</th><th>Contact Number</th><th>Email</th><th>Purpose of Visit</th><th>Scheduled Date</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="pendingTable">
-        <?php foreach ($requests as $req): ?>
-          <?php if ($req['status'] === 'Pending'): ?>
+        <?php
+        $hasPending = false;
+        foreach ($requests as $req):
+          if ($req['status'] === 'Pending'):
+            $hasPending = true;
+        ?>
             <tr data-id="<?= $req['id'] ?>">
               <td><?= htmlspecialchars($req['visitor_name']) ?></td>
+              <td><?= htmlspecialchars($req['contact_number']) ?></td>
+              <td><?= htmlspecialchars($req['email']) ?></td>
+              <td><?= htmlspecialchars($req['reason']) ?></td>
               <td><?= htmlspecialchars($req['visit_date']) ?></td>
-              <td><?= htmlspecialchars($req['visit_time']) ?></td>
               <td><span class="badge bg-warning text-dark"><?= $req['status'] ?></span></td>
               <td>
                 <button class="btn btn-primary btn-sm view-btn"
                   data-id="<?= $req['id'] ?>"
+                  data-status="<?= $req['status'] ?>"
                   data-name="<?= htmlspecialchars($req['visitor_name']) ?>"
                   data-home="<?= htmlspecialchars($req['home_address']) ?>"
                   data-contact="<?= htmlspecialchars($req['contact_number']) ?>"
@@ -143,15 +154,25 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   data-time="<?= $req['visit_time'] ?>"
                   data-reason="<?= htmlspecialchars($req['reason']) ?>"
                   data-personnel="<?= htmlspecialchars($req['personnel_related']) ?>"
-                  data-vehicle="<?= htmlspecialchars($req['vehicle_brand'].' '.$req['vehicle_model'].' '.$req['plate_number'].' '.$req['vehicle_color']) ?>"
+                  data-office="<?= htmlspecialchars($req['office_to_visit']) ?>"
+                  data-vehicleowner="<?= htmlspecialchars($req['vehicle_owner']) ?>"
+                  data-vehiclebrand="<?= htmlspecialchars($req['vehicle_brand']) ?>"
+                  data-vehiclemodel="<?= htmlspecialchars($req['vehicle_model']) ?>"
+                  data-vehiclecolor="<?= htmlspecialchars($req['vehicle_color']) ?>"
+                  data-platenumber="<?= htmlspecialchars($req['plate_number']) ?>"
+                  data-drivername="<?= htmlspecialchars($req['driver_name']) ?>"
                   data-validid="<?= htmlspecialchars($req['valid_id_path']) ?>"
                   data-selfie="<?= htmlspecialchars($req['selfie_photo_path']) ?>"
                   data-vehiclephoto="<?= htmlspecialchars($req['vehicle_photo_path']) ?>"
+                  data-driverid="<?= htmlspecialchars($req['driver_id']) ?>"
                 >View</button>
               </td>
             </tr>
           <?php endif; ?>
         <?php endforeach; ?>
+        <?php if (!$hasPending): ?>
+          <tr><td colspan="7" class="text-center">There are no current visitation request.</td></tr>
+        <?php endif; ?>
         </tbody>
       </table>
     </div>
@@ -159,18 +180,52 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Approved -->
     <div class="tab-pane fade" id="approvedTab">
       <table class="table table-bordered">
-        <thead class="table-success"><tr><th>Visitor</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+        <thead class="table-success"><tr><th>Visitor</th><th>Contact Number</th><th>Email</th><th>Purpose of Visit</th><th>Scheduled Date</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="approvedTable">
-        <?php foreach ($requests as $req): ?>
-          <?php if ($req['status'] === 'Approved'): ?>
+        <?php
+        $hasApproved = false;
+        foreach ($requests as $req):
+          if ($req['status'] === 'Approved'):
+            $hasApproved = true;
+        ?>
             <tr data-id="<?= $req['id'] ?>">
               <td><?= htmlspecialchars($req['visitor_name']) ?></td>
+              <td><?= htmlspecialchars($req['contact_number']) ?></td>
+              <td><?= htmlspecialchars($req['email']) ?></td>
+              <td><?= htmlspecialchars($req['reason']) ?></td>
               <td><?= htmlspecialchars($req['visit_date']) ?></td>
-              <td><?= htmlspecialchars($req['visit_time']) ?></td>
               <td><span class="badge bg-success"><?= $req['status'] ?></span></td>
+              <td>
+                <button class="btn btn-primary btn-sm view-btn"
+                  data-id="<?= $req['id'] ?>"
+                  data-status="<?= $req['status'] ?>"
+                  data-name="<?= htmlspecialchars($req['visitor_name']) ?>"
+                  data-home="<?= htmlspecialchars($req['home_address']) ?>"
+                  data-contact="<?= htmlspecialchars($req['contact_number']) ?>"
+                  data-email="<?= htmlspecialchars($req['email']) ?>"
+                  data-date="<?= $req['visit_date'] ?>"
+                  data-time="<?= $req['visit_time'] ?>"
+                  data-reason="<?= htmlspecialchars($req['reason']) ?>"
+                  data-personnel="<?= htmlspecialchars($req['personnel_related']) ?>"
+                  data-office="<?= htmlspecialchars($req['office_to_visit']) ?>"
+                  data-vehicleowner="<?= htmlspecialchars($req['vehicle_owner']) ?>"
+                  data-vehiclebrand="<?= htmlspecialchars($req['vehicle_brand']) ?>"
+                  data-vehiclemodel="<?= htmlspecialchars($req['vehicle_model']) ?>"
+                  data-vehiclecolor="<?= htmlspecialchars($req['vehicle_color']) ?>"
+                  data-platenumber="<?= htmlspecialchars($req['plate_number']) ?>"
+                  data-drivername="<?= htmlspecialchars($req['driver_name']) ?>"
+                  data-validid="<?= htmlspecialchars($req['valid_id_path']) ?>"
+                  data-selfie="<?= htmlspecialchars($req['selfie_photo_path']) ?>"
+                  data-vehiclephoto="<?= htmlspecialchars($req['vehicle_photo_path']) ?>"
+                  data-driverid="<?= htmlspecialchars($req['driver_id']) ?>"
+                >View</button>
+              </td>
             </tr>
           <?php endif; ?>
         <?php endforeach; ?>
+        <?php if (!$hasApproved): ?>
+          <tr><td colspan="7" class="text-center">There are no current visitation request.</td></tr>
+        <?php endif; ?>
         </tbody>
       </table>
     </div>
@@ -178,18 +233,52 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Rejected -->
     <div class="tab-pane fade" id="rejectedTab">
       <table class="table table-bordered">
-        <thead class="table-danger"><tr><th>Visitor</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+        <thead class="table-danger"><tr><th>Visitor</th><th>Contact Number</th><th>Email</th><th>Purpose of Visit</th><th>Scheduled Date</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="rejectedTable">
-        <?php foreach ($requests as $req): ?>
-          <?php if ($req['status'] === 'Rejected'): ?>
+        <?php
+        $hasRejected = false;
+        foreach ($requests as $req):
+          if ($req['status'] === 'Rejected'):
+            $hasRejected = true;
+        ?>
             <tr data-id="<?= $req['id'] ?>">
               <td><?= htmlspecialchars($req['visitor_name']) ?></td>
+              <td><?= htmlspecialchars($req['contact_number']) ?></td>
+              <td><?= htmlspecialchars($req['email']) ?></td>
+              <td><?= htmlspecialchars($req['reason']) ?></td>
               <td><?= htmlspecialchars($req['visit_date']) ?></td>
-              <td><?= htmlspecialchars($req['visit_time']) ?></td>
               <td><span class="badge bg-danger"><?= $req['status'] ?></span></td>
+              <td>
+                <button class="btn btn-primary btn-sm view-btn"
+                  data-id="<?= $req['id'] ?>"
+                  data-status="<?= $req['status'] ?>"
+                  data-name="<?= htmlspecialchars($req['visitor_name']) ?>"
+                  data-home="<?= htmlspecialchars($req['home_address']) ?>"
+                  data-contact="<?= htmlspecialchars($req['contact_number']) ?>"
+                  data-email="<?= htmlspecialchars($req['email']) ?>"
+                  data-date="<?= $req['visit_date'] ?>"
+                  data-time="<?= $req['visit_time'] ?>"
+                  data-reason="<?= htmlspecialchars($req['reason']) ?>"
+                  data-personnel="<?= htmlspecialchars($req['personnel_related']) ?>"
+                  data-office="<?= htmlspecialchars($req['office_to_visit']) ?>"
+                  data-vehicleowner="<?= htmlspecialchars($req['vehicle_owner']) ?>"
+                  data-vehiclebrand="<?= htmlspecialchars($req['vehicle_brand']) ?>"
+                  data-vehiclemodel="<?= htmlspecialchars($req['vehicle_model']) ?>"
+                  data-vehiclecolor="<?= htmlspecialchars($req['vehicle_color']) ?>"
+                  data-platenumber="<?= htmlspecialchars($req['plate_number']) ?>"
+                  data-drivername="<?= htmlspecialchars($req['driver_name']) ?>"
+                  data-validid="<?= htmlspecialchars($req['valid_id_path']) ?>"
+                  data-selfie="<?= htmlspecialchars($req['selfie_photo_path']) ?>"
+                  data-vehiclephoto="<?= htmlspecialchars($req['vehicle_photo_path']) ?>"
+                  data-driverid="<?= htmlspecialchars($req['driver_id']) ?>"
+                >View</button>
+              </td>
             </tr>
           <?php endif; ?>
         <?php endforeach; ?>
+        <?php if (!$hasRejected): ?>
+          <tr><td colspan="7" class="text-center">There are no current visitation request.</td></tr>
+        <?php endif; ?>
         </tbody>
       </table>
     </div>
@@ -212,7 +301,14 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <p><strong>Time:</strong> <span id="modalTime"></span></p>
           <p><strong>Reason:</strong> <span id="modalReason"></span></p>
           <p><strong>Personnel Related:</strong> <span id="modalPersonnel"></span></p>
-          <p><strong>Vehicle Info:</strong> <span id="modalVehicle"></span></p>
+          <p><strong>Office to Visit:</strong> <span id="modalOffice"></span></p>
+          <p><strong>Vehicle Owner:</strong> <span id="modalVehicleOwner"></span></p>
+          <p><strong>Vehicle Brand:</strong> <span id="modalVehicleBrand"></span></p>
+          <p><strong>Vehicle Model:</strong> <span id="modalVehicleModel"></span></p>
+          <p><strong>Vehicle Color:</strong> <span id="modalVehicleColor"></span></p>
+          <p><strong>Plate Number:</strong> <span id="modalPlateNumber"></span></p>
+          <p><strong>Driver Name:</strong> <span id="modalDriverName"></span></p>
+          <p><strong>Driver ID:</strong> <span id="modalDriverId"></span></p>
           <p><strong>Valid ID:</strong><br><img id="modalValidId" src="" alt="Valid ID"></p>
           <p><strong>Selfie Photo:</strong><br><img id="modalSelfie" src="" alt="Selfie"></p>
           <p><strong>Vehicle Photo:</strong><br><img id="modalVehiclePhoto" src="" alt="Vehicle"></p>
@@ -244,11 +340,30 @@ document.querySelectorAll(".view-btn").forEach(btn => {
     document.getElementById("modalTime").textContent = btn.dataset.time;
     document.getElementById("modalReason").textContent = btn.dataset.reason;
     document.getElementById("modalPersonnel").textContent = btn.dataset.personnel;
-    document.getElementById("modalVehicle").textContent = btn.dataset.vehicle;
+    document.getElementById("modalOffice").textContent = btn.dataset.office;
+    document.getElementById("modalVehicleOwner").textContent = btn.dataset.vehicleowner;
+    document.getElementById("modalVehicleBrand").textContent = btn.dataset.vehiclebrand;
+    document.getElementById("modalVehicleModel").textContent = btn.dataset.vehiclemodel;
+    document.getElementById("modalVehicleColor").textContent = btn.dataset.vehiclecolor;
+    document.getElementById("modalPlateNumber").textContent = btn.dataset.platenumber;
+    document.getElementById("modalDriverName").textContent = btn.dataset.drivername;
+    document.getElementById("modalDriverId").textContent = btn.dataset.driverid;
     document.getElementById("modalValidId").src = btn.dataset.validid || "placeholder.png";
     document.getElementById("modalSelfie").src = btn.dataset.selfie || "placeholder.png";
     document.getElementById("modalVehiclePhoto").src = btn.dataset.vehiclephoto || "placeholder.png";
     document.getElementById("modalRequestId").value = btn.dataset.id;
+
+    // Hide approve/reject buttons if not pending
+    const approveBtn = document.getElementById("approveBtn");
+    const rejectBtn = document.getElementById("rejectBtn");
+    if (btn.dataset.status === "Pending") {
+      approveBtn.style.display = "inline-block";
+      rejectBtn.style.display = "inline-block";
+    } else {
+      approveBtn.style.display = "none";
+      rejectBtn.style.display = "none";
+    }
+
     requestModal.show();
   });
 });

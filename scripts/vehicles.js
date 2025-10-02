@@ -2,14 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const expectedTbody = document.querySelector("#expectedVehiclesTable tbody");
   const insideTbody = document.querySelector("#insideVehiclesTable tbody");
 
-  function escapeHtml(s) {
-    if (!s) return "";
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+ function escapeHtml(s) {
+  if (!s) return "";
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 
   // ---- Load Expected Vehicles ----
   async function loadExpectedVehicles() {
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       expectedTbody.innerHTML = "";
       if (!Array.isArray(data) || data.length === 0) {
         expectedTbody.innerHTML =
-          `<tr><td colspan="7" class="text-center">No expected vehicles</td></tr>`;
+          `<tr><td colspan="6" class="text-center">No expected vehicles</td></tr>`;
         return;
       }
 
@@ -34,11 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     <td>${escapeHtml(v.vehicle_color)}</td>
     <td>${escapeHtml(v.plate_number)}</td>
     <td>${escapeHtml(v.status)}</td>
-    <td>
-      <button class="btn btn-sm btn-primary view-live-btn" data-id="${v.id}">
-        Live View
-      </button>
-    </td>
   `;
   expectedTbody.appendChild(tr);
 });
@@ -71,9 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     <td>${escapeHtml(v.vehicle_model)}</td>
     <td>${escapeHtml(v.vehicle_color)}</td>
     <td>${escapeHtml(v.plate_number)}</td>
-    <td>${escapeHtml(v.status || "Inside")}</td>
     <td>${escapeHtml(v.entry_time || "")}</td>
     <td>${v.exit_time ? escapeHtml(v.exit_time) : "Still Inside"}</td>
+    <td>${escapeHtml(v.status || "Inside")}</td>
     <td>
       ${!v.exit_time
         ? `<button class="btn btn-sm btn-danger exit-btn" data-id="${v.id}">
@@ -85,70 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
   insideTbody.appendChild(tr);
 });
 
-
-
     } catch (err) {
       console.error("Error loading inside vehicles:", err);
     }
   }
   window.loadInsideVehicles = loadInsideVehicles;
-
-  // ---- Live View Modal ----
-  const liveModal = new bootstrap.Modal(document.getElementById("liveViewModal"));
-  const liveContainer = document.getElementById("liveStreamContainer");
-
-  expectedTbody.addEventListener("click", e => {
-    const btn = e.target.closest(".view-live-btn");
-    if (btn) {
-      openLiveModal(btn.dataset.id);
-    }
-  });
-
-  function openLiveModal(vehicleId) {
-    liveContainer.innerHTML = `
-      <div class="camera-feed">
-        <video autoplay muted loop width="100%" height="300" style="background:black;">
-          <source src="./demo/demo_feed.mp4" type="video/mp4">
-          Your browser does not support video.
-        </video>
-        <div class="mt-3 d-flex gap-2">
-          <button id="captureBtn" class="btn btn-warning">📸 Capture Vehicle</button>
-          <button id="confirmEntryBtn" class="btn btn-success">✅ Confirm Entry</button>
-        </div>
-      </div>
-    `;
-    liveModal.show();
-
-    // Capture button
-    document.getElementById("captureBtn").onclick = () => {
-      alert("Vehicle captured for ID: " + vehicleId);
-    };
-
-    // Confirm Entry button
-    document.getElementById("confirmEntryBtn").onclick = async () => {
-      if (confirm("Confirm entry for this vehicle?")) {
-        try {
-          const res = await fetch("confirm_vehicle_entry.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: "vehicle_id=" + encodeURIComponent(vehicleId)
-          });
-          const result = await res.json();
-          if (result.success) {
-            alert("✅ Vehicle entry confirmed!");
-            liveModal.hide();
-            loadExpectedVehicles();
-            loadInsideVehicles();
-          } else {
-            alert("Error: " + result.message);
-          }
-        } catch (err) {
-          console.error(err);
-          alert("Request failed.");
-        }
-      }
-    };
-  }
 
   // ---- Handle Exit Button ----
   insideTbody.addEventListener("click", e => {

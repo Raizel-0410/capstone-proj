@@ -198,23 +198,31 @@
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.6);
+  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
+  pointer-events: none;
 }
 
 .modal.show {
   display: flex;
+  pointer-events: auto;
 }
 
 .modal-content {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  width: 350px;
-  max-width: 90%;
+  max-width: 750px;
+  width: 100%;
+  margin: auto;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .modal-actions {
@@ -240,6 +248,216 @@
   color: white;
 }
 
+<<<<<<< Updated upstream
+=======
+/* === Fix table layout for Pendings page === */
+
+/* Make table container always full width */
+.table-container,
+.table-responsive {
+  width: 100% !important;
+  margin-top: 15px;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  overflow-x: auto !important; /* horizontal scroll if needed */
+  background: #fff !important;
+  padding: 0 !important;
+}
+
+/* Table */
+.table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  table-layout: auto !important; /* allow natural column sizing */
+  min-width: 600px !important;   /* prevent too much shrinking */
+}
+
+/* Header cells */
+.table thead th {
+  background-color: #5BB7D1 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  padding: 8px 6px !important;
+  border: none !important;
+  white-space: nowrap !important;
+  min-width: 90px !important; /* reduced from 120px for better fit */
+  max-width: 150px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Body cells */
+.table tbody td {
+  padding: 8px 6px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  border: none !important;
+  background: transparent !important;
+  word-wrap: break-word !important;
+  min-width: 90px !important; /* matches header behavior */
+  max-width: 150px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Row separators */
+.table tbody tr {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* Fix for Actions column (buttons not shrinking) */
+.table tbody td:last-child {
+  width: 150px !important;
+  white-space: nowrap !important;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block !important;
+  padding: 4px 10px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: #fff !important;
+}
+.status-approved { background: #28a745 !important; }
+.status-pending  { background: #ffc107 !important; color: #000 !important; }
+.status-rejected { background: #dc3545 !important; }
+
+/* Tabs */
+.nav-tabs {
+  border-bottom: none !important;
+  margin-bottom: 10px !important;
+}
+.nav-tabs .nav-link {
+  border: none !important;
+  color: #333 !important;
+  font-weight: 500 !important;
+  padding: 6px 14px !important;
+  min-width: 100px !important;
+  text-align: center !important;
+}
+.nav-tabs .nav-link.active {
+  background: #5BB7D1 !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+}
+.nav-tabs .nav-link:hover {
+  background: #e6e6e6 !important;
+  border-radius: 4px !important;
+}
+
+
+/* Modal styles for view details */
+.modal img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.modal table td {
+    padding: 8px;
+    vertical-align: top;
+}
+
+.modal table td:first-child {
+    font-weight: bold;
+    width: 150px;
+}
+
+/* Visitor details modal improvements */
+.modal-body {
+    font-family: 'League Spartan', sans-serif;
+    color: #004d40; /* Dark teal to match dashboard theme */
+    line-height: 1.6;
+    max-width: 750px;
+    max-height: 70vh; /* reduced height to improve visual balance */
+    margin: 0 auto;
+    background-color: #e0f2f1; /* Light teal background */
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
+    overflow-y: auto; /* enable vertical scrolling if content overflows */
+    overflow-x: hidden;
+    word-wrap: break-word;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px 20px;
+    align-items: center;
+}
+
+.modal-body strong {
+    font-weight: 700;
+    color: #00796b; /* Medium teal */
+    justify-self: end;
+}
+
+.modal-body p {
+    margin-bottom: 14px;
+    font-size: 16px;
+}
+
+.modal-body #vehicleInfo,
+.modal-body #driverInfo {
+    margin-top: 25px;
+    border-top: 2px solid #00796b;
+    padding-top: 20px;
+}
+
+.modal-body #vehicleInfo strong,
+.modal-body #driverInfo strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #004d40;
+}
+
+.modal-body img {
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 77, 64, 0.3);
+    max-width: 60%;
+    max-height: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-body .row.mt-3 {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.modal-body .row.mt-3 .col-md-6 {
+    flex: 1;
+    text-align: center;
+    background-color: #b2dfdb; /* lighter teal background for photo containers */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
+}
+
+.modal-body .row.mt-3 .col-md-6 img {
+    max-height: 180px;
+    object-fit: contain;
+    border: 2px solid #004d40;
+    border-radius: 10px;
+}
+
+.modal-body .row.mt-3 .col-md-6 h6 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #004d40;
+}
+
+>>>>>>> Stashed changes
 /* Tablets or smaller laptops */
 @media (max-width: 1366px) {
     .sidebar-panel {
@@ -248,6 +466,7 @@
     }
 }
 
+<<<<<<< Updated upstream
 /* Mobile or very small screens */
 @media (max-width: 768px) {
     .body {
@@ -269,3 +488,6 @@
         width: 100%;
     }
 }
+=======
+
+>>>>>>> Stashed changes

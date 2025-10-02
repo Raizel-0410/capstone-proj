@@ -4,15 +4,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const addForm = document.getElementById("addUserForm");
   const editModal = document.getElementById("editUserModal");
   const editForm = document.getElementById("editUserForm");
+  const searchInput = document.getElementById("search");
+  const roleDropdown = document.getElementById("roleDropdown");
+
+  let allUsers = []; // Store all users for filtering
+
+  // Set initial selected role to "All Roles"
+  const allRolesLink = roleDropdown.querySelector('a[data-role="all"]');
+  if (allRolesLink) {
+    allRolesLink.classList.add('selected');
+    const roleBtn = document.querySelector('.role-btn');
+    if (roleBtn) {
+      roleBtn.innerHTML = `<i class="fa-solid fa-user"></i> ${allRolesLink.textContent} <i class="fa-solid fa-caret-down"></i>`;
+    }
+  }
 
   function escapeHtml(s) {
-    if (s === null || s === undefined) return "";
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
+  if (s === null || s === undefined) return "";
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
   // Fetch users and populate table
   async function fetchUsers() {
@@ -22,28 +36,159 @@ document.addEventListener("DOMContentLoaded", () => {
       const users = await res.json();
       if (!Array.isArray(users)) return console.error("Invalid response", users);
 
-      usersTbody.innerHTML = "";
-      users.forEach(u => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${escapeHtml(u.full_name)}</td>
-          <td>${escapeHtml(u.email)}</td>
-          <td>${escapeHtml(u.rank)}</td>
-          <td>${escapeHtml(u.status)}</td>
-          <td>${escapeHtml(u.role)}</td>
-          <td>${escapeHtml(u.joined_date)}</td>
-          <td>${escapeHtml(u.last_active)}</td>
-          <td>
-            <button class="btn btn-sm btn-primary edit-btn" data-id="${u.id}">Edit</button>
-            <button class="btn btn-sm btn-danger delete-btn" data-id="${u.id}">Delete</button>
-          </td>
-        `;
-        usersTbody.appendChild(tr);
-      });
+      allUsers = users; // Store for filtering
+      renderUsers(allUsers);
     } catch (err) {
       console.error(err);
       alert("Error fetching users. Check console.");
     }
+  }
+
+  // Render users based on filtered list
+  function renderUsers(users) {
+    usersTbody.innerHTML = "";
+    users.forEach(u => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${escapeHtml(u.full_name)}</td>
+        <td>${escapeHtml(u.email)}</td>
+        <td>${escapeHtml(u.rank)}</td>
+        <td>${escapeHtml(u.status)}</td>
+        <td>${escapeHtml(u.role)}</td>
+        <td>${escapeHtml(u.joined_date)}</td>
+        <td>${escapeHtml(u.last_active)}</td>
+        <td>
+          <button class="btn btn-sm btn-primary edit-btn" data-id="${u.id}">Edit</button>
+          <button class="btn btn-sm btn-danger delete-btn" data-id="${u.id}">Delete</button>
+        </td>
+      `;
+      usersTbody.appendChild(tr);
+    });
+  }
+
+  // Filter users based on search and role
+  function filterUsers() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedRole = document.querySelector('.dropdown-content a.selected')?.getAttribute('data-role') || 'all';
+
+    let filtered = allUsers.filter(u => {
+      const userRole = u.role ? u.role.trim() : '';
+      const matchesSearch = u.full_name.toLowerCase().includes(searchTerm) || u.email.toLowerCase().includes(searchTerm);
+      const matchesRole = selectedRole === 'all' || userRole === selectedRole;
+      return matchesSearch && matchesRole;
+    });
+
+    renderUsers(filtered);
+  }
+
+  // Search input event
+  searchInput.addEventListener('input', filterUsers);
+
+  // Role dropdown toggle
+  window.toggleDropdown = function() {
+    console.log("toggleDropdown called");
+    const dropdown = document.querySelector('.dropdown');
+    if (dropdown.classList.contains('show')) {
+      dropdown.classList.remove('show');
+      console.log("Dropdown hidden");
+    } else {
+      // Close any other open dropdowns
+      document.querySelectorAll('.dropdown.show').forEach(d => d.classList.remove('show'));
+      dropdown.classList.add('show');
+      console.log("Dropdown shown");
+    }
+  };
+
+  // Fix dropdown button click to toggle dropdown-content visibility
+  document.querySelector('.role-btn').addEventListener('click', (e) => {
+    console.log("Role button clicked");
+    e.stopPropagation();
+    window.toggleDropdown();
+  });
+
+  // Role selection
+  document.querySelectorAll('.dropdown-content a').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const selectedRole = this.getAttribute('data-role');
+
+      // Remove selected class from all
+      document.querySelectorAll('.dropdown-content a').forEach(a => a.classList.remove('selected'));
+      // Add to clicked
+      this.classList.add('selected');
+
+      // Update button text
+      const roleBtn = document.querySelector('.role-btn');
+      roleBtn.innerHTML = `<i class="fa-solid fa-user"></i> ${this.textContent} <i class="fa-solid fa-caret-down"></i>`;
+
+      // Close dropdown
+      document.querySelector('.dropdown').classList.remove('show');
+
+      // Filter
+      filterUsers();
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.dropdown');
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  // Add Personnel button click to open modal
+  const addPersonnelBtn = document.getElementById('addPersonnelBtn');
+  const addUserModal = document.getElementById('addUserModal');
+  const closeAddModalBtn = document.getElementById('closeAddModal');
+  const cancelAddBtn = document.getElementById('cancelAddBtn');
+  const addUserForm = document.getElementById('addUserForm');
+
+  if (addPersonnelBtn && addUserModal) {
+    addPersonnelBtn.addEventListener('click', () => {
+      addUserModal.classList.add('show');
+    });
+  }
+
+  if (closeAddModalBtn) {
+    closeAddModalBtn.addEventListener('click', () => {
+      addUserModal.classList.remove('show');
+    });
+  }
+
+  if (cancelAddBtn) {
+    cancelAddBtn.addEventListener('click', () => {
+      addUserModal.classList.remove('show');
+    });
+  }
+
+  // Add User form submit handler
+  if (addUserForm) {
+    addUserForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(addUserForm);
+
+      try {
+        const response = await fetch('add_user.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        if (result.success) {
+          addUserModal.classList.remove('show');
+          addUserForm.reset();
+          fetchUsers();
+        }
+      } catch (error) {
+        console.error('Error adding user:', error);
+        alert('Failed to add user. Please try again.');
+      }
+    });
   }
 
   // Edit & Delete Delegation

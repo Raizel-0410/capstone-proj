@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< Updated upstream
 -- Generation Time: Sep 25, 2025 at 02:44 AM
+=======
+-- Generation Time: Oct 02, 2025 at 12:57 PM
+>>>>>>> Stashed changes
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,6 +38,24 @@ CREATE TABLE `admin_audit_logs` (
   `ip_address` varchar(45) DEFAULT NULL,
   `user_agent` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clearance_badges`
+--
+
+CREATE TABLE `clearance_badges` (
+  `id` int(11) NOT NULL,
+  `visitor_id` int(11) NOT NULL,
+  `clearance_level` varchar(255) NOT NULL,
+  `key_card_number` varchar(50) NOT NULL,
+  `validity_start` datetime NOT NULL,
+  `validity_end` datetime NOT NULL,
+  `status` enum('active','expired') DEFAULT 'active',
+  `issued_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -266,7 +288,10 @@ CREATE TABLE `visitation_requests` (
   `visit_date` date NOT NULL,
   `visit_time` time NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` enum('Pending','Approved','Rejected') NOT NULL DEFAULT 'Pending'
+  `status` enum('Pending','Approved','Rejected') NOT NULL DEFAULT 'Pending',
+  `office_to_visit` varchar(255) DEFAULT NULL,
+  `driver_name` varchar(255) DEFAULT NULL,
+  `driver_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -277,7 +302,8 @@ CREATE TABLE `visitation_requests` (
 
 CREATE TABLE `visitors` (
   `id` int(11) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
   `contact_number` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -287,7 +313,12 @@ CREATE TABLE `visitors` (
   `date` date NOT NULL,
   `time_in` time DEFAULT NULL,
   `time_out` time DEFAULT NULL,
+<<<<<<< Updated upstream
   `status` enum('Inside','Outside') DEFAULT 'Inside'
+=======
+  `status` enum('Inside','Exited') DEFAULT NULL,
+  `key_card_number` varchar(255) DEFAULT NULL
+>>>>>>> Stashed changes
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -312,6 +343,13 @@ CREATE TABLE `visitor_sessions` (
 ALTER TABLE `admin_audit_logs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `clearance_badges`
+--
+ALTER TABLE `clearance_badges`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `visitor_id` (`visitor_id`);
 
 --
 -- Indexes for table `deleted_users`
@@ -428,6 +466,12 @@ ALTER TABLE `admin_audit_logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `clearance_badges`
+--
+ALTER TABLE `clearance_badges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `exited_visitors`
 --
 ALTER TABLE `exited_visitors`
@@ -502,6 +546,12 @@ ALTER TABLE `visitors`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `clearance_badges`
+--
+ALTER TABLE `clearance_badges`
+  ADD CONSTRAINT `clearance_badges_ibfk_1` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `exited_visitors`

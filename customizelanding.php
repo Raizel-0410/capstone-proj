@@ -65,6 +65,7 @@ if (!empty($session['user_id'])) {
 <body>
 
 <div class="body">
+<<<<<<< Updated upstream
 
 <div class="left-panel">
 <div class="sidebar-panel">
@@ -117,6 +118,28 @@ if (!empty($session['user_id'])) {
           <span class="username"><?php echo $fullName; ?></span>
           <a id="logout-link" class="logout-link" href="logout.php">Logout</a>
         </div>
+=======
+  <div class="left-panel">
+    <div class="sidebar-panel">
+      <h1 class="sidebar-header">iSecure</h1>
+      <div class="nav-links">
+        <ul>
+          <h6>MENU</h6>
+          <li><i class="fa-solid fa-gauge-high"></i><a href="maindashboard.php"> Main Dashboard</a></li>
+          <li><i class="fa-solid fa-user"></i><a href="visitors.php"> Visitors</a></li>
+          <li><i class="fa-solid fa-car-side"></i><a href="vehicles.php"> Vehicles</a></li>
+          <li><i class="fa-solid fa-user-gear"></i><a href="personnels.php"> Personnels</a></li>
+          <li><i class="fa-solid fa-clock-rotate-left"></i><a href="pendings.php"> Pendings</a></li>
+          <h6>DASHBOARD WIDGETS</h6>
+          <li><i class="fa-solid fa-chart-column"></i><a href="#"> Daily Visits Analysis</a></li>
+          <li><i class="fa-solid fa-list-check"></i><a href="#"> Visitor Status</a></li>
+        <h6>DATA MANAGEMENT</h6>
+        <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
+        <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
+        <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
+        <li><i class="fa-solid fa-box-archive"></i><a href="inventory.php"> Inventory</a></li>
+        </ul>
+>>>>>>> Stashed changes
       </div>
     </div>
   </div>

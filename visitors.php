@@ -76,7 +76,8 @@ if (!empty($session['user_id'])) {
           <li><i class="fa-solid fa-clock-rotate-left"></i><a href="pendings.php"> Pendings</a></li>
           <h6>DATA MANAGEMENT</h6>
           <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
-          <li><i class="fa-solid fa-box-archive"></i><a href="inventory.php"> Inventory</a></li>
+          <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
+          <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
           <h6>CUSTOMIZATION</h6>
           <li><i class="fa-solid fa-newspaper"></i><a href="customizelanding.php"> Landing Page</a></li>
         </ul>
@@ -118,6 +119,7 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 
+<<<<<<< Updated upstream
       <!-- Visitors Table -->
       <div class="card mt-4">
         <div class="card-header bg-primary text-white">
@@ -142,6 +144,90 @@ if (!empty($session['user_id'])) {
           </div>
         </div>
       </div>
+=======
+           <!-- Confirm Modal -->
+      <div id="confirmModal" class="modal">
+        <div class="modal-content">
+          <p id="confirmMessage"></p>
+          <div class="modal-actions">
+            <button id="confirmYes" class="btn btn-danger">Yes</button>
+            <button id="confirmNo" class="btn btn-secondary">No</button>
+          </div>
+        </div>
+      </div>
+
+<!-- ==== Expected Visitors Table ==== -->
+<div class="vehicles-container">
+  <h5 class="table-title">Expected Visitors</h5>
+  <div class="table-responsive">
+    <table id="expectedVisitorsTable">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Contact</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="6" class="text-center">Loading...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==== Inside Visitors Table ==== -->
+<div class="vehicles-container">
+  <h5 class="table-title">Inside Visitors</h5>
+  <div class="table-responsive">
+    <table id="insideVisitorsTable">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Contact</th>
+          <th>Key Card Number</th>
+          <th>Time In</th>
+          <th>Time Out</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="8" class="text-center">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==== Exited Visitors Table ==== -->
+<div class="vehicles-container">
+  <h5 class="table-title">Exited Visitors</h5>
+  <div class="table-responsive">
+    <table id="exitedVisitorsTable">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Contact</th>
+          <th>Key Card Number</th>
+          <th>Time In</th>
+          <th>Time Out</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="8" class="text-center">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+>>>>>>> Stashed changes
 
     </div>
   </div>
@@ -195,19 +281,46 @@ if (!empty($session['user_id'])) {
         <div class="tab-content mt-3">
           <!-- Visitor Details -->
           <div class="tab-pane fade show active" id="details" role="tabpanel">
-            <p><strong>Full Name:</strong> <span id="visitorName"></span></p>
-            <p><strong>Contact:</strong> <span id="visitorContact"></span></p>
-            <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
-            <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
-            <p><strong>Reason:</strong> <span id="visitorReason"></span></p>
-            <div class="row mt-3">
-              <div class="col-md-6 text-center">
-                <h6>ID Photo</h6>
-                <img id="visitorIDPhoto" src="" alt="ID Photo" class="img-fluid rounded shadow">
+            <div class="details-container">
+              <div class="details-text">
+                <p><strong>Full Name:</strong> <span id="visitorName"></span></p>
+                <p><strong>Contact:</strong> <span id="visitorContact"></span></p>
+                <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
+                <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
+                <p><strong>Reason:</strong> <span id="visitorReason"></span></p>
+                <p><strong>Personnel to Visit:</strong> <span id="visitorPersonnel"></span></p>
+                <p><strong>Personnel Office:</strong> <span id="visitorPersonnelOffice"></span></p>
+                <p><strong>Office to Visit:</strong> <span id="visitorOfficeToVisit"></span></p>
+                <div id="vehicleInfo" style="display: none;">
+                  <h6>Vehicle Information:</h6>
+                  <p><strong>Vehicle Owner:</strong> <span id="vehicleOwner"></span></p>
+                  <p><strong>Vehicle Brand:</strong> <span id="vehicleBrand"></span></p>
+                  <p><strong>Vehicle Model:</strong> <span id="vehicleModel"></span></p>
+                  <p><strong>Vehicle Color:</strong> <span id="vehicleColor"></span></p>
+                  <p><strong>Plate Number:</strong> <span id="plateNumber"></span></p>
+                </div>
+                <div id="driverInfo" style="display: none;">
+                  <h6>Driver Information:</h6>
+                  <p><strong>Driver Name:</strong> <span id="driverName"></span></p>
+                </div>
               </div>
-              <div class="col-md-6 text-center">
-                <h6>Selfie Photo</h6>
-                <img id="visitorSelfie" src="" alt="Selfie Photo" class="img-fluid rounded shadow">
+              <div class="details-images">
+                <div class="image-container">
+                  <h6>ID Photo</h6>
+                  <img id="visitorIDPhoto" src="" alt="ID Photo" class="img-fluid rounded shadow">
+                </div>
+                <div class="image-container">
+                  <h6>Selfie Photo</h6>
+                  <img id="visitorSelfie" src="" alt="Selfie Photo" class="img-fluid rounded shadow">
+                </div>
+                <div class="image-container" id="vehiclePhotoContainer" style="display:none;">
+                  <h6>Vehicle Photo</h6>
+                  <img id="vehiclePhoto" src="" alt="Vehicle Photo" class="img-fluid rounded shadow" style="max-width: 200px;">
+                </div>
+                <div class="image-container" id="driverIdPhotoContainer" style="display:none;">
+                  <h6>Driver ID Photo</h6>
+                  <img id="driverIdPhoto" src="" alt="Driver ID Photo" class="img-fluid rounded shadow" style="max-width: 200px;">
+                </div>
               </div>
             </div>
           </div>
@@ -232,7 +345,7 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
-<script src="./scripts/visitors.js"></script>
+<script src="./scripts/visitors_new.js"></script>
 <script src="./scripts/session_check.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
