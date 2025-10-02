@@ -56,7 +56,6 @@ if (!empty($session['user_id'])) {
         <ul>
           <h6>MENU</h6>
           <li><i class="fa-solid fa-gauge-high"></i><a href="maindashboard.php"> Main Dashboard</a></li>
-          <li><i class="fa-solid fa-id-card-clip"></i><a href="personinformation.php"> Person Information</a></li>
           <li><i class="fa-solid fa-user"></i><a href="visitors.php"> Visitors</a></li>
           <li><i class="fa-solid fa-car-side"></i><a href="vehicles.php"> Vehicles</a></li>
           <li><i class="fa-solid fa-user-gear"></i><a href="personnels.php"> Personnels</a></li>
@@ -102,66 +101,68 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 
-      <!-- ==== Expected Vehicles Table ==== -->
-      <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">Expected Vehicles</h5>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="expectedVehiclesTable">
-              <thead class="table-light">
-                <tr>
-                  <th>Owner</th>
-                  <th>Brand</th>
-                  <th>Model</th>
-                  <th>Color</th>
-                  <th>Plate No.</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="7" class="text-center">Loading...</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<!-- ==== Expected Vehicles Table ==== -->
+<div class="card mb-4">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Expected Vehicles</h5>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" id="expectedVehiclesTable">
+        <thead class="table-light">
+          <tr>
+            <th>Owner</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Plate No.</th>
+            <th>Status</th> <!-- ✅ Updated header -->
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="7" class="text-center">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-      <!-- ==== Inside Vehicles Table ==== -->
-      <div class="card mb-4">
-        <div class="card-header bg-success text-white">
-          <h5 class="mb-0">Inside Vehicles</h5>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="insideVehiclesTable">
-              <thead class="table-light">
-                <tr>
-                  <th>Owner</th>
-                  <th>Brand</th>
-                  <th>Model</th>
-                  <th>Color</th>
-                  <th>Plate No.</th>
-                  <th>Entry Time</th>
-                  <th>Exit Time</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="8" class="text-center">Loading...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+
+
+<!-- ==== Inside Vehicles Table ==== -->
+<div class="vehicles-container">
+  <h5 class="table-title">Inside Vehicles</h5>
+  <div class="table-responsive">
+    <table id="insideVehiclesTable">
+      <thead>
+        <tr>
+          <th>Owner</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Color</th>
+          <th>Plate No.</th>
+          <th>Entry Time</th>
+          <th>Exit Time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="8" class="text-center">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 
     </div>
   </div>
 </div>
+
 
 <script src="./scripts/vehicles.js"></script>
 <script src="./scripts/session_check.js"></script>
