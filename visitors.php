@@ -122,6 +122,7 @@ if (!empty($session['user_id'])) {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <!-- Visitors Table -->
       <div class="card mt-4">
         <div class="card-header bg-primary text-white">
@@ -147,6 +148,8 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -235,6 +238,9 @@ if (!empty($session['user_id'])) {
 </div>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
