@@ -1,3 +1,8 @@
-- [x] Fix date format in editBadge function of key_cards.php for validity_start and validity_end to use datetime-local format
-- [x] Fix date format in submit function of key_cards.php to send validity_start and validity_end in "YYYY-MM-DD HH:MM:SS" format for backend
-- [x] Ensure status update works by fixing the date format issue causing update failures
+- [x] Update personnel_walkin.php: Remove value and readonly from visit_date input to match landing page
+- [x] Update personnel_walkin.php: Change "Reason for Visitation" label to "Visitation Only"
+- [x] Update personnel_walkin.php: Change "Personnel Related to" label to "Personnel to Visit"
+- [x] Update personnel_walkin.php: Add "Office to Visit" input field
+- [x] Update personnel_walkin.php: Remove visit_time input and change "Date & Time" to "Date" since time is automatic
+- [x] Update walkin_submit.php: Change $visit_date to use $_POST['visit_date']
+- [x] Update walkin_submit.php: Set $visit_time to current time instead of from POST
+- [x] Update walkin_submit.php: Add handling for office_to_visit field in form processing and database insert

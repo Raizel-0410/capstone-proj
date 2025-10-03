@@ -36,23 +36,24 @@ $vehicle_color      = $_POST['vehicle_color'] ?? null;
 $vehicle_model      = $_POST['vehicle_model'] ?? null;
 $reason             = $_POST['reason'] ?? null;
 $personnel_related  = $_POST['personnel_related'] ?? null;
+$office_to_visit    = $_POST['office_to_visit'] ?? null;
 $visit_date         = date('Y-m-d'); // Fixed to today
-$visit_time         = $_POST['visit_time'] ?? null;
+$visit_time         = date('H:i:s'); // Set to current time
 
 // Upload files
 $valid_id_path      = uploadFile("valid_id");
 $selfie_photo_path  = uploadFile("selfie_photo");
 $vehicle_photo_path = uploadFile("vehicle_photo");
 
-// Insert into visitation_requests with type 'Walk-in'
+// Insert into visitation_requests
 $stmt = $pdo->prepare("
     INSERT INTO visitation_requests
     (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path,
      vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path,
-     reason, personnel_related, visit_date, visit_time, status, type)
+     reason, personnel_related, office_to_visit, visit_date, visit_time, status)
     VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path,
             :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_model, :vehicle_photo_path,
-            :reason, :personnel_related, :visit_date, :visit_time, 'Pending', 'Walk-in')
+            :reason, :personnel_related, :office_to_visit, :visit_date, :visit_time, 'Pending')
 ");
 
 $success = $stmt->execute([
@@ -70,6 +71,7 @@ $success = $stmt->execute([
     ':vehicle_photo_path'=> $vehicle_photo_path,
     ':reason'            => $reason,
     ':personnel_related' => $personnel_related,
+    ':office_to_visit'   => $office_to_visit,
     ':visit_date'        => $visit_date,
     ':visit_time'        => $visit_time
 ]);

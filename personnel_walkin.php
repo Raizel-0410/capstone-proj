@@ -157,8 +157,8 @@ if ($role !== 'User') {
               <label>Vehicle Color:
                 <input type="text" name="vehicle_color" placeholder="e.g. Red, Black">
               </label>
-              <label>Vehicle Model:
-                <input type="text" name="vehicle_model" placeholder="e.g. Vios, Civic">
+              <label>Vehicle Type:
+                <input type="text" name="vehicle_model" placeholder="e.g. SUV, Sedan">
               </label>
               <label class="label-btn">Vehicle Photo:
                 <input type="file" name="vehicle_photo" accept="image/*">
@@ -170,17 +170,19 @@ if ($role !== 'User') {
           <h3>Visit Details: </h3>
           <div class="schedule-request-section">
             <div class="schedule-req-div">
-              <label>Reason for Visitation:
+              <label>Visitation:
                 <input type="text" name="reason" placeholder="Enter reason" required>
               </label>
-              <label>Personnel Related to:
-                <input type="text" name="personnel_related" value="<?php echo $fullName; ?>" readonly>
+              <label>Personnel to Visit:
+                <input type="text" name="personnel_related" placeholder="Personnel Related To" required>
+              </label>
+              <label>Office to Visit:
+                <input type="text" name="office_to_visit" placeholder="Enter office" required>
               </label>
             </div>
 
-            <label id="datetime">Date & Time:
+            <label id="datetime">Date:
               <input type="date" name="visit_date" value="<?php echo date('Y-m-d'); ?>" readonly>
-              <input type="time" name="visit_time" required>
             </label>
 
             <button type="submit" class="submit">Submit Walk-in Request</button>
