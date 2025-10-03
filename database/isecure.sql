@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2025 at 01:56 AM
+-- Generation Time: Oct 03, 2025 at 04:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,7 +49,7 @@ CREATE TABLE `clearance_badges` (
   `key_card_number` varchar(50) NOT NULL,
   `validity_start` datetime NOT NULL,
   `validity_end` datetime NOT NULL,
-  `status` enum('active','expired') DEFAULT 'active',
+  `status` enum('active','inactive','terminated','expired') DEFAULT 'active',
   `issued_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
