@@ -143,11 +143,23 @@ document.getElementById('visitorSelect').addEventListener('change', function() {
 });
 
 function editBadge(id, number, start, end, status) {
+    // Format date strings to 'YYYY-MM-DDTHH:MM' for datetime-local input
+    function formatDateTimeLocal(dateTimeStr) {
+        const dt = new Date(dateTimeStr);
+        if (isNaN(dt)) return '';
+        const year = dt.getFullYear();
+        const month = String(dt.getMonth() + 1).padStart(2, '0');
+        const day = String(dt.getDate()).padStart(2, '0');
+        const hours = String(dt.getHours()).padStart(2, '0');
+        const minutes = String(dt.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
     document.getElementById('formTitle').textContent = 'Edit Key Card';
     document.getElementById('badgeId').value = id;
     document.getElementById('keyCardNumber').value = number;
-    document.getElementById('validityStart').value = start;
-    document.getElementById('validityEnd').value = end;
+    document.getElementById('validityStart').value = formatDateTimeLocal(start);
+    document.getElementById('validityEnd').value = formatDateTimeLocal(end);
     document.getElementById('badgeStatus').value = status;
     document.getElementById('statusField').style.display = 'block';
     document.getElementById('terminateBtn').style.display = 'inline-block';
@@ -184,11 +196,16 @@ document.getElementById('badgeForm').addEventListener('submit', function(e) {
         alert('Please select a visitor.');
         return;
     }
+    let validityStart = document.getElementById('validityStart').value;
+    let validityEnd = document.getElementById('validityEnd').value;
+    // Convert datetime-local format to MySQL datetime format
+    validityStart = validityStart.replace('T', ' ') + ':00';
+    validityEnd = validityEnd.replace('T', ' ') + ':00';
     const data = {
         visitor_id: visitorId,
         key_card_number: document.getElementById('keyCardNumber').value,
-        validity_start: document.getElementById('validityStart').value,
-        validity_end: document.getElementById('validityEnd').value
+        validity_start: validityStart,
+        validity_end: validityEnd
     };
     let action = 'issue';
     if (badgeId) {

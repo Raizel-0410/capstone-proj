@@ -1,0 +1,3 @@
+- [x] Fix date format in editBadge function of key_cards.php for validity_start and validity_end to use datetime-local format
+- [x] Fix date format in submit function of key_cards.php to send validity_start and validity_end in "YYYY-MM-DD HH:MM:SS" format for backend
+- [x] Ensure status update works by fixing the date format issue causing update failures
