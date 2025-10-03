@@ -63,7 +63,6 @@
 }
 
 .nav-links a {
-.nav-links a {
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -243,11 +242,11 @@
   color: #fff !important;
 }
 .table-success {
-  background-color: #5BB7D1 !important;
+  background-color: #28a745 !important;
   color: #fff !important;
 }
 .table-danger {
-  background-color: #5BB7D1 !important;
+  background-color: #dc3545 !important;
   color: #fff !important;
 }
 
@@ -348,16 +347,11 @@
     overflow-x: hidden;
     word-wrap: break-word;
     font-size: 14px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 10px 20px;
-    align-items: center;
 }
 
 .modal-body strong {
     font-weight: 700;
     color: #2789A4;
-    justify-self: end;
 }
 
 .modal-body p {
@@ -415,5 +409,4 @@
     .right-panel {
         width: 100%;
     }
-}
 }

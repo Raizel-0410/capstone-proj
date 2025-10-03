@@ -138,7 +138,7 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <td><?= htmlspecialchars($req['email']) ?></td>
               <td><?= htmlspecialchars($req['reason']) ?></td>
               <td><?= htmlspecialchars($req['visit_date']) ?></td>
-              <td><span class="badge bg-warning text-dark"><?= $req['status'] ?></span></td>
+              <td><span class="status-badge status-pending"><?= $req['status'] ?></span></td>
               <td>
                 <button class="btn btn-primary btn-sm view-btn"
                   data-id="<?= $req['id'] ?>"
@@ -191,7 +191,7 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <td><?= htmlspecialchars($req['email']) ?></td>
               <td><?= htmlspecialchars($req['reason']) ?></td>
               <td><?= htmlspecialchars($req['visit_date']) ?></td>
-              <td><span class="badge bg-success"><?= $req['status'] ?></span></td>
+              <td><span class="status-badge status-approved"><?= $req['status'] ?></span></td>
               <td>
                 <button class="btn btn-primary btn-sm view-btn"
                   data-id="<?= $req['id'] ?>"
@@ -244,7 +244,7 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <td><?= htmlspecialchars($req['email']) ?></td>
               <td><?= htmlspecialchars($req['reason']) ?></td>
               <td><?= htmlspecialchars($req['visit_date']) ?></td>
-              <td><span class="badge bg-danger"><?= $req['status'] ?></span></td>
+              <td><span class="status-badge status-rejected"><?= $req['status'] ?></span></td>
               <td>
                 <button class="btn btn-primary btn-sm view-btn"
                   data-id="<?= $req['id'] ?>"
