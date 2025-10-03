@@ -23,7 +23,10 @@ try {
     $stmt = $pdo->prepare("UPDATE vehicles SET exit_time = NOW(), status = 'Exited' WHERE visitation_id = :vid AND exit_time IS NULL");
     $stmt->execute([':vid' => $visitorId]);
 
-    echo json_encode(['success' => true, 'message' => 'Visitor exit marked successfully']);
+    // Update clearance_badges status to terminated for the visitor's key card
+    $stmt = $pdo->prepare("UPDATE clearance_badges SET status = 'terminated' WHERE visitor_id = :vid AND status = 'active'");
+    $stmt->execute([':vid' => $visitorId]);
+
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }

@@ -1,8 +1,5 @@
-- [x] Update personnel_walkin.php: Remove value and readonly from visit_date input to match landing page
-- [x] Update personnel_walkin.php: Change "Reason for Visitation" label to "Visitation Only"
-- [x] Update personnel_walkin.php: Change "Personnel Related to" label to "Personnel to Visit"
-- [x] Update personnel_walkin.php: Add "Office to Visit" input field
-- [x] Update personnel_walkin.php: Remove visit_time input and change "Date & Time" to "Date" since time is automatic
-- [x] Update walkin_submit.php: Change $visit_date to use $_POST['visit_date']
-- [x] Update walkin_submit.php: Set $visit_time to current time instead of from POST
-- [x] Update walkin_submit.php: Add handling for office_to_visit field in form processing and database insert
+# TODO: Fix Vehicle Status Update on Visitor Entry/Exit
+
+- [x] Update approve_visitation_request.php to set vehicles.visitation_id to the new visitor.id after inserting visitor
+- [ ] Test marking entry for a visitor with vehicle to confirm vehicle status changes to 'Inside'
+- [ ] Test marking exit for a visitor with vehicle to confirm vehicle status changes to 'Exited'
