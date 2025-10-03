@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const expectedTbody = document.querySelector("#expectedVehiclesTable tbody");
   const insideTbody = document.querySelector("#insideVehiclesTable tbody");
+  const exitedTbody = document.querySelector("#exitedVehiclesTable tbody");
 function escapeHtml(s) {
   if (!s) return "";
   return String(s)
@@ -102,7 +103,7 @@ function escapeHtml(s) {
   }
   window.loadInsideVehicles = loadInsideVehicles;
 
- const exitedTbody = document.querySelector("#exitedVehiclesTable tbody");
+ 
 
 // ---- Load Exited Vehicles ----
 async function loadExitedVehicles() {
