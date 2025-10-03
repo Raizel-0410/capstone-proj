@@ -27,6 +27,7 @@ try {
     $stmt = $pdo->prepare("UPDATE clearance_badges SET status = 'terminated' WHERE visitor_id = :vid AND status = 'active'");
     $stmt->execute([':vid' => $visitorId]);
 
+    echo json_encode(['success' => true, 'message' => 'Visitor marked as exited']);
 } catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
