@@ -1,5 +1,0 @@
-- [x] Remove duplicate .nav-links a rule in pendings.css
-- [x] Update table header colors in pendings.css for different statuses (pending: #5BB7D1, approved: green, rejected: red)
-- [x] Update pendings.php to use custom status-badge classes instead of Bootstrap badges
-- [x] Fix modal-body CSS to match HTML paragraph structure, remove grid layout
-- [ ] Test the page to ensure fixes work correctly
