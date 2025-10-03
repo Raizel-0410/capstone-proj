@@ -107,85 +107,96 @@ if ($role !== 'User') {
       <div class="walkin-form-section">
         <h4>Walk-in Visit Request</h4>
         <form class="visitation-request-section" action="walkin_submit.php" method="POST" enctype="multipart/form-data">
-          <!-- Visitor Info -->
-          <h3>Visitor Information: </h3>
-          <div class="visitor-information-section">
-            <div class="visitor-info-column">
-              <label>First Name:
-                <input type="text" name="first_name" placeholder="Enter first name" required>
-              </label>
-              <label>Last Name:
-                <input type="text" name="last_name" placeholder="Enter last name" required>
-              </label>
-              <label>Home Address:
-                <input type="text" name="home_address" placeholder="Enter home address" required>
-              </label>
-              <label class="label-btn">Valid ID:
-                <input type="file" name="valid_id" accept="image/*" required>
-              </label>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <!-- Visitor Info -->
+                <h3>Visitor Information: </h3>
+                <div class="visitor-information-section">
+                  <div class="visitor-info-column">
+                    <label>First Name:
+                      <input type="text" name="first_name" placeholder="Enter first name" required>
+                    </label>
+                    <label>Last Name:
+                      <input type="text" name="last_name" placeholder="Enter last name" required>
+                    </label>
+                    <label>Home Address:
+                      <input type="text" name="home_address" placeholder="Enter home address" required>
+                    </label>
+                    <label>Valid ID:</label>
+                    <div class="file-input-wrapper" onclick="document.getElementById('valid_id').click();">
+                      Choose File
+                    </div>
+                    <input type="file" id="valid_id" name="valid_id" accept="image/*" required style="position:absolute; left:-9999px;">
+                  </div>
+
+                  <div class="visitor-info-column">
+                    <label>Contact Number:
+                      <input type="text" name="contact_number" placeholder="e.g. 09xxxxxxxxx" required>
+                    </label>
+                    <label>Email Address:
+                      <input type="email" name="email" placeholder="example@email.com" required>
+                    </label>
+                    <label>Selfie Photo:</label>
+                    <div class="file-input-wrapper" onclick="document.getElementById('selfie_photo').click();">
+                      Choose File
+                    </div>
+                    <input type="file" id="selfie_photo" name="selfie_photo" accept="image/*" required style="position:absolute; left:-9999px;">
+                  </div>
+                </div>
+
+                <!-- Visit Details -->
+                <h3>Visit Details: </h3>
+                <div class="schedule-request-section">
+                  <div class="schedule-req-div">
+                    <label>Visitation:
+                      <input type="text" name="reason" placeholder="Enter reason" required>
+                    </label>
+                    <label>Personnel to Visit:
+                      <input type="text" name="personnel_related" placeholder="Personnel Related To" required>
+                    </label>
+                  </div>
+
+                  <label id="datetime">Date:
+                    <input type="date" name="visit_date" value="<?php echo date('Y-m-d'); ?>" readonly>
+                  </label>
+
+                  <button type="submit" class="submit">Submit Walk-in Request</button>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <!-- Vehicle Info -->
+                <h3>Vehicle Information: </h3>
+                <div class="vehicle-information-section">
+                  <div class="vehicle-info-column">
+                    <label>Vehicle Owner:
+                      <input type="text" name="vehicle_owner" placeholder="Owner name" readonly>
+                    </label>
+                    <label>Vehicle Brand:
+                      <input type="text" name="vehicle_brand" placeholder="e.g. Toyota, Honda">
+                    </label>
+                    <label>Plate Number:
+                      <input type="text" name="plate_number" placeholder="ABC-1234">
+                    </label>
+                  </div>
+
+                  <div class="vehicle-info-column">
+                    <label>Vehicle Color:
+                      <input type="text" name="vehicle_color" placeholder="e.g. Red, Black">
+                    </label>
+                    <label>Vehicle Type:
+                      <input type="text" name="vehicle_type" placeholder="e.g. SUV, Sedan">
+                    </label>
+                    <label>Vehicle Photo:</label>
+                    <div class="file-input-wrapper" onclick="document.getElementById('vehicle_photo').click();">
+                      Choose File
+                    </div>
+                    <input type="file" id="vehicle_photo" name="vehicle_photo" accept="image/*" style="position:absolute; left:-9999px;">
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="visitor-info-column">
-              <label>Contact Number:
-                <input type="text" name="contact_number" placeholder="e.g. 09xxxxxxxxx" required>
-              </label>
-              <label>Email Address:
-                <input type="email" name="email" placeholder="example@email.com" required>
-              </label>
-              <label class="label-btn">Selfie Photo:
-                <input type="file" name="selfie_photo" accept="image/*" required>
-              </label>
-            </div>
-          </div>
-
-          <!-- Vehicle Info -->
-          <h3>Vehicle Information: </h3>
-          <div class="vehicle-information-section">
-            <div class="vehicle-info-column">
-              <label>Vehicle Owner:
-                <input type="text" name="vehicle_owner" placeholder="Owner name">
-              </label>
-              <label>Vehicle Brand:
-                <input type="text" name="vehicle_brand" placeholder="e.g. Toyota, Honda">
-              </label>
-              <label>Plate Number:
-                <input type="text" name="plate_number" placeholder="ABC-1234">
-              </label>
-            </div>
-
-            <div class="vehicle-info-column">
-              <label>Vehicle Color:
-                <input type="text" name="vehicle_color" placeholder="e.g. Red, Black">
-              </label>
-              <label>Vehicle Type:
-                <input type="text" name="vehicle_model" placeholder="e.g. SUV, Sedan">
-              </label>
-              <label class="label-btn">Vehicle Photo:
-                <input type="file" name="vehicle_photo" accept="image/*">
-              </label>
-            </div>
-          </div>
-
-          <!-- Schedule -->
-          <h3>Visit Details: </h3>
-          <div class="schedule-request-section">
-            <div class="schedule-req-div">
-              <label>Visitation:
-                <input type="text" name="reason" placeholder="Enter reason" required>
-              </label>
-              <label>Personnel to Visit:
-                <input type="text" name="personnel_related" placeholder="Personnel Related To" required>
-              </label>
-              <label>Office to Visit:
-                <input type="text" name="office_to_visit" placeholder="Enter office" required>
-              </label>
-            </div>
-
-            <label id="datetime">Date:
-              <input type="date" name="visit_date" value="<?php echo date('Y-m-d'); ?>" readonly>
-            </label>
-
-            <button type="submit" class="submit">Submit Walk-in Request</button>
           </div>
         </form>
       </div>
@@ -196,6 +207,16 @@ if ($role !== 'User') {
 
 <script src="./scripts/personnel_dashboard.js"></script>
 <script src="./scripts/session_check.js"></script>
+<script>
+document.querySelector('input[name="first_name"]').addEventListener('input', updateOwner);
+document.querySelector('input[name="last_name"]').addEventListener('input', updateOwner);
+
+function updateOwner() {
+  const first = document.querySelector('input[name="first_name"]').value;
+  const last = document.querySelector('input[name="last_name"]').value;
+  document.querySelector('input[name="vehicle_owner"]').value = first + ' ' + last;
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
