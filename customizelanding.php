@@ -94,23 +94,18 @@ $sidebarItems = $pdo->query("SELECT * FROM landing_sidebar_sections ORDER BY FIE
 
 <div class="nav-links">
 
-    <ul>
-    <h6>MENU</h6>
-        <li><i class="fa-solid fa-gauge-high"></i><a href="..\iSecure - final\maindashboard.php"> Main Dashboard</a></li>
-        <li><i class="fa-solid fa-video"></i><a href="..\iSecure - final\cameraview.php"> Camera View</a></li>
-        <li class="camera-view-drop-down"><i class="fa-solid fa-circle-dot"></i><a href="..\iSecure - final\livefeed.php"> Live Feed</a></li>
-        <li class="camera-view-drop-down"><i class="fa-solid fa-id-card-clip"></i><a href="..\iSecure - final\personinformation.php"> Person Information</a></li>
-        <li><i class="fa-solid fa-user"></i><a href="..\iSecure - final\visitors.php"> Visitors</a></li>
-        <li><i class="fa-solid fa-car-side"></i><a href="..\iSecure - final\vehicles.php"> Vehicles</a></li>
-        <li><i class="fa-solid fa-user-gear"></i><a href="..\iSecure - final\personnels.php"> Personnels</a></li>
-        <li><i class="fa-solid fa-clock-rotate-left"></i><a href="..\iSecure - final\pendings.php"> Pendings</a></li>
-    <h6>DASHBOARD WIDGETS</h6>
-        <li><i class="fa-solid fa-chart-column"></i><a href="#"> Daily Visits Analysis</a></li>
-        <li><i class="fa-solid fa-list-check"></i><a href="#"> Visitor Status</a></li>
-    <h6>DATA MANAGEMENT</h6>
-        <li><i class="fa-solid fa-image-portrait"></i><a href="..\iSecure - final\personnelaccounts.php"> Personnel Accounts</a></li>
-        <li><i class="fa-solid fa-box-archive"></i><a href="..\iSecure - final\inventory.php"> Inventory</a></li>
-    </ul>
+        <ul>
+        <h6>MENU</h6>
+            <li><i class="fa-solid fa-gauge-high"></i><a href="..\iSecure - final\maindashboard.php"> Main Dashboard</a></li>
+            <li><i class="fa-solid fa-user"></i><a href="..\iSecure - final\visitors.php"> Visitors</a></li>
+            <li><i class="fa-solid fa-car-side"></i><a href="..\iSecure - final\vehicles.php"> Vehicles</a></li>
+            <li><i class="fa-solid fa-user-gear"></i><a href="..\iSecure - final\personnels.php"> Personnels</a></li>
+            <li><i class="fa-solid fa-clock-rotate-left"></i><a href="..\iSecure - final\pendings.php"> Pendings</a></li>
+        <h6>DATA MANAGEMENT</h6>
+          <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
+          <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
+          <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
+        </ul>
 
 </div>
 

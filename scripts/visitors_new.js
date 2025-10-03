@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>
             <button class="btn btn-info btn-sm view-btn" data-id="${v.id}">View</button>
             ${v.time_in === undefined ? `<button class="btn btn-success btn-sm entry-btn" data-id="${v.id}">Mark Entry</button>` : ""}
-            ${v.time_out === undefined && v.time_in ? `<button class="btn btn-danger btn-sm exit-btn" data-id="${v.id}">Mark Exit</button>` : ""}
+            ${v.time_out == null && v.time_in != null ? `<button class="btn btn-danger btn-sm exit-btn" data-id="${v.id}">Mark Exit</button>` : ""}
             ${v.time_in && !v.time_out ? `<button class="btn btn-warning btn-sm edit-btn" data-id="${v.id}">Edit</button>` : ""}
           </td>
         `;

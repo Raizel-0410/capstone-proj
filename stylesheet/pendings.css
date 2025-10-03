@@ -209,10 +209,11 @@
   width: 100% !important;
   margin-top: 15px;
   border: 1px solid #ddd !important;
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   overflow-x: auto !important;
   background: #fff !important;
-  padding: 0 !important;
+  padding: 20px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
 }
 
 .table {
@@ -227,13 +228,27 @@
   color: #fff !important;
   font-weight: 600 !important;
   text-align: center !important;
-  padding: 8px 6px !important;
+  padding: 12px !important;
   border: none !important;
   white-space: nowrap !important;
   min-width: 90px !important;
   max-width: 150px !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+}
+
+/* Override Bootstrap table header background classes */
+.table-light {
+  background-color: #5BB7D1 !important;
+  color: #fff !important;
+}
+.table-success {
+  background-color: #5BB7D1 !important;
+  color: #fff !important;
+}
+.table-danger {
+  background-color: #5BB7D1 !important;
+  color: #fff !important;
 }
 
 .table tbody td {
@@ -288,6 +303,12 @@
     color: #fff !important;
     border-radius: 4px !important;
 }
+
+/* Override Bootstrap nav-tabs active background */
+.nav-tabs .nav-link.active {
+    background-color: #5BB7D1 !important;
+    color: #fff !important;
+}
 .nav-tabs .nav-link:hover {
     background: #e6e6e6 !important;
     border-radius: 4px !important;
@@ -314,18 +335,15 @@
 /* Visitor details modal improvements */
 .modal-body {
     font-family: 'League Spartan', sans-serif;
-    color: #004d40;
-    color: #004d40;
+    color: #006682;
     line-height: 1.6;
     max-width: 750px;
     max-height: 70vh;
-    max-height: 70vh;
     margin: 0 auto;
-    background-color: #e0f2f1;
-    background-color: #e0f2f1;
+    background-color: #e0f7ff;
     padding: 20px 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 102, 130, 0.2);
     overflow-y: auto;
     overflow-x: hidden;
     word-wrap: break-word;
@@ -338,8 +356,7 @@
 
 .modal-body strong {
     font-weight: 700;
-    color: #00796b;
-    color: #00796b;
+    color: #2789A4;
     justify-self: end;
 }
 
@@ -359,7 +376,7 @@
 .modal-body .row.mt-3 .col-md-6 {
     flex: 1;
     text-align: center;
-    background-color: #b2dfdb;
+    background-color: #cce7ff;
     padding: 10px;
     border-radius: 10px;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
@@ -368,14 +385,14 @@
 .modal-body .row.mt-3 .col-md-6 img {
     max-height: 180px;
     object-fit: contain;
-    border: 2px solid #004d40;
+    border: 2px solid #006682;
     border-radius: 10px;
 }
 
 .modal-body .row.mt-3 .col-md-6 h6 {
     font-weight: 700;
     margin-bottom: 10px;
-    color: #004d40;
+    color: #006682;
 }
 
 /* Tablets or smaller laptops */

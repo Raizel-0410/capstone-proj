@@ -15,9 +15,16 @@ if (!$visitorId) {
 }
 
 try {
-    // Update time_in and status
-    $stmt = $pdo->prepare("UPDATE visitors SET time_in = NOW(), status = 'Inside' WHERE id = :id");
-    $stmt->execute([':id' => $visitorId]);
+    // Assign key card
+    $keyCardNumber = 'KC-' . strtoupper(substr(md5(uniqid()), 0, 8));
+
+    // Update visitor with key card
+    $updateStmt = $pdo->prepare("UPDATE visitors SET time_in = NOW(), status = 'Inside', key_card_number = ? WHERE id = ?");
+    $updateStmt->execute([$keyCardNumber, $visitorId]);
+
+    // Insert into clearance_badges
+    $badgeStmt = $pdo->prepare("INSERT INTO clearance_badges (visitor_id, clearance_level, key_card_number, validity_start, validity_end, status) VALUES (?, 'Visitor', ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 DAY), 'active')");
+    $badgeStmt->execute([$visitorId, $keyCardNumber]);
 
     // Sync entry time to linked vehicles
     $stmt = $pdo->prepare("UPDATE vehicles SET entry_time = NOW(), status = 'Inside' WHERE visitation_id = :vid AND entry_time IS NULL");
