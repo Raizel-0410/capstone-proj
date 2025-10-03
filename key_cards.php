@@ -17,6 +17,7 @@ $visitors = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" type="image/png" href="./images/logo/5thFighterWing-logo.png">
     <link rel="stylesheet" href="./stylesheet/admin-maindashboard.css" />
+    <link rel="stylesheet" href="./stylesheet/key_cards.css" />
 </head>
 <body>
 <div class="body">
@@ -62,61 +63,65 @@ $visitors = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 <div class="container-fluid mt-4">
-    <h2>Visitor Key Card Management</h2>
+    <div class="key-cards-form-section">
+        <h2>Visitor Key Card Management</h2>
 
-    <div class="mb-3">
-        <label for="visitorSelect" class="form-label">Select Visitor</label>
-        <select id="visitorSelect" class="form-select">
-            <option value="">-- Select Visitor --</option>
-            <?php foreach ($visitors as $visitor): ?>
-                <option value="<?= htmlspecialchars($visitor['id']) ?>"><?= htmlspecialchars($visitor['first_name'] . ' ' . $visitor['last_name']) ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-
-    <div id="badgeList" class="mb-4"></div>
-
-    <h4 id="formTitle">Issue New Key Card</h4>
-    <form id="badgeForm">
-        <input type="hidden" id="badgeId" name="id" value="" />
         <div class="mb-3">
-            <label for="keyCardNumber" class="form-label">Key Card Number</label>
-            <input type="text" id="keyCardNumber" name="key_card_number" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label for="validityStart" class="form-label">Validity Start</label>
-            <input type="datetime-local" id="validityStart" name="validity_start" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label for="validityEnd" class="form-label">Validity End</label>
-            <input type="datetime-local" id="validityEnd" name="validity_end" class="form-control" required />
-        </div>
-        <div class="mb-3" id="statusField" style="display:none;">
-            <label for="badgeStatus" class="form-label">Status</label>
-            <select id="badgeStatus" name="status" class="form-control">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="terminated">Terminated</option>
+            <label for="visitorSelect" class="form-label">Select Visitor</label>
+            <select id="visitorSelect" class="form-select">
+                <option value="">-- Select Visitor --</option>
+                <?php foreach ($visitors as $visitor): ?>
+                    <option value="<?= htmlspecialchars($visitor['id']) ?>"><?= htmlspecialchars($visitor['first_name'] . ' ' . $visitor['last_name']) ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" id="submitBtn">Issue Key Card</button>
-        <button type="button" class="btn btn-danger" id="terminateBtn" style="display:none;">Terminate Key Card</button>
-        <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;">Cancel</button>
-    </form>
+
+        <h4 id="formTitle">Issue New Key Card</h4>
+        <form id="badgeForm">
+            <input type="hidden" id="badgeId" name="id" value="" />
+            <div class="mb-3">
+                <label for="keyCardNumber" class="form-label">Key Card Number</label>
+                <input type="text" id="keyCardNumber" name="key_card_number" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label for="validityStart" class="form-label">Validity Start</label>
+                <input type="datetime-local" id="validityStart" name="validity_start" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label for="validityEnd" class="form-label">Validity End</label>
+                <input type="datetime-local" id="validityEnd" name="validity_end" class="form-control" required />
+            </div>
+            <div class="mb-3" id="statusField" style="display:none;">
+                <label for="badgeStatus" class="form-label">Status</label>
+                <select id="badgeStatus" name="status" class="form-control">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="terminated">Terminated</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Issue Key Card</button>
+            <button type="button" class="btn btn-danger" id="terminateBtn" style="display:none;">Terminate Key Card</button>
+            <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;">Cancel</button>
+        </form>
+    </div>
+
+    <div id="badgeList" class="key-cards-list-section" style="display:none;"></div>
 </div>
 
 <script>
 document.getElementById('visitorSelect').addEventListener('change', function() {
     const visitorId = this.value;
     if (!visitorId) {
-        document.getElementById('badgeList').innerHTML = '';
+        const badgeList = document.getElementById('badgeList');
+        badgeList.innerHTML = '';
+        badgeList.style.display = 'none';
         return;
     }
     fetch(`clearance_badge_management.php?action=fetch&visitor_id=${visitorId}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                let html = '<h5>Existing Key Cards</h5><ul class="list-group">';
+                let html = '<h5>Existing Key Cards</h5><ul class="list-group key-cards-list">';
                 data.badges.forEach(badge => {
                     html += `<li class="list-group-item">
                         <strong>Key Card #:</strong> ${badge.key_card_number} |
@@ -126,9 +131,13 @@ document.getElementById('visitorSelect').addEventListener('change', function() {
                     </li>`;
                 });
                 html += '</ul>';
-                document.getElementById('badgeList').innerHTML = html;
+                const badgeList = document.getElementById('badgeList');
+                badgeList.innerHTML = html;
+                badgeList.style.display = 'block';
             } else {
-                document.getElementById('badgeList').innerHTML = '<p>No badges found.</p>';
+                const badgeList = document.getElementById('badgeList');
+                badgeList.innerHTML = '<p>No badges found.</p>';
+                badgeList.style.display = 'block';
             }
         });
 });
