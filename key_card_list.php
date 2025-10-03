@@ -35,7 +35,8 @@ $badges = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
             <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
             <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
-            <li><i class="fa-solid fa-box-archive"></i><a href="inventory.php"> Inventory</a></li>
+            <h6>CUSTOMIZATION</h6>
+            <li><i class="fa-solid fa-newspaper"></i><a href="..\iSecure - final\customizelanding.php"> Landing Page</a></li>
         </ul>
     </div>
 </div>

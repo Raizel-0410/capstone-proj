@@ -106,7 +106,8 @@ $sidebarItems = $pdo->query("SELECT * FROM landing_sidebar_sections ORDER BY FIE
           <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
           <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
         </ul>
-
+        <h6>CUSTOMIZATION</h6>
+            <li><i class="fa-solid fa-newspaper"></i><a href="..\iSecure - final\customizelanding.php"> Landing Page</a></li>
 </div>
 
 </div>
