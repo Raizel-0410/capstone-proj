@@ -1,18 +1,15 @@
 <?php
 require 'auth_check.php';
 require 'db_connect.php';
-
 header('Content-Type: application/json');
 
 try {
-    // Make status comparison case-insensitive
-    $stmt = $pdo->prepare("SELECT id, vehicle_owner AS driver_name, vehicle_brand, vehicle_model, vehicle_color, plate_number, entry_time, exit_time, status
+    $stmt = $pdo->prepare("SELECT id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, status
                            FROM vehicles
-                           WHERE LOWER(status) = 'expected'
-                           ORDER BY entry_time DESC");
+                           WHERE status = 'Expected'
+                           ORDER BY id ASC");
     $stmt->execute();
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     echo json_encode($vehicles);
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
