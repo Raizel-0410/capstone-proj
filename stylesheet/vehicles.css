@@ -258,7 +258,8 @@
 }
 
 #expectedVehiclesTable,
-#insideVehiclesTable {
+#insideVehiclesTable,
+#exitedVehiclesTable {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 8px;
@@ -266,15 +267,18 @@
 
 #expectedVehiclesTable th,
 #insideVehiclesTable th,
+#exitedVehiclesTable th,
 #expectedVehiclesTable td,
-#insideVehiclesTable td {
+#insideVehiclesTable td,
+#exitedVehiclesTable td {
   padding: 12px;
   text-align: center;
   border: none;
 }
 
 #expectedVehiclesTable th,
-#insideVehiclesTable th {
+#insideVehiclesTable th,
+#exitedVehiclesTable th {
   background: #5BB7D1;
   color: white;
   font-weight: bold;
@@ -282,8 +286,10 @@
 
 #expectedVehiclesTable tr,
 #insideVehiclesTable tr,
+#exitedVehiclesTable tr,
 #expectedVehiclesTable td,
-#insideVehiclesTable td {
+#insideVehiclesTable td,
+#exitedVehiclesTable td {
   background: transparent !important;
   box-shadow: none !important;
 }

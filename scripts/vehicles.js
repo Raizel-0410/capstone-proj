@@ -76,32 +76,70 @@ function escapeHtml(s) {
         return;
       }
 
-      data.forEach(v => {
+    data.forEach(v => {
   const tr = document.createElement("tr");
   tr.innerHTML = `
-    <td>${escapeHtml(v.vehicle_owner)}</td>
+    <td>${escapeHtml(v.driver_name)}</td>
     <td>${escapeHtml(v.vehicle_brand)}</td>
     <td>${escapeHtml(v.vehicle_model)}</td>
     <td>${escapeHtml(v.vehicle_color)}</td>
     <td>${escapeHtml(v.plate_number)}</td>
-<td>${escapeHtml(v.entry_time || "")}</td>
+    <td>${escapeHtml(v.entry_time || "")}</td>
     <td>${v.exit_time ? escapeHtml(v.exit_time) : "Still Inside"}</td>
     <td>${escapeHtml(v.status || "Inside")}</td>
     <td>
       ${!v.exit_time
-        ? `<button class="btn btn-sm btn-danger exit-btn" data-id="${v.id}">
-             Mark Exit
-           </button>`
+        ? `<button class="btn btn-sm btn-danger exit-btn" data-id="${v.id}">Mark Exit</button>`
         : ""}
     </td>
   `;
   insideTbody.appendChild(tr);
 });
+
    } catch (err) {
       console.error("Error loading inside vehicles:", err);
     }
   }
   window.loadInsideVehicles = loadInsideVehicles;
+
+ const exitedTbody = document.querySelector("#exitedVehiclesTable tbody");
+
+// ---- Load Exited Vehicles ----
+async function loadExitedVehicles() {
+  try {
+    const res = await fetch("fetch_exited_vehicles.php");
+    const data = await res.json();
+    console.log("Exited vehicles:", data);
+
+    exitedTbody.innerHTML = "";
+    if (!Array.isArray(data) || data.length === 0) {
+      exitedTbody.innerHTML =
+        `<tr><td colspan="8" class="text-center">No exited vehicles</td></tr>`;
+      return;
+    }
+
+    data.forEach(v => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${escapeHtml(v.driver_name)}</td>
+        <td>${escapeHtml(v.vehicle_brand)}</td>
+        <td>${escapeHtml(v.vehicle_model)}</td>
+        <td>${escapeHtml(v.vehicle_color)}</td>
+        <td>${escapeHtml(v.plate_number)}</td>
+        <td>${escapeHtml(v.entry_time || "")}</td>
+        <td>${escapeHtml(v.exit_time || "")}</td>
+        <td>${escapeHtml(v.status || "Exited")}</td>
+      `;
+      exitedTbody.appendChild(tr);
+    });
+
+  } catch (err) {
+    console.error("Error loading exited vehicles:", err);
+  }
+}
+window.loadExitedVehicles = loadExitedVehicles;
+
+
   // ---- Handle Exit Button ----
   insideTbody.addEventListener("click", e => {
     const btn = e.target.closest(".exit-btn");
@@ -133,8 +171,10 @@ function escapeHtml(s) {
   // ---- Auto refresh ----
   loadExpectedVehicles();
   loadInsideVehicles();
+  loadExitedVehicles();
   setInterval(() => {
     loadExpectedVehicles();
     loadInsideVehicles();
+    loadExitedVehicles();
   }, 30000);
 });

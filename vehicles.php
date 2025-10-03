@@ -1,4 +1,3 @@
-
 <?php
 require 'auth_check.php';
 
@@ -35,7 +34,8 @@ if (!empty($session['user_id'])) {
         $role = htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8');
     }
 }
-?><!DOCTYPE html> 
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -62,7 +62,7 @@ if (!empty($session['user_id'])) {
           <li><i class="fa-solid fa-clock-rotate-left"></i><a href="pendings.php"> Pendings</a></li>
           <h6>DATA MANAGEMENT</h6>
           <li><i class="fa-solid fa-image-portrait"></i><a href="personnelaccounts.php"> Personnel Accounts</a></li>
-<li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
+          <li><i class="fa-solid fa-id-badge"></i><a href="key_cards.php"> Key Cards</a></li>
           <li><i class="fa-solid fa-list"></i><a href="key_card_list.php"> Key Cards List</a></li>
           <h6>CUSTOMIZATION</h6>
           <li><i class="fa-solid fa-newspaper"></i><a href="customizelanding.php"> Landing Page</a></li>
@@ -101,32 +101,59 @@ if (!empty($session['user_id'])) {
         </div>
       </div>
 
-<!-- ==== Expected Vehicles Table ==== -->
-<div class="vehicles-container">
-  <h5 class="table-title">Expected Vehicles</h5>
+      <!-- ==== Expected Vehicles Table ==== -->
+      <div class="vehicles-container mb-4">
+        <h5 class="table-title">Expected Vehicles</h5>
+        <div class="table-responsive">
+          <table id="expectedVehiclesTable" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Driver</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Plate No.</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" class="text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==== Inside Vehicles Table ==== -->
+      <div class="vehicles-container mb-4">
+        <h5 class="table-title">Inside Vehicles</h5>
+        <div class="table-responsive">
+          <table id="insideVehiclesTable" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Driver</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Plate No.</th>
+                <th>Entry Time</th>
+                <th>Exit Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="9" class="text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+ <div class="vehicles-container">
+  <h5 class="table-title">Exited Vehicles</h5>
   <div class="table-responsive">
-    <table id="expectedVehiclesTable">
+    <table id="exitedVehiclesTable" class="table table-striped">
       <thead>
         <tr>
-          <th>Owner</th>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Color</th>
-          <th>Plate No.</th>
-          <th>Status</th>
-  </tr>
-      </thead>
-      <tbody>
-        <tr>
-<td colspan="6" class="text-center">Loading...</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-        <tr>
-          <th>Owner</th>
+          <th>Driver</th>
           <th>Brand</th>
           <th>Model</th>
           <th>Color</th>
@@ -134,16 +161,16 @@ if (!empty($session['user_id'])) {
           <th>Entry Time</th>
           <th>Exit Time</th>
           <th>Status</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td colspan="8" class="text-center">Loading...</td></tr>
+        <tr>
+          <td colspan="8" class="text-center">Loading...</td>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
-
 
 
     </div>
@@ -154,4 +181,4 @@ if (!empty($session['user_id'])) {
 <script src="./scripts/session_check.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>
