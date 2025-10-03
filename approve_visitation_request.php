@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($request) {
                 // Insert into vehicles table (Expected)
                 $stmt = $pdo->prepare("
-                    INSERT INTO vehicles 
-                        (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, entry_time, exit_time, status) 
-                    VALUES 
+                    INSERT INTO vehicles
+                        (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, entry_time, exit_time, status)
+                    VALUES
                         (:visitation_id, :vehicle_owner, :vehicle_brand, :vehicle_model, :vehicle_color, :plate_number, :vehicle_photo_path, NULL, NULL, 'Expected')
                 ");
                 $stmt->execute([

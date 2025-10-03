@@ -88,11 +88,6 @@ function escapeHtml(s) {
     <td>${escapeHtml(v.entry_time || "")}</td>
     <td>${v.exit_time ? escapeHtml(v.exit_time) : "Still Inside"}</td>
     <td>${escapeHtml(v.status || "Inside")}</td>
-    <td>
-      ${!v.exit_time
-        ? `<button class="btn btn-sm btn-danger exit-btn" data-id="${v.id}">Mark Exit</button>`
-        : ""}
-    </td>
   `;
   insideTbody.appendChild(tr);
 });

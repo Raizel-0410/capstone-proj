@@ -260,11 +260,11 @@ if ($token) {
   </div>
 
   <!-- Vehicle Info (Optional) -->
-  <h3>Vehicle Information (Optional):</h3>
+  <h3>Vehicle Information:</h3>
   <div class="vehicle-information-section">
     <div class="vehicle-info-column">
-      <label>Vehicle Owner:
-        <input type="text" name="vehicle_owner" placeholder="Owner name">
+      <label>Vehicle Driver:
+        <input type="text" name="vehicle_owner" placeholder="Driver name" readonly>
       </label>
       <label>Vehicle Brand:
         <input type="text" name="vehicle_brand" placeholder="e.g. Toyota, Honda">
@@ -287,17 +287,6 @@ if ($token) {
     </div>
   </div>
 
-  <!-- Driver Info (if different driver) -->
-  <h3>Driver Information (if different from visitor):</h3>
-  <div class="driver-information-section">
-    <label>Driver Name:
-      <input type="text" name="driver_name" placeholder="Driver's full name">
-    </label>
-    <label class="label-btn">Driver ID Photo:
-      <input type="file" name="driver_id" accept="image/*">
-    </label>
-  </div>
-
   <!-- Schedule -->
   <h3>Visit Information: </h3>
   <div class="schedule-request-section">
@@ -307,9 +296,6 @@ if ($token) {
       </label>
       <label>Personnel to Visit:
         <input type="text" name="personnel_related" placeholder="Who will be visited">
-      </label>
-      <label>Personnel Office:
-        <input type="text" name="personnel_office" placeholder="Office where personnel is stationed">
       </label>
       <label>Office to Visit:
         <input type="text" name="office_to_visit" placeholder="Office to visit">
@@ -406,6 +392,15 @@ if ($token) {
   </div>
      <script src="./scripts/landingpage.js"></script>
      <script>
+       document.querySelector('input[name="first_name"]').addEventListener('input', updateDriver);
+       document.querySelector('input[name="last_name"]').addEventListener('input', updateDriver);
+
+       function updateDriver() {
+         const first = document.querySelector('input[name="first_name"]').value;
+         const last = document.querySelector('input[name="last_name"]').value;
+         document.querySelector('input[name="vehicle_owner"]').value = first + ' ' + last;
+       }
+
        document.querySelector('form.visitation-request-section').addEventListener('submit', function(e) {
          const visitTime = document.querySelector('input[name="visit_time"]').value;
          if (visitTime) {

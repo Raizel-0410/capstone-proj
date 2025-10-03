@@ -225,7 +225,7 @@
                 <li>NISSAN NV - Visitor A</li>
               </ul>
             </div>
-            <div class="widget-footer"><a href="#">View full information</a></div>
+            <div class="widget-footer"><a href="vehicles.php">View full information</a></div>
           </div>
 
           <!-- User Activity -->

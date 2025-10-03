@@ -36,10 +36,7 @@ $vehicle_color      = $_POST['vehicle_color'] ?? null;
 $vehicle_type       = $_POST['vehicle_type'] ?? null;
 $reason             = $_POST['reason'] ?? null;
 $personnel_related  = $_POST['personnel_related'] ?? null;
-$personnel_office   = $_POST['personnel_office'] ?? null;
 $office_to_visit    = $_POST['office_to_visit'] ?? null;
-$driver_name        = $_POST['driver_name'] ?? null;
-$driver_id          = $_POST['driver_id'] ?? null;
 $visit_date         = $_POST['visit_date'] ?? null;
 $visit_time         = $_POST['visit_time'] ?? null;
 
@@ -53,10 +50,10 @@ $stmt = $pdo->prepare("
     INSERT INTO visitation_requests
     (visitor_name, home_address, contact_number, email, valid_id_path, selfie_photo_path,
      vehicle_owner, vehicle_brand, plate_number, vehicle_color, vehicle_model, vehicle_photo_path,
-     reason, personnel_related, visit_date, visit_time, status)
+     reason, personnel_related, office_to_visit, visit_date, visit_time, status)
     VALUES (:visitor_name, :home_address, :contact_number, :email, :valid_id_path, :selfie_photo_path,
             :vehicle_owner, :vehicle_brand, :plate_number, :vehicle_color, :vehicle_type, :vehicle_photo_path,
-            :reason, :personnel_related, :visit_date, :visit_time, 'Pending')
+            :reason, :personnel_related, :office_to_visit, :visit_date, :visit_time, 'Pending')
 ");
 
 $success = $stmt->execute([
@@ -74,6 +71,7 @@ $success = $stmt->execute([
     ':vehicle_photo_path'=> $vehicle_photo_path,
     ':reason'            => $reason,
     ':personnel_related' => $personnel_related,
+    ':office_to_visit'   => $office_to_visit,
     ':visit_date'        => $visit_date,
     ':visit_time'        => $visit_time
 ]);
@@ -93,7 +91,7 @@ if ($success) {
             ':visitation_id'      => $visitationId,
             ':vehicle_owner'      => $vehicle_owner ?: $visitor_name,
             ':vehicle_brand'      => $vehicle_brand,
-            ':vehicle_model'      => $vehicle_model,
+            ':vehicle_model'      => $vehicle_type,
             ':vehicle_color'      => $vehicle_color,
             ':plate_number'       => $plate_number,
             ':vehicle_photo_path' => $vehicle_photo_path

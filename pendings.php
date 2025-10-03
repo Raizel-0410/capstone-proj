@@ -304,8 +304,6 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <p><strong>Vehicle Model:</strong> <span id="modalVehicleModel"></span></p>
           <p><strong>Vehicle Color:</strong> <span id="modalVehicleColor"></span></p>
           <p><strong>Plate Number:</strong> <span id="modalPlateNumber"></span></p>
-          <p><strong>Driver Name:</strong> <span id="modalDriverName"></span></p>
-          <p><strong>Driver ID:</strong> <span id="modalDriverId"></span></p>
           <p><strong>Valid ID:</strong><br><img id="modalValidId" src="" alt="Valid ID"></p>
           <p><strong>Selfie Photo:</strong><br><img id="modalSelfie" src="" alt="Selfie"></p>
           <p><strong>Vehicle Photo:</strong><br><img id="modalVehiclePhoto" src="" alt="Vehicle"></p>
@@ -343,8 +341,6 @@ document.querySelectorAll(".view-btn").forEach(btn => {
     document.getElementById("modalVehicleModel").textContent = btn.dataset.vehiclemodel;
     document.getElementById("modalVehicleColor").textContent = btn.dataset.vehiclecolor;
     document.getElementById("modalPlateNumber").textContent = btn.dataset.platenumber;
-    document.getElementById("modalDriverName").textContent = btn.dataset.drivername;
-    document.getElementById("modalDriverId").textContent = btn.dataset.driverid;
     document.getElementById("modalValidId").src = btn.dataset.validid || "placeholder.png";
     document.getElementById("modalSelfie").src = btn.dataset.selfie || "placeholder.png";
     document.getElementById("modalVehiclePhoto").src = btn.dataset.vehiclephoto || "placeholder.png";

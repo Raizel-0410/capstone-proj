@@ -249,7 +249,7 @@ if (!empty($session['user_id'])) {
             <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
             <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
             <p><strong>Reason for Visit:</strong> <span id="visitorReason"></span></p>
-            <p><strong>Personnel Related:</strong> <span id="visitorPersonnel"></span></p>
+            <p><strong>Personnel to Visit:</strong> <span id="visitorPersonnel"></span></p>
             <div class="photos" style="display: flex; gap: 20px; margin-top: 20px;">
               <div>
                 <strong>ID Photo:</strong><br>
@@ -272,14 +272,7 @@ if (!empty($session['user_id'])) {
                 <img id="vehiclePhoto" src="" alt="Vehicle Photo" style="max-width:200px; max-height:200px;">
               </div>
             </div>
-            <div id="driverInfo" style="display:none; margin-top: 20px;">
-              <h5>Driver Information</h5>
-              <p><strong>Name:</strong> <span id="driverName"></span></p>
-              <div style="margin-top: 10px;">
-                <strong>ID Photo:</strong><br>
-                <img id="driverIdPhoto" src="" alt="Driver ID" style="max-width:200px; max-height:200px;">
-              </div>
-            </div>
+
           </div>
         </div>
         <div class="tab-pane fade" id="verify" role="tabpanel" aria-labelledby="verify-tab">

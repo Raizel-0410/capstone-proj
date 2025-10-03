@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2025 at 04:59 AM
+-- Generation Time: Oct 03, 2025 at 04:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -71,46 +71,6 @@ CREATE TABLE `deleted_users` (
   `joined_date` datetime DEFAULT NULL,
   `last_active` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `exited_visitors`
---
-
-CREATE TABLE `exited_visitors` (
-  `id` int(11) NOT NULL,
-  `visitation_id` int(11) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `contact_number` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `home_address` varchar(255) DEFAULT NULL,
-  `reason` text DEFAULT NULL,
-  `visit_date` date DEFAULT NULL,
-  `time_in` time DEFAULT NULL,
-  `time_out` time DEFAULT NULL,
-  `valid_id_path` varchar(255) DEFAULT NULL,
-  `selfie_photo_path` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `inside_vehicles`
---
-
-CREATE TABLE `inside_vehicles` (
-  `id` int(11) NOT NULL,
-  `request_id` int(11) DEFAULT NULL,
-  `owner` varchar(100) NOT NULL,
-  `brand` varchar(100) DEFAULT NULL,
-  `model` varchar(100) DEFAULT NULL,
-  `color` varchar(50) DEFAULT NULL,
-  `plate` varchar(50) DEFAULT NULL,
-  `entry_time` datetime DEFAULT current_timestamp(),
-  `exit_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -389,19 +349,6 @@ ALTER TABLE `deleted_users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `exited_visitors`
---
-ALTER TABLE `exited_visitors`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `visitation_id` (`visitation_id`);
-
---
--- Indexes for table `inside_vehicles`
---
-ALTER TABLE `inside_vehicles`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `landing_about_us`
 --
 ALTER TABLE `landing_about_us`
@@ -516,18 +463,6 @@ ALTER TABLE `clearance_badges`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `exited_visitors`
---
-ALTER TABLE `exited_visitors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `inside_vehicles`
---
-ALTER TABLE `inside_vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `landing_about_us`
 --
 ALTER TABLE `landing_about_us`
@@ -608,12 +543,6 @@ ALTER TABLE `visitors`
 --
 ALTER TABLE `clearance_badges`
   ADD CONSTRAINT `clearance_badges_ibfk_1` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `exited_visitors`
---
-ALTER TABLE `exited_visitors`
-  ADD CONSTRAINT `exited_visitors_ibfk_1` FOREIGN KEY (`visitation_id`) REFERENCES `visitation_requests` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `landing_audit_logs`

@@ -113,7 +113,7 @@
  flex-wrap: wrap;
  position:sticky;
  top: 0;
- z-index: 1;
+ z-index: 9999;
  background-color: transparent; /* start transparent */
  transition: background-color 0.3s ease;
 }
@@ -610,6 +610,10 @@ input[type="file"]::file-selector-button:hover {
   background-color: #004a99;
 }
 
+input[type="file"] {
+  color: transparent;
+}
+
 .visitor-info-column button.add i, .vehicle-info-column button.add i{
   background-color: transparent;
 }
@@ -677,15 +681,16 @@ input[type="file"]::file-selector-button:hover {
   width: 160px;
   height: 35px;
   border-radius: 35px;
-  margin-left: 59rem;
+  margin-left: auto;
   margin-top: 30px;
-  color: white; 
+  color: white;
   background-color: #003673;
   border: none;
   align-content: center;
   padding-top: 2px;
   font-size: 20px;
   font-weight: 300;
+  display: block;
 }
 
 .contact-us-section h1 {

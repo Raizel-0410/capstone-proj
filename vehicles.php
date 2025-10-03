@@ -146,7 +146,7 @@ if (!empty($session['user_id'])) {
           </table>
         </div>
       </div>
-
+    <!-- ==== Exited Vehicles Table ==== -->
  <div class="vehicles-container">
   <h5 class="table-title">Exited Vehicles</h5>
   <div class="table-responsive">

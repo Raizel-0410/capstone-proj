@@ -53,35 +53,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function showVisitorDetails(visitor) {
-    document.getElementById("visitorName").textContent = escapeHtml(visitor.full_name);
-    document.getElementById("visitorContact").textContent = escapeHtml(visitor.contact_number);
-    document.getElementById("visitorEmail").textContent = escapeHtml(visitor.email);
-    document.getElementById("visitorAddress").textContent = escapeHtml(visitor.address);
-    document.getElementById("visitorReason").textContent = escapeHtml(visitor.reason);
-    document.getElementById("visitorPersonnel").textContent = escapeHtml(visitor.personnel_related || '');
-    document.getElementById("visitorIDPhoto").src = visitor.id_photo_path;
-    document.getElementById("visitorSelfie").src = visitor.selfie_photo_path;
+    function showVisitorDetails(visitor) {
+      document.getElementById("visitorName").textContent = escapeHtml(visitor.full_name);
+      document.getElementById("visitorContact").textContent = escapeHtml(visitor.contact_number);
+      document.getElementById("visitorEmail").textContent = escapeHtml(visitor.email);
+      document.getElementById("visitorAddress").textContent = escapeHtml(visitor.address);
+      document.getElementById("visitorReason").textContent = escapeHtml(visitor.reason);
+      document.getElementById("visitorPersonnel").textContent = escapeHtml(visitor.personnel_related || '');
+      document.getElementById("visitorIDPhoto").src = visitor.id_photo_path;
+      document.getElementById("visitorSelfie").src = visitor.selfie_photo_path;
 
-    // Vehicle Info
-    const vehicleInfo = document.getElementById("vehicleInfo");
-    if (visitor.vehicle_owner) {
-      vehicleInfo.style.display = 'block';
-      document.getElementById("vehicleOwner").textContent = escapeHtml(visitor.vehicle_owner);
-      document.getElementById("vehicleBrand").textContent = escapeHtml(visitor.vehicle_brand);
-      document.getElementById("vehicleModel").textContent = escapeHtml(visitor.vehicle_model);
-      document.getElementById("vehicleColor").textContent = escapeHtml(visitor.vehicle_color);
-      document.getElementById("plateNumber").textContent = escapeHtml(visitor.plate_number);
-      document.getElementById("vehiclePhoto").src = visitor.vehicle_photo_path || '';
-    } else vehicleInfo.style.display = 'none';
+      // Vehicle Info
+      const vehicleInfo = document.getElementById("vehicleInfo");
+      if (vehicleInfo) {
+        if (visitor.vehicle_owner) {
+          vehicleInfo.style.display = 'block';
+          document.getElementById("vehicleOwner").textContent = escapeHtml(visitor.vehicle_owner);
+          document.getElementById("vehicleBrand").textContent = escapeHtml(visitor.vehicle_brand);
+          document.getElementById("vehicleModel").textContent = escapeHtml(visitor.vehicle_model);
+          document.getElementById("vehicleColor").textContent = escapeHtml(visitor.vehicle_color);
+          document.getElementById("plateNumber").textContent = escapeHtml(visitor.plate_number);
+          document.getElementById("vehiclePhoto").src = visitor.vehicle_photo_path || '';
+        } else vehicleInfo.style.display = 'none';
+      }
 
-    // Driver Info
-    const driverInfo = document.getElementById("driverInfo");
-    if (visitor.driver_name) {
-      driverInfo.style.display = 'block';
-      document.getElementById("driverName").textContent = escapeHtml(visitor.driver_name);
-      document.getElementById("driverIdPhoto").src = visitor.driver_id || '';
-    } else driverInfo.style.display = 'none';
+      // Driver Info
+      const driverInfo = document.getElementById("driverInfo");
+      if (driverInfo) {
+        if (visitor.driver_name) {
+          driverInfo.style.display = 'block';
+          document.getElementById("driverName").textContent = escapeHtml(visitor.driver_name);
+          document.getElementById("driverIdPhoto").src = visitor.driver_id || '';
+        } else driverInfo.style.display = 'none';
+      }
 
     currentVisitorId = visitor.id;
 
@@ -205,20 +209,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Delegate table buttons
-  [expectedVisitorsTbody, insideVisitorsTbody, exitedVisitorsTbody].forEach(tbody => {
-    tbody.addEventListener("click", async e => {
-      const id = e.target.dataset.id;
-      if (!id) return;
+  document.addEventListener("click", async e => {
+    const id = e.target.dataset.id;
+    if (!id) return;
 
-      if (e.target.classList.contains("view-btn")) {
-        const visitor = await fetchVisitorDetails(id);
-        if (visitor) showVisitorDetails(visitor);
-      } else if (e.target.classList.contains("entry-btn")) {
-        markEntry(id);
-      } else if (e.target.classList.contains("exit-btn")) {
-        markExit(id);
-      }
-    });
+    if (e.target.classList.contains("view-btn")) {
+      const visitor = await fetchVisitorDetails(id);
+      if (visitor) showVisitorDetails(visitor);
+    } else if (e.target.classList.contains("entry-btn")) {
+      markEntry(id);
+    } else if (e.target.classList.contains("exit-btn")) {
+      markExit(id);
+    }
   });
 
   logoutLink?.addEventListener("click", () => {

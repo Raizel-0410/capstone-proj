@@ -96,9 +96,9 @@ async function loadLatestVehicles() {
       const li = document.createElement("li");
       li.innerHTML = `
         <i class="fa-solid fa-car-side" style="margin-right: 8px;"></i>
-        <span style="font-weight:500;">${v.vehicle_brand} ${v.vehicle_model}</span> - 
-        <span style="font-weight:500;">${v.owner_name}</span> - 
-        <span style="font-weight:300; color:#36C3EF;">Time: ${v.entry_time}</span>
+        <span style="font-weight:500;">${escapeHtml(v.vehicle_brand || "")} ${escapeHtml(v.vehicle_model || "")}</span> -
+        <span style="font-weight:500;">${escapeHtml(v.owner_name || "Unknown")}</span> -
+        <span style="font-weight:300; color:#36C3EF;">Time: ${escapeHtml(v.entry_time || "N/A")}</span>
       `;
       list.appendChild(li);
     });
