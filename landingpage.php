@@ -299,7 +299,7 @@ if ($token) {
   </div>
 
   <!-- Schedule -->
-  <h3>Schedule Request: </h3>
+  <h3>Visit Information: </h3>
   <div class="schedule-request-section">
     <div class="schedule-req-div">
       <label>Reason:
