@@ -1,8 +1,8 @@
-* {
-    padding: 0;
-    margin: 0;
-    font-family: 'League Spartan', sans-serif;
-    box-sizing: border-box;
+/* Mobile or very small screens */
+@media (max-width: 768px) {
+    .body {
+        flex-direction: column;
+    }
 }
 
 .body {
@@ -172,7 +172,7 @@
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 750px;
+  max-width: 110rem;
   width: 100%;
   margin: auto;
   text-align: center;
@@ -336,7 +336,7 @@
     font-family: 'League Spartan', sans-serif;
     color: #006682;
     line-height: 1.6;
-    max-width: 750px;
+    max-width: 105rem;
     max-height: 70vh;
     margin: 0 auto;
     background-color: #e0f7ff;
@@ -387,6 +387,86 @@
     font-weight: 700;
     margin-bottom: 10px;
     color: #006682;
+}
+
+/* Styles for visitor details modal table and images */
+.modal-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: white;
+  color: black;
+}
+
+.modal-body table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  padding: 8px 12px;
+  vertical-align: top;
+  border: 1px solid #dee2e6;
+}
+
+.modal-body table td {
+  background-color: white;
+  padding: 8px 12px;
+  vertical-align: top;
+  border: 1px solid #dee2e6;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.image-box {
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.uniform-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Bigger modal styles */
+.big-modal-dialog {
+  max-width: 130rem !important;
+  margin: 2rem auto !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: calc(100vh - 4rem) !important;
+}
+
+.big-modal-content {
+  height: 75vh !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+  width: 130rem !important;
+}
+
+.big-modal-body {
+  height: calc(75vh - 120px) !important;
+  overflow-y: auto !important;
+  width: 130rem !important;
+  margin: 0 auto !important;
+}
+
+/* Make table inside modal responsive */
+.big-modal-body .table-responsive {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.big-modal-body table {
+  width: 100% !important;
+  min-width: unset !important;
+  table-layout: auto !important;
+  word-wrap: break-word !important;
 }
 
 /* Tablets or smaller laptops */

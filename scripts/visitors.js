@@ -54,38 +54,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
     function showVisitorDetails(visitor) {
-      document.getElementById("visitorName").textContent = escapeHtml(visitor.full_name);
-      document.getElementById("visitorContact").textContent = escapeHtml(visitor.contact_number);
-      document.getElementById("visitorEmail").textContent = escapeHtml(visitor.email);
-      document.getElementById("visitorAddress").textContent = escapeHtml(visitor.address);
-      document.getElementById("visitorReason").textContent = escapeHtml(visitor.reason);
-      document.getElementById("visitorPersonnel").textContent = escapeHtml(visitor.personnel_related || '');
+      // Combine first and last name for Name column
+      const fullName = [visitor.first_name, visitor.last_name].filter(Boolean).join(' ');
+      document.getElementById("visitorNameCell").textContent = escapeHtml(fullName);
+
+      document.getElementById("visitorAddressCell").textContent = escapeHtml(visitor.address);
+      document.getElementById("visitorContactCell").textContent = escapeHtml(visitor.contact_number);
+      document.getElementById("visitorEmailCell").textContent = escapeHtml(visitor.email);
+      document.getElementById("visitorDateCell").textContent = escapeHtml(visitor.date || '');
+      document.getElementById("visitorTimeCell").textContent = escapeHtml(visitor.time_in || '');
+      document.getElementById("visitorReasonCell").textContent = escapeHtml(visitor.reason);
+      document.getElementById("visitorPersonnelCell").textContent = escapeHtml(visitor.personnel_related || '');
+      document.getElementById("visitorOfficeCell").textContent = escapeHtml(visitor.office || '');
+      document.getElementById("vehicleOwnerCell").textContent = escapeHtml(visitor.vehicle_owner || '');
+      document.getElementById("vehicleBrandCell").textContent = escapeHtml(visitor.vehicle_brand || '');
+      document.getElementById("vehicleModelCell").textContent = escapeHtml(visitor.vehicle_model || '');
+      document.getElementById("vehicleColorCell").textContent = escapeHtml(visitor.vehicle_color || '');
+      document.getElementById("plateNumberCell").textContent = escapeHtml(visitor.plate_number || '');
       document.getElementById("visitorIDPhoto").src = visitor.id_photo_path;
       document.getElementById("visitorSelfie").src = visitor.selfie_photo_path;
-
-      // Vehicle Info
-      const vehicleInfo = document.getElementById("vehicleInfo");
-      if (vehicleInfo) {
-        if (visitor.vehicle_owner) {
-          vehicleInfo.style.display = 'block';
-          document.getElementById("vehicleOwner").textContent = escapeHtml(visitor.vehicle_owner);
-          document.getElementById("vehicleBrand").textContent = escapeHtml(visitor.vehicle_brand);
-          document.getElementById("vehicleModel").textContent = escapeHtml(visitor.vehicle_model);
-          document.getElementById("vehicleColor").textContent = escapeHtml(visitor.vehicle_color);
-          document.getElementById("plateNumber").textContent = escapeHtml(visitor.plate_number);
-          document.getElementById("vehiclePhoto").src = visitor.vehicle_photo_path || '';
-        } else vehicleInfo.style.display = 'none';
-      }
-
-      // Driver Info
-      const driverInfo = document.getElementById("driverInfo");
-      if (driverInfo) {
-        if (visitor.driver_name) {
-          driverInfo.style.display = 'block';
-          document.getElementById("driverName").textContent = escapeHtml(visitor.driver_name);
-          document.getElementById("driverIdPhoto").src = visitor.driver_id || '';
-        } else driverInfo.style.display = 'none';
-      }
+      document.getElementById("vehiclePhoto").src = visitor.vehicle_photo_path || '';
 
     currentVisitorId = visitor.id;
 
@@ -94,16 +82,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const facialTabBtn = document.querySelector('#visitorTab button[data-bs-target="#facial"]');
     const vehicleTabBtn = document.querySelector('#visitorTab button[data-bs-target="#vehicle"]');
     const idTabBtn = document.querySelector('#visitorTab button[data-bs-target="#id"]');
+    const detailsTabBtn = document.querySelector('#visitorTab button[data-bs-target="#details"]');
 
-    const isReadOnly = visitor.status === "Inside" || visitor.status === "Exited";
+    const isReadOnly = visitor.status.toLowerCase() === "inside" || visitor.status.toLowerCase() === "exited";
 
     [verifyTabBtn, facialTabBtn, vehicleTabBtn, idTabBtn].forEach(tab => {
       if (tab) tab.style.display = isReadOnly ? 'none' : 'block';
     });
 
+    if (detailsTabBtn) {
+      detailsTabBtn.style.display = isReadOnly ? 'none' : 'block';
+    }
+
     [nextToVerifyBtn, nextToFacialBtn, nextToVehicleBtn].forEach(btn => {
       if (btn) btn.style.display = isReadOnly ? 'none' : 'inline-block';
     });
+
+    // Conditionally hide/show the Details tab content and container
+    const detailsTabContent = document.getElementById('details');
+    const visitorTabContent = document.getElementById('visitorTabContent');
+    if (detailsTabContent) {
+      detailsTabContent.style.display = isReadOnly ? 'none' : 'block';
+    }
+    if (visitorTabContent) {
+      visitorTabContent.style.display = isReadOnly ? 'none' : 'block';
+    }
 
     const detailsTabTriggerEl = document.querySelector('#details-tab');
     if (detailsTabTriggerEl) {

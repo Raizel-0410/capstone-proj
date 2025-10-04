@@ -258,7 +258,7 @@ h5 {
 
 /* Override Bootstrap modal header */
 .modal-header {
-  background-color: #006682;
+  background-color: white;
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -578,4 +578,73 @@ h5 {
     object-fit: contain;
     border: 2px solid #004d40;
     border-radius: 10px;
+}
+
+/* Styles for visitor details modal table and images */
+.modal-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modal-body table th,
+.modal-body table td {
+  padding: 8px 12px;
+  vertical-align: top;
+  border: 1px solid #dee2e6;
+}
+
+.image-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.image-box {
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.uniform-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Fix table cell word wrapping and spacing in visitor details modal */
+#visitorDetailsModal table.table th,
+#visitorDetailsModal table.table td {
+  white-space: normal !important;
+  word-wrap: break-word;
+  vertical-align: middle;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+#visitorDetailsModal table.table thead th {
+  white-space: nowrap;
+  background-color:     rgba(13, 202, 240)  !important;
+}
+
+#visitorDetailsModal .image-container {
+  background-color: #004d40;
+  padding: 15px;
+  border-radius: 0 0 10px 10px;
+}
+
+#visitorDetailsModal .image-box img.uniform-image {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+#visitorDetailsModal .image-box strong {
+  color: #a5d6a7;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
 }

@@ -217,94 +217,120 @@ if (!empty($session['user_id'])) {
   </div>
 </div>
 
+<!-- Updated modal to match requested style with verification tabs -->
 <div class="modal fade" id="visitorDetailsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
+  <div class="modal-dialog" style="max-width: 1000px;">
+    <div class="modal-content" style="background-color: #e0f7ff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <div class="modal-header" style="border-bottom: none; padding-bottom: 0.5rem;">
         <h5 class="modal-title">Visitor Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <ul class="nav nav-tabs" id="visitorTab" role="tablist" style="margin-bottom: 20px;">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">Details</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="verify-tab" data-bs-toggle="tab" data-bs-target="#verify" type="button" role="tab" aria-controls="verify" aria-selected="false">Verify</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab" aria-controls="facial" aria-selected="false">Facial</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="false">Vehicle</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="id-tab" data-bs-toggle="tab" data-bs-target="#id" type="button" role="tab" aria-controls="id" aria-selected="false">ID</button>
-        </li>
-      </ul>
-      <div class="tab-content" id="visitorTabContent" style="margin-top: 10px;">
-      <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-          <div class="visitor-info" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; align-items: start;">
-            <p><strong>Full Name:</strong> <span id="visitorName"></span></p>
-            <p><strong>Contact Number:</strong> <span id="visitorContact"></span></p>
-            <p><strong>Email:</strong> <span id="visitorEmail"></span></p>
-            <p><strong>Address:</strong> <span id="visitorAddress"></span></p>
-            <p><strong>Reason for Visit:</strong> <span id="visitorReason"></span></p>
-            <p><strong>Personnel to Visit:</strong> <span id="visitorPersonnel"></span></p>
-            <div class="photos" style="display: flex; gap: 20px; margin-top: 20px;">
-              <div>
-                <strong>ID Photo:</strong><br>
-                <img id="visitorIDPhoto" src="" alt="ID Photo" style="max-width:200px; max-height:200px;">
-              </div>
-              <div>
-                <strong>Selfie:</strong><br>
-                <img id="visitorSelfie" src="" alt="Selfie" style="max-width:200px; max-height:200px;">
-              </div>
-            </div>
-            <div id="vehicleInfo" style="display:none; margin-top: 20px;">
-              <h5>Vehicle Information</h5>
-              <p><strong>Owner:</strong> <span id="vehicleOwner"></span></p>
-              <p><strong>Brand:</strong> <span id="vehicleBrand"></span></p>
-              <p><strong>Model:</strong> <span id="vehicleModel"></span></p>
-              <p><strong>Color:</strong> <span id="vehicleColor"></span></p>
-              <p><strong>Plate Number:</strong> <span id="plateNumber"></span></p>
-              <div style="margin-top: 10px;">
-                <strong>Vehicle Photo:</strong><br>
-                <img id="vehiclePhoto" src="" alt="Vehicle Photo" style="max-width:200px; max-height:200px;">
-              </div>
-            </div>
-
+      <div class="modal-body" style="background-color: white; border-radius: 12px; padding: 1rem;">
+        <div class="table-responsive" style="overflow-x: auto;">
+          <table class="table table-bordered text-center mb-0" style="table-layout: auto; white-space: nowrap;">
+            <thead class="bg-info text-white">
+              <tr>
+                <th>Name</th>
+                <th>Home Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Personnel to Visit</th>
+                <th>Office to Visit</th>
+                <th>Vehicle Owner</th>
+                <th>Vehicle Brand</th>
+                <th>Vehicle Model</th>
+                <th>Vehicle Color</th>
+                <th>Plate Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="visitorNameCell" style="font-weight: 600;"></td>
+                <td id="visitorAddressCell"></td>
+                <td id="visitorContactCell"></td>
+                <td id="visitorEmailCell"></td>
+                <td id="visitorDateCell"></td>
+                <td id="visitorTimeCell"></td>
+                <td id="visitorReasonCell"></td>
+                <td id="visitorPersonnelCell"></td>
+                <td id="visitorOfficeCell"></td>
+                <td id="vehicleOwnerCell"></td>
+                <td id="vehicleBrandCell"></td>
+                <td id="vehicleModelCell"></td>
+                <td id="vehicleColorCell"></td>
+                <td id="plateNumberCell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center gap-4 mt-4">
+          <div class="text-center">
+            <strong>Valid ID</strong><br>
+            <img id="visitorIDPhoto" src="" alt="Valid ID" style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+          </div>
+          <div class="text-center">
+            <strong>Selfie Photo</strong><br>
+            <img id="visitorSelfie" src="" alt="Selfie" style="max-width: 150px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+          </div>
+          <div class="text-center">
+            <strong>Vehicle Photo</strong><br>
+            <img id="vehiclePhoto" src="" alt="Vehicle Photo" style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
           </div>
         </div>
-        <div class="tab-pane fade" id="verify" role="tabpanel" aria-labelledby="verify-tab">
-          <div>
-            <button id="nextToFacial" class="btn btn-primary float-end">Next</button>
+        <ul class="nav nav-tabs mt-4" id="visitorTab" role="tablist" style="border-bottom: none;">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">Details</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="verify-tab" data-bs-toggle="tab" data-bs-target="#verify" type="button" role="tab" aria-controls="verify" aria-selected="false">Verify</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab" aria-controls="facial" aria-selected="false">Facial</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="false">Vehicle</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="id-tab" data-bs-toggle="tab" data-bs-target="#id" type="button" role="tab" aria-controls="id" aria-selected="false">ID</button>
+          </li>
+        </ul>
+        
+        <div class="tab-content" id="visitorTabContent" style="margin-top: 10px;">
+          <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <!-- Details tab content can be repeated or customized if needed -->
           </div>
-        </div>
-        <div class="tab-pane fade" id="facial" role="tabpanel" aria-labelledby="facial-tab">
-          <div>
+          <div class="tab-pane fade" id="verify" role="tabpanel" aria-labelledby="verify-tab">
+            <div>
+              <button id="nextToFacial" class="btn btn-primary float-end">Next</button>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="facial" role="tabpanel" aria-labelledby="facial-tab">
             <div id="facialRecognitionContainer" style="min-height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
               <!-- Facial recognition feature under development -->
             </div>
             <button id="nextToVehicle" class="btn btn-primary float-end">Next</button>
           </div>
-        </div>
-        <div class="tab-pane fade" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
-          <div>
+          <div class="tab-pane fade" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
             <div id="vehicleRecognitionContainer" style="min-height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
               <!-- Vehicle license plate recognition feature under development -->
             </div>
             <button id="skipVehicle" class="btn btn-secondary float-start">Skip</button>
             <button id="nextToId" class="btn btn-primary float-end">Next</button>
           </div>
-        </div>
-        <div class="tab-pane fade" id="id" role="tabpanel" aria-labelledby="id-tab">
-          <div>
+          <div class="tab-pane fade" id="id" role="tabpanel" aria-labelledby="id-tab">
             <div id="idRecognitionContainer" style="min-height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
               <!-- ID recognition feature under development -->
             </div>
             <button id="markEntryBtn" class="btn btn-success float-end">Mark Entry</button>
           </div>
         </div>
+      </div>
+      <div class="modal-footer" style="border-top: none;">
+        <!-- Add any footer buttons if needed -->
+      </div>
     </div>
   </div>
 </div>

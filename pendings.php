@@ -284,29 +284,66 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <!-- Request Modal -->
   <div class="modal fade" id="requestModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+  <div class="modal-dialog big-modal-dialog">
+      <div class="modal-content big-modal-content">
         <div class="modal-header"><h5 class="modal-title">Visitation Request Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body">
-          <p><strong>Name:</strong> <span id="modalName"></span></p>
-          <p><strong>Home Address:</strong> <span id="modalHome"></span></p>
-          <p><strong>Contact:</strong> <span id="modalContact"></span></p>
-          <p><strong>Email:</strong> <span id="modalEmail"></span></p>
-          <p><strong>Date:</strong> <span id="modalDate"></span></p>
-          <p><strong>Time:</strong> <span id="modalTime"></span></p>
-          <p><strong>Reason:</strong> <span id="modalReason"></span></p>
-          <p><strong>Personnel Related:</strong> <span id="modalPersonnel"></span></p>
-          <p><strong>Office to Visit:</strong> <span id="modalOffice"></span></p>
-          <p><strong>Vehicle Owner:</strong> <span id="modalVehicleOwner"></span></p>
-          <p><strong>Vehicle Brand:</strong> <span id="modalVehicleBrand"></span></p>
-          <p><strong>Vehicle Model:</strong> <span id="modalVehicleModel"></span></p>
-          <p><strong>Vehicle Color:</strong> <span id="modalVehicleColor"></span></p>
-          <p><strong>Plate Number:</strong> <span id="modalPlateNumber"></span></p>
-          <p><strong>Valid ID:</strong><br><img id="modalValidId" src="" alt="Valid ID"></p>
-          <p><strong>Selfie Photo:</strong><br><img id="modalSelfie" src="" alt="Selfie"></p>
-          <p><strong>Vehicle Photo:</strong><br><img id="modalVehiclePhoto" src="" alt="Vehicle"></p>
+        <div class="modal-body p-0 big-modal-body">
+          <div class="table-responsive" style="max-height: 100%;">
+            <table class="table table-bordered text-center mb-0" style="table-layout: fixed; word-wrap: break-word; min-width: 900px;">
+              <thead class="bg-info text-white">
+                <tr>
+                  <th style="width: 45%;">Name</th>
+                  <th style="width: 45%;">Home Address</th>
+                  <th style="width: 45%;">Contact</th>
+                  <th style="width: 45%;">Email</th>
+                  <th style="width: 45%;">Date</th>
+                  <th style="width: 45%;">Time</th>
+                  <th style="width: 45%;">Reason</th>
+                  <th style="width: 45%;">Personnel to Visit</th>
+                  <th style="width: 45%;">Office to Visit</th>
+                  <th style="width: 45%;">Vehicle Owner</th>
+                  <th style="width: 45%;">Vehicle Brand</th>
+                  <th style="width: 45%;">Vehicle Model</th>
+                  <th style="width: 45%;">Vehicle Color</th>
+                  <th style="width: 45%;">Plate Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="modalNameCell"></td>
+                  <td id="modalHomeCell"></td>
+                  <td id="modalContactCell"></td>
+                  <td id="modalEmailCell"></td>
+                  <td id="modalDateCell"></td>
+                  <td id="modalTimeCell"></td>
+                  <td id="modalReasonCell"></td>
+                  <td id="modalPersonnelCell"></td>
+                  <td id="modalOfficeCell"></td>
+                  <td id="modalVehicleOwnerCell"></td>
+                  <td id="modalVehicleBrandCell"></td>
+                  <td id="modalVehicleModelCell"></td>
+                  <td id="modalVehicleColorCell"></td>
+                  <td id="modalPlateNumberCell"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="image-container d-flex justify-content-center gap-3 mt-3">
+            <div class="image-box text-center">
+              <strong>Valid ID</strong><br>
+              <img id="modalValidId" src="" alt="Valid ID" class="uniform-image" style="max-width: 150px; max-height: 150px;">
+            </div>
+            <div class="image-box text-center">
+              <strong>Selfie Photo</strong><br>
+              <img id="modalSelfie" src="" alt="Selfie" class="uniform-image" style="max-width: 150px; max-height: 150px;">
+            </div>
+            <div class="image-box text-center">
+              <strong>Vehicle Photo</strong><br>
+              <img id="modalVehiclePhoto" src="" alt="Vehicle" class="uniform-image" style="max-width: 150px; max-height: 150px;">
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <input type="hidden" id="modalRequestId">
@@ -325,26 +362,26 @@ $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
 const requestModal = new bootstrap.Modal(document.getElementById("requestModal"));
 
-document.querySelectorAll(".view-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.getElementById("modalName").textContent = btn.dataset.name;
-    document.getElementById("modalHome").textContent = btn.dataset.home;
-    document.getElementById("modalContact").textContent = btn.dataset.contact;
-    document.getElementById("modalEmail").textContent = btn.dataset.email;
-    document.getElementById("modalDate").textContent = btn.dataset.date;
-    document.getElementById("modalTime").textContent = btn.dataset.time;
-    document.getElementById("modalReason").textContent = btn.dataset.reason;
-    document.getElementById("modalPersonnel").textContent = btn.dataset.personnel;
-    document.getElementById("modalOffice").textContent = btn.dataset.office;
-    document.getElementById("modalVehicleOwner").textContent = btn.dataset.vehicleowner;
-    document.getElementById("modalVehicleBrand").textContent = btn.dataset.vehiclebrand;
-    document.getElementById("modalVehicleModel").textContent = btn.dataset.vehiclemodel;
-    document.getElementById("modalVehicleColor").textContent = btn.dataset.vehiclecolor;
-    document.getElementById("modalPlateNumber").textContent = btn.dataset.platenumber;
-    document.getElementById("modalValidId").src = btn.dataset.validid || "placeholder.png";
-    document.getElementById("modalSelfie").src = btn.dataset.selfie || "placeholder.png";
-    document.getElementById("modalVehiclePhoto").src = btn.dataset.vehiclephoto || "placeholder.png";
-    document.getElementById("modalRequestId").value = btn.dataset.id;
+        document.querySelectorAll(".view-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.getElementById("modalNameCell").textContent = btn.dataset.name;
+            document.getElementById("modalHomeCell").textContent = btn.dataset.home;
+            document.getElementById("modalContactCell").textContent = btn.dataset.contact;
+            document.getElementById("modalEmailCell").textContent = btn.dataset.email;
+            document.getElementById("modalDateCell").textContent = btn.dataset.date;
+            document.getElementById("modalTimeCell").textContent = btn.dataset.time;
+            document.getElementById("modalReasonCell").textContent = btn.dataset.reason;
+            document.getElementById("modalPersonnelCell").textContent = btn.dataset.personnel;
+            document.getElementById("modalOfficeCell").textContent = btn.dataset.office;
+            document.getElementById("modalVehicleOwnerCell").textContent = btn.dataset.vehicleowner;
+            document.getElementById("modalVehicleBrandCell").textContent = btn.dataset.vehiclebrand;
+            document.getElementById("modalVehicleModelCell").textContent = btn.dataset.vehiclemodel;
+            document.getElementById("modalVehicleColorCell").textContent = btn.dataset.vehiclecolor;
+            document.getElementById("modalPlateNumberCell").textContent = btn.dataset.platenumber;
+            document.getElementById("modalValidId").src = btn.dataset.validid || "placeholder.png";
+            document.getElementById("modalSelfie").src = btn.dataset.selfie || "placeholder.png";
+            document.getElementById("modalVehiclePhoto").src = btn.dataset.vehiclephoto || "placeholder.png";
+            document.getElementById("modalRequestId").value = btn.dataset.id;
 
     // Hide approve/reject buttons if not pending
     const approveBtn = document.getElementById("approveBtn");
