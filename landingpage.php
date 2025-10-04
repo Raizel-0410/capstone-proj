@@ -259,41 +259,45 @@ if ($token) {
     </div>
   </div>
 
-  <!-- Vehicle Info (Optional) -->
-  <h3>Vehicle Information:</h3>
-  <div class="vehicle-information-section">
-    <div class="vehicle-info-column">
-      <label>Vehicle Driver:
-        <input type="text" name="vehicle_owner" placeholder="Driver name" readonly>
-      </label>
-      <label>Vehicle Brand:
-        <input type="text" name="vehicle_brand" placeholder="e.g. Toyota, Honda">
-      </label>
-      <label>Plate Number:
-        <input type="text" name="plate_number" placeholder="ABC-1234">
-      </label>
-    </div>
+  <label class="vehicle-radio-label">Do you have a vehicle?
+    <input type="radio" name="has_vehicle" value="yes" class="vehicle-radio"> Yes
+    <input type="radio" name="has_vehicle" value="no" checked class="vehicle-radio"> No
+  </label>
 
-    <div class="vehicle-info-column">
-      <label>Vehicle Color:
-        <input type="text" name="vehicle_color" placeholder="e.g. Red, Black">
-      </label>
-      <label>Vehicle Type:
-        <input type="text" name="vehicle_type" placeholder="e.g. Sedan, SUV">
-      </label>
-      <label class="label-btn">Vehicle Photo:
-        <input type="file" name="vehicle_photo" accept="image/*">
-      </label>
+  <!-- Vehicle Info (Optional) -->
+  <h3 style="display: none;" class="vehicle-info-title">Vehicle Information:</h3>
+  <div class="vehicle-information-section" style="display: none;">
+    <div class="vehicle-info-columns-wrapper" style="display: flex; gap: 20px; width: 100%;">
+      <div class="vehicle-info-column">
+        <label>Vehicle Driver:
+          <input type="text" name="vehicle_owner" placeholder="Driver name" readonly>
+        </label>
+        <label>Vehicle Brand:
+          <input type="text" name="vehicle_brand" placeholder="e.g. Toyota, Honda">
+        </label>
+        <label>Plate Number:
+          <input type="text" name="plate_number" placeholder="ABC-1234">
+        </label>
+      </div>
+
+      <div class="vehicle-info-column">
+        <label>Vehicle Color:
+          <input type="text" name="vehicle_color" placeholder="e.g. Red, Black">
+        </label>
+        <label>Vehicle Type:
+          <input type="text" name="vehicle_type" placeholder="e.g. Sedan, SUV">
+        </label>
+        <label class="label-btn">Vehicle Photo:
+          <input type="file" name="vehicle_photo" accept="image/*">
+        </label>
+      </div>
     </div>
   </div>
 
   <!-- Schedule -->
-  <h3>Visit Information: </h3>
-  <div class="schedule-request-section">
+  <h3 style="margin-top: 2rem;">Visit Information: </h3>
+  <div class="schedule-request-section" style="margin-top: 1rem;">
     <div class="schedule-req-div">
-      <label>Reason:
-        <input type="text" name="reason" placeholder="Enter reason" required>
-      </label>
       <label>Personnel to Visit:
         <input type="text" name="personnel_related" placeholder="Who will be visited">
       </label>
@@ -306,6 +310,14 @@ if ($token) {
       <input type="date" name="visit_date" required>
       <input type="time" name="visit_time" required>
     </label>
+
+    <div class="schedule-req-div">
+      <br>
+    <label>Reason:
+      <input type="text" name="reason" placeholder="Enter reason" required>
+    </label>
+    </div>
+    
 
     <button type="submit" class="submit">Submit</button>
   </div>
@@ -400,6 +412,22 @@ if ($token) {
          const last = document.querySelector('input[name="last_name"]').value;
          document.querySelector('input[name="vehicle_owner"]').value = first + ' ' + last;
        }
+
+       document.querySelectorAll('input[name="has_vehicle"]').forEach(radio => {
+         radio.addEventListener('change', function() {
+           const vehicleSection = document.querySelector('.vehicle-information-section');
+           const vehicleTitle = document.querySelector('.vehicle-info-title');
+           if (this.value === 'yes') {
+             vehicleSection.style.display = 'block';
+             if (vehicleTitle) vehicleTitle.style.display = 'block';
+           } else {
+             vehicleSection.style.display = 'none';
+             if (vehicleTitle) vehicleTitle.style.display = 'none';
+             // Clear vehicle owner when no vehicle
+             document.querySelector('input[name="vehicle_owner"]').value = '';
+           }
+         });
+       });
 
        document.querySelector('form.visitation-request-section').addEventListener('submit', function(e) {
          const visitTime = document.querySelector('input[name="visit_time"]').value;

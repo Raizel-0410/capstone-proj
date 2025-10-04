@@ -29,21 +29,33 @@ $visitor_name       = trim($first_name . ' ' . $last_name);
 $home_address       = $_POST['home_address'] ?? null;
 $contact_number     = $_POST['contact_number'] ?? null;
 $email              = $_POST['email'] ?? null;
-$vehicle_owner      = $_POST['vehicle_owner'] ?? null;
-$vehicle_brand      = $_POST['vehicle_brand'] ?? null;
-$plate_number       = $_POST['plate_number'] ?? null;
-$vehicle_color      = $_POST['vehicle_color'] ?? null;
-$vehicle_type       = $_POST['vehicle_type'] ?? null;
+$has_vehicle        = $_POST['has_vehicle'] ?? 'no';
 $reason             = $_POST['reason'] ?? null;
 $personnel_related  = $_POST['personnel_related'] ?? null;
 $office_to_visit    = $_POST['office_to_visit'] ?? null;
 $visit_date         = $_POST['visit_date'] ?? null;
 $visit_time         = $_POST['visit_time'] ?? null;
 
+// Handle vehicle fields based on has_vehicle
+if ($has_vehicle === 'yes') {
+    $vehicle_owner      = $_POST['vehicle_owner'] ?? null;
+    $vehicle_brand      = $_POST['vehicle_brand'] ?? null;
+    $plate_number       = $_POST['plate_number'] ?? null;
+    $vehicle_color      = $_POST['vehicle_color'] ?? null;
+    $vehicle_type       = $_POST['vehicle_type'] ?? null;
+    $vehicle_photo_path = uploadFile("vehicle_photo");
+} else {
+    $vehicle_owner      = null;
+    $vehicle_brand      = null;
+    $plate_number       = null;
+    $vehicle_color      = null;
+    $vehicle_type       = null;
+    $vehicle_photo_path = null;
+}
+
 // Upload files
 $valid_id_path      = uploadFile("valid_id");
 $selfie_photo_path  = uploadFile("selfie_photo");
-$vehicle_photo_path = uploadFile("vehicle_photo");
 
 // Insert into visitation_requests
 $stmt = $pdo->prepare("

@@ -1,7 +1,5 @@
-# TODO: Fix Latest Vehicle Entry Widget Undefined/Null Values
+# TODO: Adjust Visitation Request Form Layout
 
-## Steps to Complete:
-- [x] Update fetch_latest_vehicles.php to alias vehicle_owner as owner_name
-- [x] Modify admin.js to handle null/undefined owner_name with default "Unknown"
-- [x] Modify admin.js to handle null/undefined entry_time with default "N/A"
-- [x] Test the widget to ensure no undefined/null values appear
+- [x] Update CSS for visitor and vehicle info labels: Change `justify-content: space-between;` to `justify-content: flex-start;` and remove `max-width: 1480px;`
+- [x] Update CSS for schedule request labels: Change `justify-content: space-between;` to `justify-content: flex-start;` and change `width: 1480px;` to `width: auto;`
+- [ ] Test the form layout in browser to verify inputs are next to labels

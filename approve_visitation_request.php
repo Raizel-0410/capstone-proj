@@ -19,22 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($request) {
-                // Insert into vehicles table (Expected)
-                $stmt = $pdo->prepare("
-                    INSERT INTO vehicles
-                        (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, entry_time, exit_time, status)
-                    VALUES
-                        (:visitation_id, :vehicle_owner, :vehicle_brand, :vehicle_model, :vehicle_color, :plate_number, :vehicle_photo_path, NULL, NULL, 'Expected')
-                ");
-                $stmt->execute([
-                    ':visitation_id'      => $request['id'],
-                    ':vehicle_owner'      => $request['visitor_name'],
-                    ':vehicle_brand'      => $request['vehicle_brand'],
-                    ':vehicle_model'      => $request['vehicle_model'],
-                    ':vehicle_color'      => $request['vehicle_color'],
-                    ':plate_number'       => $request['plate_number'],
-                    ':vehicle_photo_path' => $request['vehicle_photo_path'] ?? null
-                ]);
+                // Insert into vehicles table (Expected) only if vehicle data exists
+                if (!empty($request['plate_number'])) {
+                    $stmt = $pdo->prepare("
+                        INSERT INTO vehicles
+                            (visitation_id, vehicle_owner, vehicle_brand, vehicle_model, vehicle_color, plate_number, vehicle_photo_path, entry_time, exit_time, status)
+                        VALUES
+                            (:visitation_id, :vehicle_owner, :vehicle_brand, :vehicle_model, :vehicle_color, :plate_number, :vehicle_photo_path, NULL, NULL, 'Expected')
+                    ");
+                    $stmt->execute([
+                        ':visitation_id'      => $request['id'],
+                        ':vehicle_owner'      => $request['visitor_name'],
+                        ':vehicle_brand'      => $request['vehicle_brand'],
+                        ':vehicle_model'      => $request['vehicle_model'],
+                        ':vehicle_color'      => $request['vehicle_color'],
+                        ':plate_number'       => $request['plate_number'],
+                        ':vehicle_photo_path' => $request['vehicle_photo_path'] ?? null
+                    ]);
+                }
 
                 // Split visitor_name into first and last name
                 $nameParts = explode(' ', $request['visitor_name']);

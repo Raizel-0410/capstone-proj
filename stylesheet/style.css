@@ -557,8 +557,7 @@ img {
   font-size: 27px;
   align-items: center;
   padding-right: 30px;
-  justify-content: space-between;
-  max-width: 1480px;
+  justify-content: flex-start;
 }
 
 .visitor-info-column input, .vehicle-info-column input, .schedule-req-div input {
@@ -588,6 +587,17 @@ img {
   font-size: 20px;
 }
 
+.label-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: visible; /* ensure no clipping */
+  padding: 0; /* remove vertical padding */
+  height: auto; /* remove fixed height */
+  line-height: 35px; /* align with updated file input button height */
+}
+
 .label-btn input {
   height: 50px;
   z-index: 1;
@@ -604,6 +614,7 @@ input[type="file"]::file-selector-button {
   border: none;
   border-radius: 35px;
   cursor: pointer;
+  vertical-align: middle;
 }
 
 input[type="file"]::file-selector-button:hover {
@@ -612,6 +623,7 @@ input[type="file"]::file-selector-button:hover {
 
 input[type="file"] {
   color: transparent;
+  margin-top: 26px;
 }
 
 .visitor-info-column button.add i, .vehicle-info-column button.add i{
@@ -621,6 +633,9 @@ input[type="file"] {
 .visitor-info-column, .vehicle-info-column {
   flex: 1;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .schedule-req-div label{
@@ -631,21 +646,20 @@ input[type="file"] {
   font-size: 27px;
   align-items: center;
   padding-right: 30px;
-  justify-content: space-between;
-  width: 1480px;
+  justify-content: flex-start;
+  width: auto;
 }
 
 .schedule-req-div input {
   padding: 4px 8px;
-  height: 30px;
-  width: 25rem;
+  height: 35px;
+  width: 280px;
   margin-top: 4px;
   border-radius: 3px;
   border-width: 0.1px;
   border-color: #003673;
-  margin-right: 50rem;
-  margin-top: 10px;
-  flex-direction: column;
+  margin-right: 0;
+  flex-direction: row;
 }
 
 #datetime {
@@ -655,7 +669,7 @@ input[type="file"] {
   font-size: 27px;
   align-items: center;
   margin-right: auto;
-  width: 1480px;
+  width: auto;
   margin-top: 20px;
   gap: 15px;
 }
@@ -663,19 +677,16 @@ input[type="file"] {
 #datetime input {
   padding: 8px;
   height: 35px;
-  width: 300px;
+  width: 280px;
   margin-top: 4px;
   border-radius: 4px;
   border-width: 0.1px;
   border-color: #003673;
-  gap: 10px;
-  font-size: 20px;
+  font-size: 15px;
   color: #003673;
   font-weight: light;
-  font-size: 15px;
   padding-left: 10px;
 }
-
 
 .schedule-request-section button{
   width: 160px;
@@ -935,4 +946,19 @@ input[type="file"] {
   text-align: start;
   width: 50rem;
   height: 2rem;
+}
+
+.vehicle-radio-label {
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 300;
+  font-size: 27px;
+  color: #003673;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-radio {
+  margin-left: 1rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
 }
