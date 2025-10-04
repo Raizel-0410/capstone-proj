@@ -107,8 +107,8 @@ $badges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="container-fluid mt-4">
     <h2>All Issued Key Cards</h2>
     <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
+        <table class="table table-striped table-bordered key-card-list-table">
+            <thead>
                 <tr>
                     <th>ID</th>
                     <th>First Name</th>

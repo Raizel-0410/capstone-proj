@@ -434,6 +434,12 @@
   padding: 0 16px;
 }
 
+.key-card-list-table thead,
+.key-card-list-table thead th {
+  background-color: #5BB7D1;
+  color: white;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 1100px) {
   .status-containers {
