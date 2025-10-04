@@ -115,6 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     new bootstrap.Modal(document.getElementById("visitorDetailsModal")).show();
+
+    // Ensure visitor details section is shown initially
+    const visitorDetailsSection = document.getElementById('visitorDetailsSection');
+    if (visitorDetailsSection) visitorDetailsSection.style.display = 'block';
   }
 
   async function markEntry(visitorId) {
@@ -201,6 +205,15 @@ document.addEventListener("DOMContentLoaded", () => {
   [nextToVerifyBtn, nextToFacialBtn, nextToVehicleBtn, nextToIdBtn, skipVehicleBtn].forEach(btn => {
     if (!btn) return;
     btn.addEventListener("click", () => showTab(btn.dataset.targetTab || btn.id.replace("nextTo", "").toLowerCase()));
+  });
+
+  // Handle tab changes to show/hide visitor details section
+  document.getElementById('visitorTab').addEventListener('shown.bs.tab', function (event) {
+    const target = event.target.getAttribute('data-bs-target');
+    const visitorDetailsSection = document.getElementById('visitorDetailsSection');
+    if (visitorDetailsSection) {
+      visitorDetailsSection.style.display = (target === '#details') ? 'block' : 'none';
+    }
   });
 
   markEntryBtn?.addEventListener("click", () => {

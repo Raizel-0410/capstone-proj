@@ -28,6 +28,7 @@ try {
             vr.personnel_related,
             vr.driver_name,
             vr.driver_id,
+            vr.office_to_visit AS office,
             veh.vehicle_owner,
             veh.vehicle_brand,
             veh.vehicle_model,

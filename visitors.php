@@ -219,67 +219,13 @@ if (!empty($session['user_id'])) {
 
 <!-- Updated modal to match requested style with verification tabs -->
 <div class="modal fade" id="visitorDetailsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog" style="max-width: 1000px;">
-    <div class="modal-content" style="background-color: #e0f7ff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  <div class="modal-dialog" style="max-width: 100rem;">
+    <div class="modal-content" style="background-color: #ffffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); height: 50rem;">
       <div class="modal-header" style="border-bottom: none; padding-bottom: 0.5rem;">
         <h5 class="modal-title">Visitor Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body" style="background-color: white; border-radius: 12px; padding: 1rem;">
-        <div class="table-responsive" style="overflow-x: auto;">
-          <table class="table table-bordered text-center mb-0" style="table-layout: auto; white-space: nowrap;">
-            <thead class="bg-info text-white">
-              <tr>
-                <th>Name</th>
-                <th>Home Address</th>
-                <th>Contact</th>
-                <th>Email</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Reason</th>
-                <th>Personnel to Visit</th>
-                <th>Office to Visit</th>
-                <th>Vehicle Owner</th>
-                <th>Vehicle Brand</th>
-                <th>Vehicle Model</th>
-                <th>Vehicle Color</th>
-                <th>Plate Number</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="visitorNameCell" style="font-weight: 600;"></td>
-                <td id="visitorAddressCell"></td>
-                <td id="visitorContactCell"></td>
-                <td id="visitorEmailCell"></td>
-                <td id="visitorDateCell"></td>
-                <td id="visitorTimeCell"></td>
-                <td id="visitorReasonCell"></td>
-                <td id="visitorPersonnelCell"></td>
-                <td id="visitorOfficeCell"></td>
-                <td id="vehicleOwnerCell"></td>
-                <td id="vehicleBrandCell"></td>
-                <td id="vehicleModelCell"></td>
-                <td id="vehicleColorCell"></td>
-                <td id="plateNumberCell"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex justify-content-center gap-4 mt-4">
-          <div class="text-center">
-            <strong>Valid ID</strong><br>
-            <img id="visitorIDPhoto" src="" alt="Valid ID" style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-          </div>
-          <div class="text-center">
-            <strong>Selfie Photo</strong><br>
-            <img id="visitorSelfie" src="" alt="Selfie" style="max-width: 150px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-          </div>
-          <div class="text-center">
-            <strong>Vehicle Photo</strong><br>
-            <img id="vehiclePhoto" src="" alt="Vehicle Photo" style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-          </div>
-        </div>
         <ul class="nav nav-tabs mt-4" id="visitorTab" role="tablist" style="border-bottom: none;">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">Details</button>
@@ -297,6 +243,62 @@ if (!empty($session['user_id'])) {
             <button class="nav-link" id="id-tab" data-bs-toggle="tab" data-bs-target="#id" type="button" role="tab" aria-controls="id" aria-selected="false">ID</button>
           </li>
         </ul>
+        <div id="visitorDetailsSection">
+          <div class="table-responsive" style="overflow-x: auto;">
+            <table class="table table-bordered text-center mb-0" style="table-layout: auto; white-space: nowrap;">
+              <thead class="bg-info text-white">
+                <tr>
+                  <th style="width: 45%;">Name</th>
+                  <th style="width: 45%;">Home Address</th>
+                  <th style="width: 45%;">Contact</th>
+                  <th style="width: 45%;">Email</th>
+                  <th style="width: 45%;">Date</th>
+                  <th style="width: 45%;">Time</th>
+                  <th style="width: 45%;">Reason</th>
+                  <th style="width: 45%;">Personnel to Visit</th>
+                  <th style="width: 45%;">Office to Visit</th>
+                  <th style="width: 45%;">Vehicle Owner</th>
+                  <th style="width: 45%;">Vehicle Brand</th>
+                  <th style="width: 45%;">Vehicle Model</th>
+                  <th style="width: 45%;">Vehicle Color</th>
+                  <th style="width: 45%;">Plate Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="visitorNameCell" style="font-weight: 600;"></td>
+                  <td id="visitorAddressCell"></td>
+                  <td id="visitorContactCell"></td>
+                  <td id="visitorEmailCell"></td>
+                  <td id="visitorDateCell"></td>
+                  <td id="visitorTimeCell"></td>
+                  <td id="visitorReasonCell"></td>
+                  <td id="visitorPersonnelCell"></td>
+                  <td id="visitorOfficeCell"></td>
+                  <td id="vehicleOwnerCell"></td>
+                  <td id="vehicleBrandCell"></td>
+                  <td id="vehicleModelCell"></td>
+                  <td id="vehicleColorCell"></td>
+                  <td id="plateNumberCell"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-center gap-4 mt-4">
+            <div class="text-center">
+              <strong>Valid ID</strong><br>
+              <img id="visitorIDPhoto" src="" alt="Valid ID" style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+            </div>
+            <div class="text-center">
+              <strong>Selfie Photo</strong><br>
+              <img id="visitorSelfie" src="" alt="Selfie" style="max-width: 150px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+            </div>
+            <div class="text-center">
+              <strong>Vehicle Photo</strong><br>
+              <img id="vehiclePhoto" src="" alt="Vehicle Photo" style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+            </div>
+          </div>
+        </div>
         
         <div class="tab-content" id="visitorTabContent" style="margin-top: 10px;">
           <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">

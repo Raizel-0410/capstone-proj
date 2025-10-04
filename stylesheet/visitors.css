@@ -231,6 +231,8 @@ h5 {
 .header-rght i {
     height: 30px;
     width: 30px;
+    align-self: center;
+    justify-self: center;
 }
 
 .fa-user-circle {
@@ -258,7 +260,7 @@ h5 {
 
 /* Override Bootstrap modal header */
 .modal-header {
-  background-color: white;
+  background-color:transparent;
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -266,13 +268,12 @@ h5 {
 }
 
 .modal-header .modal-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: black;
 }
 
 .modal-header .btn-close {
-  filter: brightness(0) invert(1); /* makes the X white */
   opacity: 0.8;
 }
 
@@ -448,9 +449,10 @@ h5 {
     font-family: 'League Spartan', sans-serif;
     color: #e0f2f1; /* Light text color for contrast */
     line-height: 1.6;
-    max-width: 900px;
+    max-width: 95rem;
     max-height: 600px; /* limit height to avoid excessive scrolling */
     margin: 0 auto;
+    margin-top: 30px;
     background-color: #004d40; /* Dark teal background to match admin panel */
     padding: 30px;
     border-radius: 12px;
@@ -460,12 +462,13 @@ h5 {
 }
 
 .modal-header {
-    background-color: #006682;
+    background-color: white;
     color: #e0f2f1;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     font-weight: 700;
     font-size: 20px;
+    border-bottom: black solid;
 }
 
 .nav-tabs {
