@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
 
                 // Split visitor_name into first and last name
-                $nameParts = explode(' ', $request['visitor_name'], 2);
-                $firstName = $nameParts[0] ?? '';
-                $lastName = $nameParts[1] ?? '';
+                $nameParts = explode(' ', $request['visitor_name']);
+                $lastName = array_pop($nameParts);
+                $firstName = implode(' ', $nameParts);
 
                 // Insert into visitors table (now includes full details)
                 $stmt = $pdo->prepare("
